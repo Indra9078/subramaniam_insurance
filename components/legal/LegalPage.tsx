@@ -36,7 +36,7 @@ export function LegalPage({
           ))}
         </article>
       </main>
-      <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+      <Footer lang={lang} dict={dict} />
     </>
   );
 }

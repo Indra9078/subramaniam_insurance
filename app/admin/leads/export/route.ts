@@ -1,13 +1,18 @@
 import { getAdmin } from "@/lib/admin/auth";
 
 const columns = [
-  "created_at", "name", "phone", "email", "interest", "preferred_time",
-  "message", "source_page", "language", "consent", "status", "notes",
+  "created_at", "name", "phone", "email", "interest", "product", "listing_title", "details",
+  "preferred_time", "message", "source_page", "language", "consent", "consent_version", "status", "notes",
 ] as const;
 
 /** Quote a CSV cell. Cells starting with = + - @ are prefixed so spreadsheets don't run them as formulas. */
 function cell(value: unknown) {
-  let s = value === null || value === undefined ? "" : String(value);
+  let s =
+    value === null || value === undefined
+      ? ""
+      : typeof value === "object"
+        ? Object.entries(value as Record<string, unknown>).map(([k, v]) => `${k}: ${v}`).join("; ")
+        : String(value);
   if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
   return `"${s.replace(/"/g, '""')}"`;
 }

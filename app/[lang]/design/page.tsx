@@ -138,7 +138,7 @@ export default async function PreviewPage({ params }: PageProps<"/[lang]/design"
         </section>
       </main>
 
-      <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+      <Footer lang={lang} dict={dict} />
     </>
   );
 }

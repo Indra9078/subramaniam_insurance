@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/site";
+import { waLink } from "@/lib/whatsapp";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
 /** Closing call to action: call, WhatsApp or request a call back. */
@@ -8,11 +9,14 @@ export function CtaBand({
   dict,
   title,
   text,
+  waText,
 }: {
   lang: string;
   dict: Dictionary;
   title?: string;
   text?: string;
+  /** Message typed into WhatsApp. Defaults to the general greeting. */
+  waText?: string;
 }) {
   const c = dict.cta;
   return (
@@ -36,7 +40,7 @@ export function CtaBand({
             <Button href={site.phoneHref} variant="light">
               {c.call}
             </Button>
-            <Button href={site.whatsappHref} variant="outlineLight">
+            <Button href={waLink(waText ?? dict.whatsappText.general)} variant="outlineLight">
               {c.whatsapp}
             </Button>
             <Button href={`/${lang}/contact`}>{c.contact}</Button>

@@ -85,7 +85,7 @@ export default async function InsurancePage({ params }: PageProps<"/[lang]/insur
 
         <CtaBand lang={lang} dict={dict} />
       </main>
-      <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+      <Footer lang={lang} dict={dict} />
     </>
   );
 }

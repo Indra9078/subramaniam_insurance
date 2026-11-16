@@ -127,7 +127,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
         <CtaBand lang={lang} dict={dict} />
       </main>
-      <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+      <Footer lang={lang} dict={dict} />
     </>
   );
 }

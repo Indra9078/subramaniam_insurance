@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { OrbitHero } from "@/components/hero/OrbitHero";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/site";
+import { waLink } from "@/lib/whatsapp";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
 export function Hero({ lang, dict }: { lang: string; dict: Dictionary }) {
@@ -31,7 +32,7 @@ export function Hero({ lang, dict }: { lang: string; dict: Dictionary }) {
             <Button href={site.phoneHref} variant="light">
               {hero.btnProperty}
             </Button>
-            <Button href={site.whatsappHref} variant="outlineLight">
+            <Button href={waLink(dict.whatsappText.general)} variant="outlineLight">
               {hero.btnWhatsapp}
             </Button>
           </div>

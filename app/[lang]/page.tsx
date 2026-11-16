@@ -46,9 +46,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           empty={dict.faq.empty}
           faqs={faqs}
         />
-        <Contact dict={dict} />
+        <Contact lang={lang} dict={dict} />
       </main>
-      <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+      <Footer lang={lang} dict={dict} />
     </>
   );
 }

@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Contact } from "@/components/home/Contact";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { site } from "@/lib/site";
+import { waLink } from "@/lib/whatsapp";
 import { pageMetadata } from "@/lib/meta";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/contact">): Promise<Metadata> {
@@ -24,7 +25,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
 
   const channels = [
     { t: c.call, d: cp.callD, v: site.phoneDisplay, href: site.phoneHref, cls: "bg-[#ffe9df]", ph: false },
-    { t: c.whatsapp, d: cp.whatsappD, v: site.phoneDisplay, href: site.whatsappHref, cls: "bg-[#e7f5ec]", ph: false },
+    { t: c.whatsapp, d: cp.whatsappD, v: site.phoneDisplay, href: waLink(dict.whatsappText.general), cls: "bg-[#e7f5ec]", ph: false },
     { t: cp.email, d: cp.emailD, v: site.email, href: `mailto:${site.email}`, cls: "bg-iris-100", ph: false },
     { t: cp.visit, d: cp.visitD, v: c.address, href: undefined, cls: "bg-[#fff3cf]", ph: true },
   ];
@@ -69,7 +70,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
           </ul>
         </section>
 
-        <Contact dict={dict} />
+        <Contact lang={lang} dict={dict} />
 
         <section className="mx-auto w-full max-w-[1240px] px-5 pb-16 md:px-8 md:pb-24">
           <h2 className="font-display text-[1.75rem] font-bold leading-tight tracking-tight md:text-4xl">
@@ -80,7 +81,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
           </div>
         </section>
       </main>
-      <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+      <Footer lang={lang} dict={dict} />
     </>
   );
 }

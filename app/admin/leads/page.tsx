@@ -33,7 +33,7 @@ async function LeadsList({ searchParams }: { searchParams: PageProps<"/admin/lea
       </nav>
       {!data.length ? (
         <p className="rounded-[1.25rem] border border-dashed border-line bg-white p-8 text-center text-muted">
-          No leads yet. Enquiries from the website forms will appear here once forms are connected (Stage 6).
+          No leads yet. Enquiries from the website forms appear here, and each one is also emailed to you.
         </p>
       ) : (
         <ul className="flex flex-col gap-3">
@@ -41,7 +41,8 @@ async function LeadsList({ searchParams }: { searchParams: PageProps<"/admin/lea
             <li key={l.id} className="flex flex-col gap-3 rounded-[1.25rem] border border-line bg-white p-4 md:p-5">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="font-semibold">{l.name}</span>
-                <a href={`tel:${l.phone}`} className="text-sm font-semibold text-ember underline-offset-4 hover:underline">{l.phone}</a>
+                <a href={`tel:+91${l.phone}`} className="text-sm font-semibold text-ember underline-offset-4 hover:underline">{l.phone}</a>
+                <a href={`https://wa.me/91${l.phone}`} target="_blank" rel="noopener" className="rounded-full bg-[#1f7a46] px-3 py-0.5 text-xs font-semibold text-white">WhatsApp</a>
                 {l.email && <a href={`mailto:${l.email}`} className="text-sm text-muted">{l.email}</a>}
                 <Badge tone={tone[l.status as keyof typeof tone]}>{l.status}</Badge>
                 <span className="ml-auto text-xs text-muted">
@@ -49,8 +50,23 @@ async function LeadsList({ searchParams }: { searchParams: PageProps<"/admin/lea
                 </span>
               </div>
               <p className="text-sm text-muted">
-                {[l.interest, l.preferred_time && `call ${l.preferred_time}`, l.language, l.source_page].filter(Boolean).join(" · ")}
+                {[
+                  l.listing_title ? `Property: ${l.listing_title}` : l.interest,
+                  l.preferred_time && `call: ${l.preferred_time}`,
+                  l.language === "ta" ? "Tamil" : l.language === "en" ? "English" : null,
+                  l.source_page,
+                ].filter(Boolean).join(" · ")}
               </p>
+              {l.details && Object.keys(l.details).length > 0 && (
+                <dl className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                  {Object.entries(l.details as Record<string, string>).map(([k, v]) => (
+                    <div key={k} className="flex gap-1.5">
+                      <dt className="text-muted">{k}:</dt>
+                      <dd className="font-semibold">{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
               {l.message && <p className="whitespace-pre-line text-sm">{l.message}</p>}
               <form action={setLeadStatus.bind(null, l.id)} className="flex flex-col gap-2 sm:flex-row sm:items-center">
                 <select name="status" defaultValue={l.status} aria-label="Status" className="min-h-11 rounded-[10px] border border-[#cfccd6] bg-white px-3">

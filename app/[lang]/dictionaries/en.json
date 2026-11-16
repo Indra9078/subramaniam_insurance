@@ -159,23 +159,49 @@
     "hoursPh": "[Working days and hours]",
     "form": {
       "name": "Your name",
-      "phone": "Phone number",
+      "phone": "Mobile number",
+      "phoneHint": "10-digit Indian mobile number",
+      "email": "Email",
+      "optional": "optional",
+      "message": "Anything else I should know?",
       "interest": "I am interested in",
-      "interestOptions": [
-        "Health insurance",
-        "Life insurance",
-        "Vehicle insurance",
-        "Property"
-      ],
+      "interestOptions": {
+        "health": "Health insurance",
+        "life": "Life insurance",
+        "vehicle": "Vehicle insurance",
+        "corporate": "Corporate and group insurance",
+        "property": "Property",
+        "other": "Something else"
+      },
       "time": "Best time to call",
-      "timeOptions": [
-        "Morning",
-        "Afternoon",
-        "Evening"
-      ],
-      "consent": "I agree to be contacted about my enquiry.",
+      "timeOptions": {
+        "morning": "Morning",
+        "afternoon": "Afternoon",
+        "evening": "Evening",
+        "any": "Any time"
+      },
+      "consent": "I agree to be contacted by A. Subramaniam by phone, WhatsApp or email about this enquiry.",
+      "consentLink": "Privacy policy",
       "submit": "Request a call back",
-      "pending": "Form sending is connected in Stage 6"
+      "sending": "Sending…",
+      "successTitle": "Thank you! Your enquiry is received.",
+      "successText": "I will call you back soon. For a faster reply, message me on WhatsApp.",
+      "successTime": {
+        "morning": "I will call you back in the morning.",
+        "afternoon": "I will call you back in the afternoon.",
+        "evening": "I will call you back in the evening.",
+        "any": "I will call you back soon."
+      },
+      "successWa": "Continue on WhatsApp",
+      "another": "Send another enquiry",
+      "errors": {
+        "name": "Please enter your name.",
+        "phone": "Please enter a valid 10-digit mobile number.",
+        "email": "Please check the email address.",
+        "consent": "Please tick the box so I can contact you.",
+        "rate": "You have sent several enquiries already. Please call or WhatsApp me instead.",
+        "generic": "Sorry, something went wrong. Please call or WhatsApp me instead."
+      }
     }
   },
   "common": {
@@ -489,15 +515,19 @@
         },
         {
           "h": "How we use it",
-          "p": "Only to reply to your enquiry and to help with insurance or property services you ask about. We do not sell your information."
+          "p": "Only to reply to your enquiry and to help with the insurance or property services you ask about. We do not sell your information or use it for unrelated marketing."
         },
         {
           "h": "Sharing",
           "p": "With your consent, details may be shared with the relevant insurer to process a proposal or claim."
         },
         {
-          "h": "How we protect it",
-          "p": "Your information is stored securely and only people who need it to help you can see it."
+          "h": "Where it is stored",
+          "p": "Enquiries are stored securely with Supabase (database) and sent to us as an email alert through Resend. Only the advisor can see them."
+        },
+        {
+          "h": "How long we keep it",
+          "p": "We keep your enquiry only as long as it is needed to help you, and delete it when it is no longer needed or when you ask."
         },
         {
           "h": "Your choices",
@@ -536,5 +566,76 @@
         }
       ]
     }
+  },
+  "productForm": {
+    "title": "Ask me about this cover",
+    "sub": "Share a few details and I will call you back with suitable options. No prices or commitments here.",
+    "health": {
+      "cover": "Who should be covered?",
+      "coverOptions": {
+        "self": "Just me",
+        "family": "My family",
+        "parents": "My parents"
+      },
+      "eldestAge": "Age of the eldest person",
+      "city": "City"
+    },
+    "life": {
+      "age": "Your age",
+      "amount": "Rough cover amount",
+      "amountOptions": {
+        "upto25l": "Up to ₹25 lakh",
+        "25to50l": "₹25 to 50 lakh",
+        "50lto1cr": "₹50 lakh to ₹1 crore",
+        "above1cr": "Above ₹1 crore",
+        "unsure": "Not sure"
+      },
+      "goal": "Main goal",
+      "goalOptions": {
+        "protection": "Family protection",
+        "savings": "Savings",
+        "child": "Child's future",
+        "retirement": "Retirement"
+      }
+    },
+    "vehicle": {
+      "type": "Vehicle type",
+      "typeOptions": {
+        "car": "Car",
+        "twoWheeler": "Two-wheeler",
+        "commercial": "Commercial vehicle"
+      },
+      "renewal": "Policy renewal date",
+      "claim": "Any claim in the last year?",
+      "claimOptions": {
+        "no": "No",
+        "yes": "Yes",
+        "unsure": "Not sure"
+      }
+    },
+    "corporate": {
+      "company": "Company name",
+      "employees": "Number of employees"
+    }
+  },
+  "propertyForm": {
+    "title": "Enquire about this property",
+    "intent": "I would like to",
+    "intentOptions": {
+      "visit": "Visit the property",
+      "info": "Know more",
+      "offer": "Make an offer"
+    }
+  },
+  "whatsappText": {
+    "general": "Hello Mr. Subramaniam, I found your website and have a question.",
+    "product": "Hello Mr. Subramaniam, I would like to know more about {product}.",
+    "listing": "Hello Mr. Subramaniam, I am interested in this property: {title} {url}"
+  },
+  "actionBar": {
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "enquire": "Enquire",
+    "label": "Quick contact"
   }
 }

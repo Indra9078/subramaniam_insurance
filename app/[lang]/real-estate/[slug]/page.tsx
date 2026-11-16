@@ -11,6 +11,8 @@ import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { getListing, getListings } from "@/lib/data";
 import { listingCovers } from "@/lib/types";
 import { site } from "@/lib/site";
+import { LeadForm } from "@/components/forms/LeadForm";
+import { fill, siteUrl, waLink } from "@/lib/whatsapp";
 import { pageMetadata } from "@/lib/meta";
 
 // Listings that exist at build time are prerendered. New ones added from the
@@ -67,7 +69,7 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
         <main className="flex-1 pt-14 md:pt-20">
           <CtaBand lang={lang} dict={dict} />
         </main>
-        <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+        <Footer lang={lang} dict={dict} />
       </>
     );
   }
@@ -81,6 +83,12 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
     { k: d.location, v: listing.location[lang] },
     { k: d.type, v: r.types[listing.type] },
   ].filter((f) => f.v);
+
+  const waText = fill(dict.whatsappText.listing, {
+    title,
+    url: siteUrl() ? `${siteUrl()}/${lang}/real-estate/${listing.slug}` : "",
+  }).trim();
+  const wa = waLink(waText);
 
   const Value = ({ children }: { children: string }) =>
     sample ? <PlaceholderTag>{children}</PlaceholderTag> : <>{children}</>;
@@ -189,15 +197,18 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
               </p>
               <div className="relative flex flex-col gap-3">
                 <Button href={site.phoneHref} variant="light">{dict.cta.call}</Button>
-                <Button href={site.whatsappHref} variant="outlineLight">{dict.cta.whatsapp}</Button>
-                <Button href={`/${lang}/contact`}>{dict.common.enquire}</Button>
+                <Button href={wa} variant="outlineLight">{dict.cta.whatsapp}</Button>
               </div>
+            </div>
+            <div id="enquire" className="scroll-mt-4 rounded-[1.75rem] border border-line bg-white p-5 md:p-6">
+              <h2 className="mb-4 font-display text-xl font-bold">{dict.propertyForm.title}</h2>
+              <LeadForm kind="property" listing={{ slug: listing.slug, title: listing.title.en }} lang={lang} dict={dict} waHref={wa} />
             </div>
             <p className="text-sm leading-6 text-muted">{d.verify}</p>
           </aside>
         </div>
       </main>
-      <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+      <Footer lang={lang} dict={dict} waText={waText} />
     </>
   );
 }

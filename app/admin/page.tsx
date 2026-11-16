@@ -24,7 +24,7 @@ async function Dashboard() {
 
   const cards = [
     { href: "/admin/listings", label: "Listings", value: listings, note: `${published} published`, cls: "bg-[#ffe9df]" },
-    { href: "/admin/leads", label: "New leads", value: newLeads, note: "Website forms connect in Stage 6", cls: "bg-[#e7f5ec]" },
+    { href: "/admin/leads", label: "New leads", value: newLeads, note: "Each new lead is also emailed to you", cls: "bg-[#e7f5ec]" },
     { href: "/admin/testimonials", label: "Testimonials", value: testimonials, note: "Publish only with written permission", cls: "bg-iris-100" },
     { href: "/admin/faqs", label: "FAQs", value: faqs, note: "Shown on the FAQ, home and insurance pages", cls: "bg-[#fff3cf]" },
   ];

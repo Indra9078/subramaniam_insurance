@@ -36,6 +36,19 @@ Last updated: 2026-11-16
 - Dummy details as agreed: phone `+91 00000 00000`, email `hello@example.com`, sample listings with `[00,00,000]` prices, draft FAQ answers, draft privacy and terms text. Every one of them is a glowing placeholder. `PlaceholderTag` has a new `block` option for whole sentences and paragraphs.
 - Checks: lint clean, production build passes, all pages tested in `/en` and `/ta` at 1440px and 390px (no horizontal scroll, no console errors), listing filters, mobile menu and language toggle tested in the browser.
 
+## Stage 5: Admin page (done, 2026-11-16)
+- Supabase project connected (URL and publishable key in `.env.local` and Vercel). No service-role key is used anywhere.
+- Database: `supabase/migrations/0001_admin.sql` creates `admins`, `listings`, `listing_photos`, `testimonials`, `faqs`, `leads`, row level security and the public `listing-photos` bucket (5 MB, JPEG/PNG/WebP). Visitors can only read published content. Only emails in `admins` can write or read leads. The database refuses to publish a testimonial without written permission and a date.
+- `supabase/seed.sql` holds 6 sample listings and 19 draft FAQs, all marked `is_sample` (they glow as placeholders). Saving an item in the admin marks it real.
+- Admin at `/admin` (English only, noindex): login, dashboard (warns while samples are live), listings with photo upload (resized in the browser, reorder, cover), testimonials, FAQs by category with "show on home", leads with status, notes and CSV export (formula-safe).
+- Security: `proxy.ts` refreshes the session and sends logged-out visitors to the login page. Every admin page, server action and the CSV route checks the session and the admins list again on the server (`lib/admin/auth.ts`).
+- Public site: listings, FAQs (home, FAQ page, product pages) and testimonials read from Supabase through cached functions (`lib/data.ts`). Admin saves call `updateTag`, so changes show at once. Empty tables show friendly "coming soon" messages. FAQ content moved out of the dictionaries into the database.
+- Listing URLs are now `/real-estate/[slug]`.
+- Client contact details are live: phone and WhatsApp +91 97879 20117, email subramaniam9757@gmail.com. Address and hours are still placeholders.
+- Checks: lint clean, production build passes, admin redirects to login, wrong password message works, admin pages send `X-Robots-Tag: noindex`, public pages checked in `/en` and `/ta` at 1440px and 390px with an empty database. Visitors cannot read leads or admins (checked).
+- Not tested here (the owner tests): logged-in admin flows (create and edit listings, photo upload, testimonials, FAQs, leads). Write-blocking for visitors was not probed live, to avoid writing to the production database.
+- Local note: in this cloud sandbox, build and start need `NODE_USE_ENV_PROXY=1` so Node can reach Supabase through the proxy. Not needed on Vercel or a normal machine.
+
 ## Open items and risks
 
 - Tamil text is my translation. A native speaker must review it before launch.
@@ -48,6 +61,9 @@ Last updated: 2026-11-16
 - Which insurer the vehicle code is with, and whether corporate and group cover is sold, are still to confirm (shown as placeholders on those pages).
 - FAQ answers, privacy policy and terms are drafts. The client (or a lawyer for the legal text) must approve them.
 - The new Tamil text (about 450 lines) needs the native-speaker review.
+- `supabase/seed.sql` had not been run at deploy time (listings and FAQs were empty). Run it, or add real content from the admin.
+- Supabase free projects pause after about a week without activity. Upgrade or keep traffic flowing after launch.
+- Confirm in the Supabase dashboard that "Allow new users to sign up" is off.
 - An unknown listing or product URL shows the default "not found" page (marked noindex). A branded 404 page is planned for Stage 8.
 
 ## Links

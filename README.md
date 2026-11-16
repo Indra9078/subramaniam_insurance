@@ -25,6 +25,13 @@ npm run lint
 
 `/[lang]` home, `/about`, `/insurance`, `/insurance/{health,life,vehicle,corporate}`, `/real-estate`, `/real-estate/[id]`, `/faq`, `/contact`, `/privacy`, `/terms`.
 
+## Supabase (Stage 5)
+
+1. Copy `.env.example` to `.env.local` and fill in the project URL and publishable key. Add the same two variables in Vercel.
+2. In the Supabase SQL editor run `supabase/migrations/0001_admin.sql`, then (optional) `supabase/seed.sql` for sample content.
+3. Create the admin user under Authentication, Users (auto confirm) and turn off public sign-ups. Admin emails live in the `admins` table.
+4. Admin is at `/admin`. Public pages read through `lib/data.ts` (cached, refreshed with `updateTag` on every admin save).
+
 ## Placeholders
 
 Anything the client still has to supply is wrapped in `<PlaceholderTag>`, which glows purple.
@@ -44,5 +51,5 @@ permission from each company (LIC, Star Health, IFFCO-Tokio, HDFC).
 
 ## Stages
 
-1. Design direction (done) 2. Setup and design system (done) 3. Home page (done) 4. Inner pages (done)
-5. Admin page 6. Lead capture 7. Chatbot 8. Polish 9. Launch 10. Blog and reels (optional)
+1. Design direction (done) 2. Setup and design system (done) 3. Home page (done) 4. Inner pages (done) 5. Admin page (done)
+6. Lead capture 7. Chatbot 8. Polish 9. Launch 10. Blog and reels (optional)

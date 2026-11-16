@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { updateTag } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { createSessionClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/admin/auth";
 import { bool, int, lines, slugify, text, type FormState } from "@/lib/admin/form";
@@ -33,6 +33,20 @@ export async function signOut() {
   const supabase = await createSessionClient();
   await supabase.auth.signOut();
   redirect("/admin/login");
+}
+
+/** Refresh cached listing data and the listing pages in both languages. */
+function refreshListings(...slugs: (string | null | undefined)[]) {
+  updateTag(TAGS.listings);
+  for (const lang of ["en", "ta"]) {
+    revalidatePath(`/${lang}/real-estate`);
+    for (const slug of slugs) if (slug) revalidatePath(`/${lang}/real-estate/${slug}`);
+  }
+}
+
+async function slugOf(supabase: Awaited<ReturnType<typeof requireAdmin>>["supabase"], listingId: string) {
+  const { data } = await supabase.from("listings").select("slug").eq("id", listingId).single();
+  return data?.slug as string | undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -70,9 +84,10 @@ export async function saveListing(id: string | null, _prev: FormState, fd: FormD
   const slug = slugify(text(fd, "slug") || fields.title_en);
 
   if (id) {
+    const { data: old } = await supabase.from("listings").select("slug").eq("id", id).single();
     const { error } = await supabase.from("listings").update({ ...fields, slug }).eq("id", id);
     if (error) return { error: friendly(error.message) };
-    updateTag(TAGS.listings);
+    refreshListings(slug, old?.slug);
     return { ok: "Saved." };
   }
   const { data, error } = await supabase
@@ -81,18 +96,19 @@ export async function saveListing(id: string | null, _prev: FormState, fd: FormD
     .select("id")
     .single();
   if (error) return { error: friendly(error.message) };
-  updateTag(TAGS.listings);
+  refreshListings(slug);
   redirect(`/admin/listings/${data.id}?created=1`);
 }
 
 export async function deleteListing(id: string) {
   const { supabase } = await requireAdmin();
+  const { data: listing } = await supabase.from("listings").select("slug").eq("id", id).single();
   const { data: photos } = await supabase.from("listing_photos").select("path").eq("listing_id", id);
   if (photos?.length) {
     await supabase.storage.from(PHOTO_BUCKET).remove(photos.map((p) => p.path));
   }
   await supabase.from("listings").delete().eq("id", id);
-  updateTag(TAGS.listings);
+  refreshListings(listing?.slug);
   redirect("/admin/listings");
 }
 
@@ -107,15 +123,15 @@ export async function addPhoto(listingId: string, path: string) {
     .from("listing_photos")
     .insert({ listing_id: listingId, path, sort: count ?? 0 });
   if (error) throw new Error(error.message);
-  updateTag(TAGS.listings);
+  refreshListings(await slugOf(supabase, listingId));
 }
 
 export async function deletePhoto(photoId: string) {
   const { supabase } = await requireAdmin();
-  const { data } = await supabase.from("listing_photos").select("path").eq("id", photoId).single();
+  const { data } = await supabase.from("listing_photos").select("path, listing_id").eq("id", photoId).single();
   if (data) await supabase.storage.from(PHOTO_BUCKET).remove([data.path]);
   await supabase.from("listing_photos").delete().eq("id", photoId);
-  updateTag(TAGS.listings);
+  refreshListings(data ? await slugOf(supabase, data.listing_id) : null);
 }
 
 /** Saves a new photo order. `ids` is the full list of photo ids in display order. */
@@ -126,7 +142,7 @@ export async function reorderPhotos(listingId: string, ids: string[]) {
       supabase.from("listing_photos").update({ sort }).eq("id", id).eq("listing_id", listingId),
     ),
   );
-  updateTag(TAGS.listings);
+  refreshListings(await slugOf(supabase, listingId));
 }
 
 // ---------------------------------------------------------------------------

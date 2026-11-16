@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, type ReactNode } from "react";
+import { startTransition, useActionState, type ReactNode } from "react";
 import type { FormState } from "@/lib/admin/form";
 
 /** Form wrapper for admin server actions: shows errors, success and a pending button. */
@@ -17,7 +17,16 @@ export function ActionForm({
 }) {
   const [state, formAction, pending] = useActionState(action, {});
   return (
-    <form action={formAction} className={className}>
+    <form
+      className={className}
+      // Submit manually so React does not reset the fields after the action:
+      // on a validation error the admin keeps what they typed.
+      onSubmit={(e) => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        startTransition(() => formAction(fd));
+      }}
+    >
       {children}
       <div className="sticky bottom-0 -mx-4 flex flex-wrap items-center gap-3 border-t border-line bg-paper/95 px-4 py-3 backdrop-blur md:static md:mx-0 md:border-0 md:bg-transparent md:p-0">
         <button

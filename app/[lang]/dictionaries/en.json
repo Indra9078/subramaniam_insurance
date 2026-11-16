@@ -435,7 +435,9 @@
       "enquireTitle": "Interested in this property?",
       "enquireText": "Call or WhatsApp me to ask questions or book a site visit.",
       "back": "Back to all listings",
-      "verify": "Please check documents and approvals before you buy. I will help you with this."
+      "verify": "Please check documents and approvals before you buy. I will help you with this.",
+      "goneTitle": "This property is no longer listed",
+      "goneText": "It may have been sold or taken down. Have a look at the other properties, or call me and I will tell you what is available."
     },
     "sold": "Sold",
     "noListings": "New properties will be listed here soon. Call or WhatsApp me to ask what is available."

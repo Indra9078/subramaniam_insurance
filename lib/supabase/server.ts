@@ -1,10 +1,14 @@
 import "server-only";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { supabaseKey, supabaseUrl } from "./env";
 
 /** Supabase client acting as the logged-in admin (reads the session cookie). */
 export async function createSessionClient() {
+  // Admin data is always per request. This also stops the auth client's clock
+  // reads (token expiry) from running during prerendering.
+  await connection();
   const cookieStore = await cookies();
   return createServerClient(supabaseUrl, supabaseKey, {
     cookies: {

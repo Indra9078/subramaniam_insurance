@@ -46,7 +46,11 @@ Last updated: 2026-11-16
 - Listing URLs are now `/real-estate/[slug]`.
 - Client contact details are live: phone and WhatsApp +91 97879 20117, email subramaniam9757@gmail.com. Address and hours are still placeholders.
 - Checks: lint clean, production build passes, admin redirects to login, wrong password message works, admin pages send `X-Robots-Tag: noindex`, public pages checked in `/en` and `/ta` at 1440px and 390px with an empty database. Visitors cannot read leads or admins (checked).
-- Not tested here (the owner tests): logged-in admin flows (create and edit listings, photo upload, testimonials, FAQs, leads). Write-blocking for visitors was not probed live, to avoid writing to the production database.
+- End-to-end admin test passed (automated browser test against the live Supabase project, admin account indrajitksofficial@gmail.com, all test data removed afterwards): login, sample warning, draft listing hidden from the public, upload of 2 photos (2400x1800 shrunk to a 32 KB JPEG), reorder, publish and feature, listing shown on EN and TA pages, home and detail page, empty title rejected, FAQ create, edit and delete (home and Tamil FAQ page), testimonial refused without permission then published and removed, leads page and CSV export, listing delete removes its photo files, logout, admin and CSV blocked when logged out.
+- Fixes from the test: admin forms keep what was typed when a save is refused (React 19 resets forms by default). Removed or unpublished listings show a friendly "no longer listed" page (noindex) instead of a cached 404 that did not refresh. Admin pages no longer log "Date.now() while prerendering" (`connection()` before the session client). Listing saves and photo changes also refresh the listing pages by path.
+- Known behaviour: after a listing changes, the very first visitor to that listing's page can see the previous version once while Next rebuilds it in the background; the next visit is fresh.
+- Admin accounts: subramaniam9757@gmail.com (client) and indrajitksofficial@gmail.com (owner). Change the owner password, since it was shared in the build chat.
+- Write-blocking for anonymous visitors was not probed live (to avoid writing to the production database). It is enforced by the row level security in the migration.
 - Local note: in this cloud sandbox, build and start need `NODE_USE_ENV_PROXY=1` so Node can reach Supabase through the proxy. Not needed on Vercel or a normal machine.
 
 ## Open items and risks
@@ -61,7 +65,7 @@ Last updated: 2026-11-16
 - Which insurer the vehicle code is with, and whether corporate and group cover is sold, are still to confirm (shown as placeholders on those pages).
 - FAQ answers, privacy policy and terms are drafts. The client (or a lawyer for the legal text) must approve them.
 - The new Tamil text (about 450 lines) needs the native-speaker review.
-- `supabase/seed.sql` had not been run at deploy time (listings and FAQs were empty). Run it, or add real content from the admin.
+- Sample listings and FAQs from `supabase/seed.sql` are live and glow as placeholders. Replace them with real content from the admin before launch.
 - Supabase free projects pause after about a week without activity. Upgrade or keep traffic flowing after launch.
 - Confirm in the Supabase dashboard that "Allow new users to sign up" is off.
 - An unknown listing or product URL shows the default "not found" page (marked noindex). A branded 404 page is planned for Stage 8.

@@ -6,6 +6,7 @@ import { getDictionary, hasLocale } from "../../dictionaries";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
+import { CtaBand } from "@/components/ui/CtaBand";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { getListing, getListings } from "@/lib/data";
 import { listingCovers } from "@/lib/types";
@@ -24,8 +25,12 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[lang]/real-estate/[slug]">): Promise<Metadata> {
   const { lang, slug } = await params;
+  if (!hasLocale(lang)) return {};
   const listing = await getListing(slug);
-  if (!hasLocale(lang) || !listing) return {};
+  if (!listing) {
+    const d = await getDictionary(lang);
+    return { title: d.realEstate.detail.goneTitle, robots: { index: false } };
+  }
   return pageMetadata(
     `/real-estate/${slug}`,
     listing.title[lang],
@@ -35,11 +40,37 @@ export async function generateMetadata({
 
 export default async function ListingPage({ params }: PageProps<"/[lang]/real-estate/[slug]">) {
   const { lang, slug } = await params;
-  const listing = await getListing(slug);
-  if (!hasLocale(lang) || !listing) notFound();
-  const dict = await getDictionary(lang);
+  if (!hasLocale(lang)) notFound();
+  const [dict, listing] = await Promise.all([getDictionary(lang), getListing(slug)]);
   const r = dict.realEstate;
   const d = r.detail;
+
+  // Unpublished, deleted or mistyped listing. Rendered as normal content (not
+  // notFound()) so the "listings" cache tag refreshes it as soon as a listing is published.
+  if (!listing) {
+    return (
+      <>
+        <PageHeader
+          lang={lang}
+          dict={dict}
+          crumbs={[{ href: `/${lang}/real-estate`, label: dict.nav.realEstate }, { label: d.goneTitle }]}
+          eyebrow={r.eyebrow}
+          title={d.goneTitle}
+          sub={d.goneText}
+        >
+          <div>
+            <Button href={`/${lang}/real-estate#listings`} variant="light">
+              {d.back}
+            </Button>
+          </div>
+        </PageHeader>
+        <main className="flex-1 pt-14 md:pt-20">
+          <CtaBand lang={lang} dict={dict} />
+        </main>
+        <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
+      </>
+    );
+  }
   const sample = listing.isSample;
   const title = listing.title[lang];
   const cover = listingCovers[listing.title.en.length % listingCovers.length];

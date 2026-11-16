@@ -39,7 +39,7 @@ Fonts: Space Grotesk (headings), Inter (body), Noto Sans Tamil (Tamil).
 | Content | JSON/MDX for fixed pages; listings, testimonials, FAQs from the admin page |
 | Database and auth | Supabase (Postgres, Auth, Storage), from Stage 5 |
 | Forms and email | Server actions, Supabase table, Resend email alerts |
-| Chatbot | Claude API through a server route, answers from approved content only. Pay-per-use API key, billed separately from Claude Pro |
+| Chatbot | Guided assistant built in (no AI, no running cost). Claude API can be added later with a pay-per-use key |
 | Hosting | GitHub repo, Vercel for testing, paid domain later |
 | Extras | WhatsApp click-to-chat, Google Analytics, Google Business link, schema markup |
 
@@ -51,8 +51,8 @@ Fonts: Space Grotesk (headings), Inter (body), Noto Sans Tamil (Tamil).
 | 3 | Home page | Hero, insurer band, services, how it works, why trust me, chatbot preview, featured properties, testimonials, FAQ, contact section. English and Tamil | Done |
 | 4 | Inner pages | About, Insurance and 4 product pages, Real estate with listings and detail pages, FAQ, Contact, Privacy policy, Terms | Done |
 | 5 | Admin page | Protected login. Add and edit property listings and photos, view and export leads, edit testimonials and FAQs | Done |
-| 6 | Lead capture | Enquiry and quote forms per product, call-back request, WhatsApp, call buttons, Supabase, email alerts | Done, awaiting your review |
-| 7 | Chatbot | English and Tamil chatbot with guardrails, hands off to WhatsApp, call or form | Not started |
+| 6 | Lead capture | Enquiry and quote forms per product, call-back request, WhatsApp, call buttons, Supabase, email alerts | Done |
+| 7 | Chatbot | Guided assistant (no AI, free): English and Tamil menus, search, hands off to WhatsApp, call or form; anonymous usage counts | Done, awaiting your review |
 | 8 | Polish | Animations, responsiveness, SEO, speed, accessibility, Tamil text review | Not started |
 | 9 | Launch | Vercel deployment, domain, analytics, privacy policy and terms, handover note | Not started |
 | 10 | Optional | Blog or resources, brand reel templates | Not started |

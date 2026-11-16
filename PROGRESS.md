@@ -63,6 +63,16 @@ Last updated: 2026-11-16
 - Checks: lint clean, build passes. End-to-end browser test against the live database: invalid phone and missing consent refused with input kept, English call back, Tamil vehicle form, property form, honeypot and fast bots not saved, 4th enquiry from one phone blocked, WhatsApp texts per page, action bar on phones and floating button on desktop, leads and answers in the admin and CSV, delete works. One real alert email accepted by Resend. All test leads deleted. No horizontal scroll on the changed pages at 390px and 1440px in English and Tamil.
 - Vercel needs `RESEND_API_KEY` (set by the owner). Optional: `NEXT_PUBLIC_SITE_URL` (links in WhatsApp messages and emails; otherwise Vercel's production URL), `LEAD_ALERT_TO`, `LEAD_ALERT_FROM`, `LEAD_HASH_SALT`.
 
+## Stage 7: Guided assistant (done, 2026-11-16)
+- Decision: no AI for now (cost and compliance). Built "Subramaniam's Helper", a free menu-driven assistant. The name stays in English; all menus and answers are in English or Tamil to match the page. It is built so AI can be added later without redoing the widget.
+- Every public page: "Need help?" button (above the phone action bar on mobile, above the WhatsApp button on desktop). Full-screen panel on phones, side panel on desktop. Home "Try the assistant" button replaces the fake input in the chat preview.
+- Paths: each insurance product (what it covers, who it is for, documents, real FAQs from the database, call back, full page), property (by type with counts, then by area, up to 3 cards with View and WhatsApp enquiry, sell or rent), claims help (general steps shown as a glowing draft until the client approves), talk to Mr. Subramaniam. Every answer offers Call, WhatsApp (topic typed in) and Request a call back (Stage 6 form inside the chat, lead saved with Source: Assistant).
+- Keyword search over topics and FAQ questions in English, Tamil and Tanglish (word-start matching for Tamil endings; FAQ answers count half). No match shows the contact options.
+- Content comes only from the dictionaries and the database through `/api/assistant` (cached). Sample listings and FAQs show as glowing placeholders, like the rest of the site. The panel's code and data load only when opened; the conversation is kept between pages (session storage).
+- Accessibility: dialog with focus moved in on open and back to the button on close or Escape, newest answer focused, typing pause skipped for reduced motion, 44px+ tap targets.
+- Usage counts (`supabase/migrations/0003_assistant.sql`): anonymous opens, topics, contact taps and searches; search text kept only when nothing matched, without digits. Admin dashboard shows "Assistant, last 30 days": opens, contact taps, top topics, searches with no answer. Privacy policy mentions the anonymous counts.
+- Checks: lint clean, build passes, browser test of every path in English and Tamil on phone and desktop (search, back, start over, call back inside the chat, property cards, navigation, persistence, Escape focus, reduced motion, no horizontal scroll, no page errors), usage counts appear on the dashboard. Fixed during testing: Back flicker, Escape focus, a false search match, panel header scrolling away on phones. Test leads and test usage events deleted.
+
 ## Open items and risks
 
 - Tamil text is my translation. A native speaker must review it before launch.
@@ -70,7 +80,8 @@ Last updated: 2026-11-16
 - HDFC was not in the client form. Confirm which HDFC product he sells, or remove it.
 - Client details still missing (see "Information still needed" in PLAN.md). All such content is shown as glowing placeholders.
 - Star Health and LIC marketing approval must be confirmed in writing before launch.
-- The chatbot needs a separate pay-per-use Claude API key (not covered by Claude Pro).
+- Optional later: switch the assistant to AI (Claude Haiku 5.5 is the low-cost option, about $1 per 1,000 replies). Needs a pay-per-use Anthropic API key.
+- Claims help steps in the assistant are a draft; the client must approve them.
 - Product pages use general wording only, with a "subject to policy terms" note. Star Health and LIC should approve this wording before launch.
 - Which insurer the vehicle code is with, and whether corporate and group cover is sold, are still to confirm (shown as placeholders on those pages).
 - FAQ answers, privacy policy and terms are drafts. The client (or a lawyer for the legal text) must approve them.

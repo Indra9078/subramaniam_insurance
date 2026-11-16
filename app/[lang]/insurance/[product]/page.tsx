@@ -9,6 +9,7 @@ import { FaqList } from "@/components/ui/FaqList";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { isProductSlug, productAccent, productInsurers, productSlugs } from "@/lib/products";
 import { pageMetadata } from "@/lib/meta";
+import { getFaqs } from "@/lib/data";
 
 export function generateStaticParams() {
   return productSlugs.map((product) => ({ product }));
@@ -43,8 +44,11 @@ function ListCard({ title, items, className }: { title: string; items: string[];
 export default async function ProductPage({ params }: PageProps<"/[lang]/insurance/[product]">) {
   const { lang, product } = await params;
   if (!hasLocale(lang) || !isProductSlug(product)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, allFaqs] = await Promise.all([getDictionary(lang), getFaqs()]);
   const p = dict.products.items[product];
+  const faqs = allFaqs
+    .filter((f) => f.category === product)
+    .map((f) => ({ q: f.question[lang], a: f.answer[lang], sample: f.isSample }));
   const l = dict.products.labels;
   const offered = productInsurers[product];
 
@@ -77,14 +81,16 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/insuran
           <p className="text-sm leading-6 text-muted lg:col-span-3">{dict.common.subjectToTerms}</p>
         </section>
 
-        <section className="mx-auto w-full max-w-[960px] px-5 pb-14 md:px-8 md:pb-20">
-          <h2 className="font-display text-[1.75rem] font-bold leading-[1.1] tracking-tight md:text-4xl">
-            {l.faq}
-          </h2>
-          <div className="mt-7">
-            <FaqList items={p.faq} />
-          </div>
-        </section>
+        {faqs.length > 0 && (
+          <section className="mx-auto w-full max-w-[960px] px-5 pb-14 md:px-8 md:pb-20">
+            <h2 className="font-display text-[1.75rem] font-bold leading-[1.1] tracking-tight md:text-4xl">
+              {l.faq}
+            </h2>
+            <div className="mt-7">
+              <FaqList items={faqs} />
+            </div>
+          </section>
+        )}
 
         <CtaBand lang={lang} dict={dict} title={l.quote} text={l.quoteText} />
 

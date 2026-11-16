@@ -10,11 +10,17 @@ import { Listings } from "@/components/home/Listings";
 import { Testimonials } from "@/components/home/Testimonials";
 import { Faq } from "@/components/home/Faq";
 import { Contact } from "@/components/home/Contact";
+import { getFaqs, getListings, getTestimonials } from "@/lib/data";
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, listings, faqs, testimonials] = await Promise.all([
+    getDictionary(lang),
+    getListings(),
+    getFaqs(),
+    getTestimonials(),
+  ]);
 
   return (
     <>
@@ -31,14 +37,14 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <Services lang={lang} dict={dict} />
         <HowItWorks dict={dict} />
         <WhyTrust dict={dict} />
-        <Listings lang={lang} dict={dict} />
-        <Testimonials dict={dict} />
+        <Listings lang={lang} dict={dict} listings={listings} />
+        <Testimonials lang={lang} dict={dict} testimonials={testimonials} />
         <Faq
           lang={lang}
           viewAll={dict.faq.viewAll}
           title={dict.faq.title}
-          answer={dict.faq.answer}
-          items={dict.faq.items}
+          empty={dict.faq.empty}
+          faqs={faqs}
         />
         <Contact dict={dict} />
       </main>

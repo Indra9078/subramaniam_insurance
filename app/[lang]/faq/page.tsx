@@ -7,6 +7,8 @@ import { CtaBand } from "@/components/ui/CtaBand";
 import { FaqList } from "@/components/ui/FaqList";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { pageMetadata } from "@/lib/meta";
+import { getFaqs } from "@/lib/data";
+import { faqCategories } from "@/lib/types";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/faq">): Promise<Metadata> {
   const { lang } = await params;
@@ -18,8 +20,12 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/faq">): Pr
 export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, faqs] = await Promise.all([getDictionary(lang), getFaqs()]);
   const f = dict.faqPage;
+  const groups = faqCategories
+    .map((c) => ({ c, items: faqs.filter((q) => q.category === c) }))
+    .filter((g) => g.items.length > 0);
+  const hasSamples = faqs.some((q) => q.isSample);
 
   return (
     <>
@@ -33,15 +39,23 @@ export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
       />
       <main className="flex-1">
         <div className="mx-auto flex w-full max-w-[960px] flex-col gap-12 px-5 py-14 md:px-8 md:py-20">
-          <div>
-            <PlaceholderTag>{dict.common.draftNote}</PlaceholderTag>
-          </div>
-          {f.groups.map((g, i) => (
-            <section key={g.title} className="flex flex-col gap-6">
+          {hasSamples && (
+            <div>
+              <PlaceholderTag>{dict.common.draftNote}</PlaceholderTag>
+            </div>
+          )}
+          {groups.length === 0 && (
+            <p className="rounded-[22px] border border-dashed border-line bg-white p-6 text-muted">{f.empty}</p>
+          )}
+          {groups.map((g, i) => (
+            <section key={g.c} className="flex flex-col gap-6">
               <h2 className="font-display text-[1.75rem] font-bold leading-tight tracking-tight md:text-4xl">
-                {g.title}
+                {f.categories[g.c]}
               </h2>
-              <FaqList items={g.items} firstOpen={i === 0} />
+              <FaqList
+                items={g.items.map((q) => ({ q: q.question[lang], a: q.answer[lang], sample: q.isSample }))}
+                firstOpen={i === 0}
+              />
             </section>
           ))}
         </div>

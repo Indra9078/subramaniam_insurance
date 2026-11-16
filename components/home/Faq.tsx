@@ -1,16 +1,21 @@
 import Link from "next/link";
 import { FaqList } from "@/components/ui/FaqList";
+import type { Faq as FaqRow } from "@/lib/types";
+import type { Locale } from "@/app/[lang]/dictionaries";
 
 type FaqProps = {
-  lang: string;
+  lang: Locale;
   title: string;
-  answer: string;
-  items: string[];
+  empty: string;
   viewAll: string;
+  faqs: FaqRow[];
 };
 
-/** Short FAQ on the home page, linking to the full FAQ page. */
-export function Faq({ lang, title, answer, items, viewAll }: FaqProps) {
+/** Short FAQ on the home page (questions marked "show on home"), linking to the full page. */
+export function Faq({ lang, title, empty, viewAll, faqs }: FaqProps) {
+  const items = faqs
+    .filter((f) => f.showOnHome)
+    .map((f) => ({ q: f.question[lang], a: f.answer[lang], sample: f.isSample }));
   return (
     <section
       id="faq"
@@ -20,7 +25,11 @@ export function Faq({ lang, title, answer, items, viewAll }: FaqProps) {
         {title}
       </h2>
       <div className="mt-8 md:mt-9">
-        <FaqList items={items.map((q) => ({ q, a: answer }))} />
+        {items.length > 0 ? (
+          <FaqList items={items} />
+        ) : (
+          <p className="rounded-[22px] border border-dashed border-line bg-white p-6 text-muted">{empty}</p>
+        )}
       </div>
       <Link
         href={`/${lang}/faq`}

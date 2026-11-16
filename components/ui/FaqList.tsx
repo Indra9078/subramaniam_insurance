@@ -3,12 +3,9 @@
 import { useId, useState } from "react";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 
-export type FaqItem = { q: string; a: string };
+export type FaqItem = { q: string; a: string; sample?: boolean };
 
-/**
- * Accordion of questions. Answers are shown as placeholders until the client
- * supplies or approves his real answers.
- */
+/** Accordion of questions. Sample answers (not yet approved) glow as placeholders. */
 export function FaqList({
   items,
   firstOpen = true,
@@ -26,7 +23,7 @@ export function FaqList({
         const panelId = `${baseId}-${i}`;
         return (
           <div
-            key={item.q}
+            key={`${item.q}-${i}`}
             className="overflow-hidden rounded-[22px] border border-line bg-white"
           >
             <h3>
@@ -48,7 +45,11 @@ export function FaqList({
             </h3>
             {isOpen && (
               <div id={panelId} className="px-6 pb-6 md:px-7">
-                <PlaceholderTag block>{item.a}</PlaceholderTag>
+                {item.sample ? (
+                  <PlaceholderTag block>{item.a}</PlaceholderTag>
+                ) : (
+                  <p className="whitespace-pre-line text-base leading-7 text-muted">{item.a}</p>
+                )}
               </div>
             )}
           </div>

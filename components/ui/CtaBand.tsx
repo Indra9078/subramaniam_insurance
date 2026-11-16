@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/Button";
-import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { site } from "@/lib/site";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
@@ -27,7 +26,10 @@ export function CtaBand({
             </h2>
             <p className="text-base leading-7 text-iris-100 md:text-lg">{text ?? c.text}</p>
             <p className="text-sm text-iris-200">
-              {dict.hero.phone} <PlaceholderTag tone="dark">{site.phoneDisplay}</PlaceholderTag>
+              {dict.hero.phone}{" "}
+              <a href={site.phoneHref} className="font-semibold text-white underline-offset-4 hover:underline">
+                {site.phoneDisplay}
+              </a>
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">

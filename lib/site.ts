@@ -1,14 +1,10 @@
-/**
- * Contact details used across the site.
- * PLACEHOLDER: every value here is a dummy until the client supplies the real one.
- * Anything shown from this file is wrapped in <PlaceholderTag> on the page.
- */
+/** Contact details used across the site (supplied by the client). */
 export const site = {
   name: "A. Subramaniam",
-  phoneDisplay: "+91 00000 00000",
-  phoneHref: "tel:+910000000000",
-  whatsappHref: "https://wa.me/910000000000",
-  email: "hello@example.com",
+  phoneDisplay: "+91 97879 20117",
+  phoneHref: "tel:+919787920117",
+  whatsappHref: "https://wa.me/919787920117",
+  email: "subramaniam9757@gmail.com",
 } as const;
 
 /** Official insurer names. Logos only with written permission. */

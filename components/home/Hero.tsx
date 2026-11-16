@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { OrbitHero } from "@/components/hero/OrbitHero";
 import { Button } from "@/components/ui/Button";
-import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
+import { site } from "@/lib/site";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
 export function Hero({ lang, dict }: { lang: string; dict: Dictionary }) {
@@ -27,17 +27,19 @@ export function Hero({ lang, dict }: { lang: string; dict: Dictionary }) {
             {hero.sub}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-3.5">
-            <Button href={`/${lang}#contact`}>{hero.btnInsurance}</Button>
-            <Button href={`/${lang}#contact`} variant="light">
+            <Button href={site.phoneHref}>{hero.btnInsurance}</Button>
+            <Button href={site.phoneHref} variant="light">
               {hero.btnProperty}
             </Button>
-            <Button href={`/${lang}#contact`} variant="outlineLight">
+            <Button href={site.whatsappHref} variant="outlineLight">
               {hero.btnWhatsapp}
             </Button>
           </div>
           <p className="text-sm text-iris-200">
             {hero.phone}{" "}
-            <PlaceholderTag tone="dark">+91 00000 00000</PlaceholderTag>
+            <a href={site.phoneHref} className="font-semibold text-white underline-offset-4 hover:underline">
+              {site.phoneDisplay}
+            </a>
           </p>
         </div>
 

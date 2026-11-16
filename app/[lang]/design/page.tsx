@@ -111,7 +111,7 @@ export default async function PreviewPage({ params }: PageProps<"/[lang]/design"
           <div className="flex flex-col gap-4 rounded-3xl border border-line bg-white p-6">
             <p className="text-muted">{preview.placeholdersNote}</p>
             <div className="flex flex-wrap items-center gap-4">
-              <PlaceholderTag>+91 00000 00000</PlaceholderTag>
+              <PlaceholderTag>[Sample]</PlaceholderTag>
               <PlaceholderTag>[REG. NO. TO ADD]</PlaceholderTag>
               <PlaceholderTag>[00]+</PlaceholderTag>
               <span className="rounded-full bg-iris-900 px-3 py-2">

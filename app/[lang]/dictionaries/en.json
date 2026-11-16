@@ -145,14 +145,8 @@
   },
   "faq": {
     "title": "Common questions",
-    "answer": "Answer from the client",
-    "items": [
-      "Which health plan is right for my family?",
-      "How do I make a claim on my policy?",
-      "How do I enquire about a plot?",
-      "Can you help renew my vehicle insurance?"
-    ],
-    "viewAll": "See all questions"
+    "viewAll": "See all questions",
+    "empty": "Questions and answers will be added soon. Meanwhile, call or WhatsApp me."
   },
   "contact": {
     "title": "Let's talk. Call, WhatsApp or ask for a call back.",
@@ -193,7 +187,8 @@
     "enquire": "Send an enquiry",
     "subjectToTerms": "Cover, benefits and exclusions depend on the insurer and the policy you choose. Please read the policy wording before you buy.",
     "draftNote": "Sample content. To be replaced with the client's real details.",
-    "breadcrumb": "Breadcrumb"
+    "breadcrumb": "Breadcrumb",
+    "sample": "Sample"
   },
   "cta": {
     "title": "Not sure where to start? Just ask.",
@@ -319,16 +314,6 @@
           "Age proof",
           "Medical history, if any",
           "Passport size photo"
-        ],
-        "faq": [
-          {
-            "q": "Can I cover my parents in one plan?",
-            "a": "Many family plans allow parents to be added. The best option depends on their age and health. Let's discuss your family's details."
-          },
-          {
-            "q": "What is a waiting period?",
-            "a": "Some illnesses are covered only after a set time from the start of the policy. The exact period depends on the plan."
-          }
         ]
       },
       "life": {
@@ -352,16 +337,6 @@
           "Age proof",
           "Income proof, for higher cover",
           "Nominee details"
-        ],
-        "faq": [
-          {
-            "q": "How much life cover do I need?",
-            "a": "It depends on your income, loans and family needs. I can help you work out a sensible amount."
-          },
-          {
-            "q": "Can I pay premiums monthly?",
-            "a": "Many plans offer monthly, quarterly, half-yearly or yearly payment. The options depend on the plan."
-          }
         ]
       },
       "vehicle": {
@@ -385,16 +360,6 @@
           "Previous policy, for renewal",
           "Driving licence",
           "ID proof"
-        ],
-        "faq": [
-          {
-            "q": "My policy has expired. Can I still renew?",
-            "a": "Usually yes, though a vehicle inspection may be needed. Send me your old policy on WhatsApp and I will check."
-          },
-          {
-            "q": "What is a no claim bonus?",
-            "a": "A discount on your premium for each claim-free year. It can usually be carried over when you renew."
-          }
         ]
       },
       "corporate": {
@@ -416,16 +381,6 @@
           "Company registration details",
           "Employee list with ages",
           "Previous group policy, if any"
-        ],
-        "faq": [
-          {
-            "q": "How many employees do I need for a group plan?",
-            "a": "The minimum group size depends on the insurer and plan. Share your team size and I will check the options."
-          },
-          {
-            "q": "Can employees add family members?",
-            "a": "Many group health plans allow spouse, children and sometimes parents. It depends on the plan you choose."
-          }
         ]
       }
     }
@@ -481,7 +436,9 @@
       "enquireText": "Call or WhatsApp me to ask questions or book a site visit.",
       "back": "Back to all listings",
       "verify": "Please check documents and approvals before you buy. I will help you with this."
-    }
+    },
+    "sold": "Sold",
+    "noListings": "New properties will be listed here soon. Call or WhatsApp me to ask what is available."
   },
   "faqPage": {
     "metaTitle": "FAQ",
@@ -489,77 +446,15 @@
     "eyebrow": "FAQ",
     "title": "Questions people often ask.",
     "sub": "Can't find your question? Call or WhatsApp me and I will answer it.",
-    "groups": [
-      {
-        "title": "General",
-        "items": [
-          {
-            "q": "Do you charge a fee for advice?",
-            "a": "Draft answer for the client to confirm."
-          },
-          {
-            "q": "Which areas do you serve?",
-            "a": "I am based in Tamil Nadu and help clients across India. Exact areas to be confirmed."
-          },
-          {
-            "q": "Can we talk in Tamil?",
-            "a": "Yes. You can call, WhatsApp or chat in Tamil or English."
-          }
-        ]
-      },
-      {
-        "title": "Health insurance",
-        "items": [
-          {
-            "q": "Which health plan is right for my family?",
-            "a": "It depends on ages, health and budget. Share your family details and I will explain suitable options."
-          },
-          {
-            "q": "How do I make a cashless claim?",
-            "a": "At a network hospital, show your health card at the insurance desk. I can guide you through the steps."
-          }
-        ]
-      },
-      {
-        "title": "Life insurance",
-        "items": [
-          {
-            "q": "What is the difference between term and savings plans?",
-            "a": "Term plans give pure protection. Savings plans combine protection with a payout. I will explain which suits your goals."
-          },
-          {
-            "q": "How do I update my nominee?",
-            "a": "Nominee changes are done through the insurer with a simple form. I can help you with it."
-          }
-        ]
-      },
-      {
-        "title": "Vehicle insurance",
-        "items": [
-          {
-            "q": "Can you help renew my vehicle insurance?",
-            "a": "Yes. Send me your current policy on WhatsApp and I will share renewal options."
-          },
-          {
-            "q": "What should I do after an accident?",
-            "a": "Make sure everyone is safe, take photos and inform the insurer quickly. Call me and I will guide you."
-          }
-        ]
-      },
-      {
-        "title": "Real estate",
-        "items": [
-          {
-            "q": "How do I enquire about a plot?",
-            "a": "Open the listing and call or WhatsApp me. I will share details and arrange a site visit."
-          },
-          {
-            "q": "Can you help me sell my property?",
-            "a": "Yes. Share the location, size and expected price and I will tell you the next steps."
-          }
-        ]
-      }
-    ]
+    "categories": {
+      "general": "General",
+      "health": "Health insurance",
+      "life": "Life insurance",
+      "vehicle": "Vehicle insurance",
+      "corporate": "Corporate and group insurance",
+      "real_estate": "Real estate"
+    },
+    "empty": "Questions and answers will be added soon. Meanwhile, call or WhatsApp me."
   },
   "contactPage": {
     "metaTitle": "Contact",

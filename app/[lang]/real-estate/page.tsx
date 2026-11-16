@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { ListingBrowser } from "@/components/realestate/ListingBrowser";
-import { listings } from "@/lib/listings";
+import { getListings } from "@/lib/data";
 import { pageMetadata } from "@/lib/meta";
 
 const serviceAccent = ["bg-[#ffe9df]", "bg-[#e7f5ec]", "bg-iris-100", "bg-[#fff3cf]"];
@@ -21,8 +21,9 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/real-estat
 export default async function RealEstatePage({ params }: PageProps<"/[lang]/real-estate">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, listings] = await Promise.all([getDictionary(lang), getListings()]);
   const r = dict.realEstate;
+  const hasSamples = listings.some((l) => l.isSample);
 
   return (
     <>
@@ -58,9 +59,15 @@ export default async function RealEstatePage({ params }: PageProps<"/[lang]/real
             <h2 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight md:text-5xl">
               {r.listingsTitle}
             </h2>
-            <PlaceholderTag>{r.sampleNote}</PlaceholderTag>
+            {hasSamples && <PlaceholderTag>{r.sampleNote}</PlaceholderTag>}
           </div>
-          <ListingBrowser lang={lang} listings={listings} labels={r} />
+          {listings.length > 0 ? (
+            <ListingBrowser lang={lang} listings={listings} labels={r} />
+          ) : (
+            <p className="rounded-[1.5rem] border border-dashed border-line bg-white p-8 text-muted">
+              {r.noListings}
+            </p>
+          )}
         </section>
 
         <CtaBand lang={lang} dict={dict} />

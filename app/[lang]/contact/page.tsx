@@ -23,10 +23,10 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
   const c = dict.contact;
 
   const channels = [
-    { t: c.call, d: cp.callD, v: site.phoneDisplay, href: site.phoneHref, cls: "bg-[#ffe9df]" },
-    { t: c.whatsapp, d: cp.whatsappD, v: site.phoneDisplay, href: site.whatsappHref, cls: "bg-[#e7f5ec]" },
-    { t: cp.email, d: cp.emailD, v: site.email, href: `mailto:${site.email}`, cls: "bg-iris-100" },
-    { t: cp.visit, d: cp.visitD, v: c.address, href: undefined, cls: "bg-[#fff3cf]" },
+    { t: c.call, d: cp.callD, v: site.phoneDisplay, href: site.phoneHref, cls: "bg-[#ffe9df]", ph: false },
+    { t: c.whatsapp, d: cp.whatsappD, v: site.phoneDisplay, href: site.whatsappHref, cls: "bg-[#e7f5ec]", ph: false },
+    { t: cp.email, d: cp.emailD, v: site.email, href: `mailto:${site.email}`, cls: "bg-iris-100", ph: false },
+    { t: cp.visit, d: cp.visitD, v: c.address, href: undefined, cls: "bg-[#fff3cf]", ph: true },
   ];
 
   return (
@@ -58,7 +58,11 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
                 </h3>
                 <p className="text-[15px] text-muted">{ch.d}</p>
                 <p className="mt-1 break-all text-sm">
-                  <PlaceholderTag className="!rounded-xl">{ch.v}</PlaceholderTag>
+                  {ch.ph ? (
+                    <PlaceholderTag className="!rounded-xl">{ch.v}</PlaceholderTag>
+                  ) : (
+                    <span className="font-semibold">{ch.v}</span>
+                  )}
                 </p>
               </li>
             ))}

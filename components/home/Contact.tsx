@@ -23,7 +23,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
         <div className="flex flex-wrap gap-3">
           <Button href={site.phoneHref} variant="dark">
             {c.call}
-            <PlaceholderTag className="ml-2.5">{site.phoneDisplay}</PlaceholderTag>
+            <span className="ml-2.5">{site.phoneDisplay}</span>
           </Button>
           <Button href={site.whatsappHref}>{c.whatsapp}</Button>
         </div>

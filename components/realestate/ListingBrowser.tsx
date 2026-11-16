@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ListingCard } from "@/components/realestate/ListingCard";
-import type { Listing, ListingType } from "@/lib/listings";
+import { listingTypes, type Listing, type ListingType } from "@/lib/types";
 import type { Dictionary, Locale } from "@/app/[lang]/dictionaries";
 
 const field =
@@ -21,7 +21,6 @@ export function ListingBrowser({
   const [type, setType] = useState<ListingType | "all">("all");
   const [location, setLocation] = useState("all");
 
-  const types = Object.keys(labels.types) as ListingType[];
   const locations = Array.from(
     new Map(listings.map((l) => [l.location.en, l.location[lang]])),
   );
@@ -45,7 +44,7 @@ export function ListingBrowser({
             className={field}
           >
             <option value="all">{labels.all}</option>
-            {types.map((t) => (
+            {listingTypes.map((t) => (
               <option key={t} value={t}>
                 {labels.types[t]}
               </option>
@@ -77,8 +76,8 @@ export function ListingBrowser({
 
       {shown.length > 0 ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {shown.map((l) => (
-            <ListingCard key={l.id} lang={lang} listing={l} labels={labels} />
+          {shown.map((l, i) => (
+            <ListingCard key={l.id} lang={lang} listing={l} labels={labels} index={i} />
           ))}
         </div>
       ) : (

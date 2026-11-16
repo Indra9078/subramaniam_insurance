@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import clsx from "clsx";
 import { LanguageToggle } from "./LanguageToggle";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
@@ -13,14 +15,17 @@ type NavbarProps = {
 /** Dark navbar for use over the purple hero. Links collapse into a menu on phones. */
 export function Navbar({ lang, nav }: NavbarProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() ?? "";
 
   const links = [
-    { href: `/${lang}#insurance`, label: nav.insurance },
-    { href: `/${lang}#property`, label: nav.realEstate },
-    { href: `/${lang}#about`, label: nav.about },
-    { href: `/${lang}#faq`, label: nav.faq },
-    { href: `/${lang}#contact`, label: nav.contact },
+    { href: `/${lang}/insurance`, label: nav.insurance },
+    { href: `/${lang}/real-estate`, label: nav.realEstate },
+    { href: `/${lang}/about`, label: nav.about },
+    { href: `/${lang}/faq`, label: nav.faq },
+    { href: `/${lang}/contact`, label: nav.contact },
   ];
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <header className="relative z-20">
@@ -37,7 +42,15 @@ export function Navbar({ lang, nav }: NavbarProps) {
           className="hidden gap-7 text-[15px] font-medium text-iris-100 lg:flex"
         >
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="hover:text-white">
+            <Link
+              key={l.href}
+              href={l.href}
+              aria-current={isActive(l.href) ? "page" : undefined}
+              className={clsx(
+                "underline-offset-8 hover:text-white",
+                isActive(l.href) && "text-white underline decoration-ember-soft decoration-2",
+              )}
+            >
               {l.label}
             </Link>
           ))}
@@ -46,7 +59,7 @@ export function Navbar({ lang, nav }: NavbarProps) {
         <div className="flex items-center gap-2 md:gap-3">
           <LanguageToggle lang={lang} label={nav.language} />
           <Link
-            href={`/${lang}#contact`}
+            href={`/${lang}/contact`}
             className="btn-sheen hidden min-h-11 items-center rounded-full px-5 text-[15px] font-semibold text-white sm:inline-flex"
           >
             {nav.call}
@@ -90,13 +103,17 @@ export function Navbar({ lang, nav }: NavbarProps) {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="flex min-h-12 items-center rounded-2xl px-4 text-base font-medium text-iris-50 hover:bg-white/10"
+              aria-current={isActive(l.href) ? "page" : undefined}
+              className={clsx(
+                "flex min-h-12 items-center rounded-2xl px-4 text-base font-medium text-iris-50 hover:bg-white/10",
+                isActive(l.href) && "bg-white/10",
+              )}
             >
               {l.label}
             </Link>
           ))}
           <Link
-            href={`/${lang}#contact`}
+            href={`/${lang}/contact`}
             onClick={() => setOpen(false)}
             className="btn-sheen mt-1 flex min-h-12 items-center justify-center rounded-2xl px-4 text-base font-semibold text-white"
           >

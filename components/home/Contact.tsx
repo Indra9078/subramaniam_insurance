@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/Button";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
+import { site } from "@/lib/site";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
 const field =
   "min-h-[50px] rounded-[14px] border border-[#cfccd6] bg-white px-3.5 text-base";
 
 /** Layout of the contact section. The form is wired up in Stage 6. */
-export function Contact({ lang, dict }: { lang: string; dict: Dictionary }) {
+export function Contact({ dict }: { dict: Dictionary }) {
   const c = dict.contact;
   const f = c.form;
   return (
@@ -20,11 +21,11 @@ export function Contact({ lang, dict }: { lang: string; dict: Dictionary }) {
         </h2>
         <p className="text-base leading-7 text-muted md:text-lg">{c.sub}</p>
         <div className="flex flex-wrap gap-3">
-          <Button href={`/${lang}#contact`} variant="dark">
+          <Button href={site.phoneHref} variant="dark">
             {c.call}
-            <PlaceholderTag className="ml-2.5">+91 00000 00000</PlaceholderTag>
+            <PlaceholderTag className="ml-2.5">{site.phoneDisplay}</PlaceholderTag>
           </Button>
-          <Button href={`/${lang}#contact`}>{c.whatsapp}</Button>
+          <Button href={site.whatsappHref}>{c.whatsapp}</Button>
         </div>
         <p className="text-sm leading-8 text-muted">
           {c.office} <PlaceholderTag>{c.address}</PlaceholderTag>

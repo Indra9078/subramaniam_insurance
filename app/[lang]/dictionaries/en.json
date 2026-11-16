@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "A. Subramaniam | Insurance and Property Advisor",
-    "description": "Health, life and vehicle insurance and property advice across Tamil Nadu and India. Call, WhatsApp or request a call back."
+    "description": "Health, life and vehicle insurance and property advice across Tamil Nadu and India. Call, WhatsApp or request a call back.",
+    "siteName": "A. Subramaniam"
   },
   "nav": {
     "insurance": "Insurance",
@@ -11,7 +12,8 @@
     "contact": "Contact",
     "call": "Call now",
     "menu": "Menu",
-    "language": "Language"
+    "language": "Language",
+    "home": "Home"
   },
   "hero": {
     "eyebrow": "Insurance and property advisor across Tamil Nadu and India",
@@ -133,7 +135,8 @@
     "note": "Added from the admin page",
     "photo": "Listing photo",
     "name": "Property title",
-    "meta": "Location, size, price"
+    "meta": "Location, size, price",
+    "viewAll": "See all properties"
   },
   "testimonials": {
     "title": "What clients say",
@@ -148,7 +151,8 @@
       "How do I make a claim on my policy?",
       "How do I enquire about a plot?",
       "Can you help renew my vehicle insurance?"
-    ]
+    ],
+    "viewAll": "See all questions"
   },
   "contact": {
     "title": "Let's talk. Call, WhatsApp or ask for a call back.",
@@ -178,6 +182,462 @@
       "consent": "I agree to be contacted about my enquiry.",
       "submit": "Request a call back",
       "pending": "Form sending is connected in Stage 6"
+    }
+  },
+  "common": {
+    "home": "Home",
+    "learnMore": "Learn more",
+    "viewAll": "View all",
+    "callNow": "Call now",
+    "whatsapp": "WhatsApp",
+    "enquire": "Send an enquiry",
+    "subjectToTerms": "Cover, benefits and exclusions depend on the insurer and the policy you choose. Please read the policy wording before you buy.",
+    "draftNote": "Sample content. To be replaced with the client's real details.",
+    "breadcrumb": "Breadcrumb"
+  },
+  "cta": {
+    "title": "Not sure where to start? Just ask.",
+    "text": "Call, WhatsApp or request a call back. I will explain your options in plain words.",
+    "call": "Call",
+    "whatsapp": "Chat on WhatsApp",
+    "contact": "Request a call back"
+  },
+  "about": {
+    "metaTitle": "About",
+    "metaDesc": "Meet A. Subramaniam: Senior Sales Manager at Star Health Insurance, LIC agent and property advisor in Tamil Nadu.",
+    "eyebrow": "About me",
+    "title": "Hello, I'm Subramaniam.",
+    "sub": "I help families and businesses protect what matters and find the right property, with honest advice and a reply you can count on.",
+    "portrait": "Portrait photo",
+    "storyTitle": "My story",
+    "story": "A short story in his own words: where he started, why he chose this work and who he helps. To be supplied by the client.",
+    "rolesTitle": "What I do",
+    "roles": [
+      {
+        "t": "Senior Sales Manager",
+        "d": "Star Health Insurance. Health cover for individuals, families and senior citizens."
+      },
+      {
+        "t": "LIC agent",
+        "d": "Life insurance, savings and pension plans from LIC."
+      },
+      {
+        "t": "Vehicle insurance",
+        "d": "Car, two-wheeler and commercial vehicle cover, including renewals."
+      },
+      {
+        "t": "Real estate",
+        "d": "Help to buy, sell or rent plots, houses, apartments and commercial space."
+      }
+    ],
+    "insurersTitle": "Insurers I work with",
+    "insurersText": "Plans and services from these companies. Company logos will be shown only with their permission.",
+    "credentialsTitle": "Registration and credentials",
+    "irdai": "IRDAI registration number",
+    "irdaiPh": "[Reg. no. to add]",
+    "expiry": "Valid until",
+    "expiryPh": "[Expiry date]",
+    "certificates": "Certificates and awards",
+    "certificatesPh": "[Certificates to add]",
+    "statsTitle": "In numbers",
+    "valuesTitle": "How I work",
+    "values": [
+      {
+        "t": "Plain words",
+        "d": "No jargon. You will know what is covered and what is not before you sign."
+      },
+      {
+        "t": "Your needs first",
+        "d": "I suggest what fits your family and budget, not the biggest plan."
+      },
+      {
+        "t": "There at claim time",
+        "d": "I help with paperwork and follow up until your claim is settled."
+      }
+    ]
+  },
+  "insurance": {
+    "metaTitle": "Insurance",
+    "metaDesc": "Health, life, vehicle and corporate insurance from LIC, Star Health Insurance and IFFCO-Tokio General Insurance, explained in plain words.",
+    "eyebrow": "Insurance",
+    "title": "The right cover, explained simply.",
+    "sub": "Health, life, vehicle and group insurance from trusted insurers. I help you compare, buy, renew and claim.",
+    "productsTitle": "Choose a type of cover",
+    "chooseTitle": "How I help you choose",
+    "choose": [
+      {
+        "t": "Understand your needs",
+        "d": "Family size, age, health, vehicle or business. We start with a short chat."
+      },
+      {
+        "t": "Compare options",
+        "d": "I explain the plans that fit, with what is covered and what is not."
+      },
+      {
+        "t": "Buy with confidence",
+        "d": "Help with forms, documents and payment."
+      },
+      {
+        "t": "Renew and claim",
+        "d": "Reminders before renewal and support at claim time."
+      }
+    ],
+    "insurersTitle": "Insurers"
+  },
+  "products": {
+    "labels": {
+      "covers": "What it can cover",
+      "suits": "Who it suits",
+      "insurers": "Offered through",
+      "documents": "Documents usually needed",
+      "faq": "Questions about this cover",
+      "quote": "Get help with this cover",
+      "quoteText": "Tell me a little about your needs and I will call you back with options.",
+      "others": "Other types of cover",
+      "confirm": "To confirm with the client"
+    },
+    "items": {
+      "health": {
+        "name": "Health insurance",
+        "short": "Hospital bills, treatment and check-ups for you and your family.",
+        "title": "Health insurance for you and your family.",
+        "intro": "Health cover helps pay hospital bills so a medical emergency does not become a money emergency.",
+        "covers": [
+          "Hospital stay and treatment",
+          "Pre and post hospitalisation costs",
+          "Day care procedures",
+          "Cashless treatment at network hospitals",
+          "Health check-ups, in some plans"
+        ],
+        "suits": [
+          "Individuals and young families",
+          "Parents and senior citizens",
+          "People who want cover beyond their employer's plan"
+        ],
+        "documents": [
+          "ID and address proof",
+          "Age proof",
+          "Medical history, if any",
+          "Passport size photo"
+        ],
+        "faq": [
+          {
+            "q": "Can I cover my parents in one plan?",
+            "a": "Many family plans allow parents to be added. The best option depends on their age and health. Let's discuss your family's details."
+          },
+          {
+            "q": "What is a waiting period?",
+            "a": "Some illnesses are covered only after a set time from the start of the policy. The exact period depends on the plan."
+          }
+        ]
+      },
+      "life": {
+        "name": "Life insurance",
+        "short": "Protection and savings plans to secure your family's future.",
+        "title": "Life insurance to secure your family's future.",
+        "intro": "Life cover gives your family financial support if something happens to you. Some plans also help you save for goals.",
+        "covers": [
+          "Term protection",
+          "Savings and endowment plans",
+          "Child education plans",
+          "Pension and retirement plans"
+        ],
+        "suits": [
+          "Earning members of a family",
+          "Parents planning for children",
+          "People planning for retirement"
+        ],
+        "documents": [
+          "ID and address proof",
+          "Age proof",
+          "Income proof, for higher cover",
+          "Nominee details"
+        ],
+        "faq": [
+          {
+            "q": "How much life cover do I need?",
+            "a": "It depends on your income, loans and family needs. I can help you work out a sensible amount."
+          },
+          {
+            "q": "Can I pay premiums monthly?",
+            "a": "Many plans offer monthly, quarterly, half-yearly or yearly payment. The options depend on the plan."
+          }
+        ]
+      },
+      "vehicle": {
+        "name": "Vehicle insurance",
+        "short": "Car, two-wheeler and commercial vehicle cover, with easy renewals.",
+        "title": "Vehicle insurance without the hassle.",
+        "intro": "Motor insurance is required by law in India. Good cover also protects you from repair bills and third-party claims.",
+        "covers": [
+          "Third-party liability",
+          "Own damage from accidents, fire or theft",
+          "Comprehensive cover",
+          "Add-ons such as zero depreciation, in some plans"
+        ],
+        "suits": [
+          "Car and two-wheeler owners",
+          "Taxi and commercial vehicle owners",
+          "Anyone whose policy is due for renewal"
+        ],
+        "documents": [
+          "Registration certificate (RC)",
+          "Previous policy, for renewal",
+          "Driving licence",
+          "ID proof"
+        ],
+        "faq": [
+          {
+            "q": "My policy has expired. Can I still renew?",
+            "a": "Usually yes, though a vehicle inspection may be needed. Send me your old policy on WhatsApp and I will check."
+          },
+          {
+            "q": "What is a no claim bonus?",
+            "a": "A discount on your premium for each claim-free year. It can usually be carried over when you renew."
+          }
+        ]
+      },
+      "corporate": {
+        "name": "Corporate and group insurance",
+        "short": "Group health and other cover for your employees and business.",
+        "title": "Group insurance for your team and business.",
+        "intro": "Group cover helps you look after your employees and protect your business, often at a lower cost per person.",
+        "covers": [
+          "Group health insurance",
+          "Group personal accident cover",
+          "Business and property cover, where available"
+        ],
+        "suits": [
+          "Small and medium businesses",
+          "Shops, offices and factories",
+          "Associations and groups"
+        ],
+        "documents": [
+          "Company registration details",
+          "Employee list with ages",
+          "Previous group policy, if any"
+        ],
+        "faq": [
+          {
+            "q": "How many employees do I need for a group plan?",
+            "a": "The minimum group size depends on the insurer and plan. Share your team size and I will check the options."
+          },
+          {
+            "q": "Can employees add family members?",
+            "a": "Many group health plans allow spouse, children and sometimes parents. It depends on the plan you choose."
+          }
+        ]
+      }
+    }
+  },
+  "realEstate": {
+    "metaTitle": "Real estate",
+    "metaDesc": "Plots, houses, apartments and commercial property in Tamil Nadu. Browse listings and enquire by call or WhatsApp.",
+    "eyebrow": "Real estate",
+    "title": "Find the right property, with someone you trust.",
+    "sub": "Plots, houses, apartments and commercial space. I help you find, visit and close with clear information at every step.",
+    "servicesTitle": "How I can help",
+    "services": [
+      {
+        "t": "Buy",
+        "d": "Shortlist properties that fit your budget and area."
+      },
+      {
+        "t": "Sell",
+        "d": "List your property and reach serious buyers."
+      },
+      {
+        "t": "Rent",
+        "d": "Find tenants or a place to rent."
+      },
+      {
+        "t": "Site visits",
+        "d": "Visit the property with me and ask your questions on the spot."
+      }
+    ],
+    "areasPh": "[Areas covered to confirm]",
+    "listingsTitle": "Current listings",
+    "filterType": "Property type",
+    "filterLocation": "Location",
+    "all": "All",
+    "types": {
+      "plot": "Plot",
+      "house": "House",
+      "apartment": "Apartment",
+      "commercial": "Commercial"
+    },
+    "empty": "No properties match. Try another filter, or ask me directly.",
+    "count": "properties",
+    "sampleNote": "Sample listings. Real listings are added from the admin page.",
+    "detail": {
+      "price": "Price",
+      "size": "Size",
+      "location": "Location",
+      "type": "Type",
+      "about": "About this property",
+      "features": "Features",
+      "photos": "Photo",
+      "enquireTitle": "Interested in this property?",
+      "enquireText": "Call or WhatsApp me to ask questions or book a site visit.",
+      "back": "Back to all listings",
+      "verify": "Please check documents and approvals before you buy. I will help you with this."
+    }
+  },
+  "faqPage": {
+    "metaTitle": "FAQ",
+    "metaDesc": "Answers to common questions about health, life and vehicle insurance, claims and property enquiries.",
+    "eyebrow": "FAQ",
+    "title": "Questions people often ask.",
+    "sub": "Can't find your question? Call or WhatsApp me and I will answer it.",
+    "groups": [
+      {
+        "title": "General",
+        "items": [
+          {
+            "q": "Do you charge a fee for advice?",
+            "a": "Draft answer for the client to confirm."
+          },
+          {
+            "q": "Which areas do you serve?",
+            "a": "I am based in Tamil Nadu and help clients across India. Exact areas to be confirmed."
+          },
+          {
+            "q": "Can we talk in Tamil?",
+            "a": "Yes. You can call, WhatsApp or chat in Tamil or English."
+          }
+        ]
+      },
+      {
+        "title": "Health insurance",
+        "items": [
+          {
+            "q": "Which health plan is right for my family?",
+            "a": "It depends on ages, health and budget. Share your family details and I will explain suitable options."
+          },
+          {
+            "q": "How do I make a cashless claim?",
+            "a": "At a network hospital, show your health card at the insurance desk. I can guide you through the steps."
+          }
+        ]
+      },
+      {
+        "title": "Life insurance",
+        "items": [
+          {
+            "q": "What is the difference between term and savings plans?",
+            "a": "Term plans give pure protection. Savings plans combine protection with a payout. I will explain which suits your goals."
+          },
+          {
+            "q": "How do I update my nominee?",
+            "a": "Nominee changes are done through the insurer with a simple form. I can help you with it."
+          }
+        ]
+      },
+      {
+        "title": "Vehicle insurance",
+        "items": [
+          {
+            "q": "Can you help renew my vehicle insurance?",
+            "a": "Yes. Send me your current policy on WhatsApp and I will share renewal options."
+          },
+          {
+            "q": "What should I do after an accident?",
+            "a": "Make sure everyone is safe, take photos and inform the insurer quickly. Call me and I will guide you."
+          }
+        ]
+      },
+      {
+        "title": "Real estate",
+        "items": [
+          {
+            "q": "How do I enquire about a plot?",
+            "a": "Open the listing and call or WhatsApp me. I will share details and arrange a site visit."
+          },
+          {
+            "q": "Can you help me sell my property?",
+            "a": "Yes. Share the location, size and expected price and I will tell you the next steps."
+          }
+        ]
+      }
+    ]
+  },
+  "contactPage": {
+    "metaTitle": "Contact",
+    "metaDesc": "Call, WhatsApp or request a call back from A. Subramaniam for insurance or property help.",
+    "eyebrow": "Contact",
+    "title": "Get in touch.",
+    "sub": "Pick whichever is easiest for you. I usually reply the same day.",
+    "channelsTitle": "Ways to reach me",
+    "callD": "Talk to me directly.",
+    "whatsappD": "Send a message or documents.",
+    "email": "Email",
+    "emailD": "For detailed questions.",
+    "visit": "Visit",
+    "visitD": "Meet me at the office.",
+    "mapTitle": "Find the office",
+    "mapPh": "Map to add"
+  },
+  "legal": {
+    "updated": "Last updated",
+    "updatedPh": "[Date]",
+    "draftNote": "Draft text. To be reviewed and approved by the client or a lawyer before launch.",
+    "privacy": {
+      "metaTitle": "Privacy policy",
+      "metaDesc": "How A. Subramaniam collects, uses and protects your personal information.",
+      "title": "Privacy policy",
+      "sections": [
+        {
+          "h": "Information we collect",
+          "p": "When you fill a form, call or message, we may collect your name, phone number, email and details of your enquiry."
+        },
+        {
+          "h": "How we use it",
+          "p": "Only to reply to your enquiry and to help with insurance or property services you ask about. We do not sell your information."
+        },
+        {
+          "h": "Sharing",
+          "p": "With your consent, details may be shared with the relevant insurer to process a proposal or claim."
+        },
+        {
+          "h": "How we protect it",
+          "p": "Your information is stored securely and only people who need it to help you can see it."
+        },
+        {
+          "h": "Your choices",
+          "p": "You can ask to see, correct or delete your information at any time by contacting us."
+        },
+        {
+          "h": "Contact",
+          "p": "For privacy questions, please use the contact page."
+        }
+      ]
+    },
+    "terms": {
+      "metaTitle": "Terms",
+      "metaDesc": "Terms of use for this website.",
+      "title": "Terms of use",
+      "sections": [
+        {
+          "h": "About this website",
+          "p": "This website gives general information about insurance and property services offered by A. Subramaniam."
+        },
+        {
+          "h": "Not advice or a quote",
+          "p": "Information here is general guidance only. It is not a quote, an offer or policy advice. Cover is subject to the insurer's policy terms."
+        },
+        {
+          "h": "Insurance",
+          "p": "Insurance is the subject matter of solicitation. Please read the policy wording and sales brochure carefully before buying."
+        },
+        {
+          "h": "Property listings",
+          "p": "Listing details are shared in good faith. Please verify documents, approvals and prices before any purchase."
+        },
+        {
+          "h": "Changes",
+          "p": "These terms may be updated from time to time. The latest version will be on this page."
+        }
+      ]
     }
   }
 }

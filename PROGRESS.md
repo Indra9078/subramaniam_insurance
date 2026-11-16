@@ -25,8 +25,18 @@ Last updated: 2026-11-16
 - The contact form is layout only. Sending is connected in Stage 6. The chat preview is an animation, the real chatbot is Stage 7.
 - The old design-system preview moved to `/en/design` and `/ta/design`.
 - Checks: lint clean, production build passes, both languages serve, desktop and mobile screenshots reviewed (English and Tamil).
-- Not yet built: `/privacy` and `/terms` pages linked in the footer (Stage 4).
+- The `/privacy` and `/terms` pages were added in Stage 4.
 
+## Stage 4: Inner pages (done, 2026-11-16)
+- New pages, each in English and Tamil: `/about`, `/insurance`, `/insurance/health`, `/insurance/life`, `/insurance/vehicle`, `/insurance/corporate`, `/real-estate`, `/real-estate/[id]`, `/faq`, `/contact`, `/privacy`, `/terms`. All 52 inner page versions are prerendered at build time.
+- Shared pieces: `PageHeader` (purple band with navbar and breadcrumb), `CtaBand` (call, WhatsApp, call back), `FaqList` (accordion, used on home, FAQ and product pages), `ListingCard` and `ListingBrowser` (type and location filters), `LegalPage`.
+- The navbar and footer now link to the real pages and highlight the current one. The home page links to the full FAQ and to all listings.
+- Data files: `lib/site.ts` (phone, WhatsApp, email, all dummy), `lib/products.ts` (which insurer offers which product), `lib/listings.ts` (6 sample listings with English and Tamil fields, the same shape planned for the Stage 5 Supabase table).
+- Each page has its own title and description in both languages (`lib/meta.ts`, title template in the layout).
+- Dummy details as agreed: phone `+91 00000 00000`, email `hello@example.com`, sample listings with `[00,00,000]` prices, draft FAQ answers, draft privacy and terms text. Every one of them is a glowing placeholder. `PlaceholderTag` has a new `block` option for whole sentences and paragraphs.
+- Checks: lint clean, production build passes, all pages tested in `/en` and `/ta` at 1440px and 390px (no horizontal scroll, no console errors), listing filters, mobile menu and language toggle tested in the browser.
+
+## Open items and risks
 ## Open items and risks
 - Tamil text is my translation. A native speaker must review it before launch.
 - Logo badges are plain text. Real logos need permission from LIC, Star Health, IFFCO-Tokio and HDFC.
@@ -34,6 +44,11 @@ Last updated: 2026-11-16
 - Client details still missing (see "Information still needed" in PLAN.md). All such content is shown as glowing placeholders.
 - Star Health and LIC marketing approval must be confirmed in writing before launch.
 - The chatbot needs a separate pay-per-use Claude API key (not covered by Claude Pro).
+- Product pages use general wording only, with a "subject to policy terms" note. Star Health and LIC should approve this wording before launch.
+- Which insurer the vehicle code is with, and whether corporate and group cover is sold, are still to confirm (shown as placeholders on those pages).
+- FAQ answers, privacy policy and terms are drafts. The client (or a lawyer for the legal text) must approve them.
+- The new Tamil text (about 450 lines) needs the native-speaker review.
+- An unknown listing or product URL shows the default "not found" page (marked noindex). A branded 404 page is planned for Stage 8.
 
 ## Links
 - Plan sheet: https://claude.ai/artifact/9mJ7HSBqCNtZyZCcJFsRDJ

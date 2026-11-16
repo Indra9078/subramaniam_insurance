@@ -184,3 +184,12 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Block version of the placeholder tag, for sentences and paragraphs. */
+.tag-glow-block {
+  display: block;
+  border-radius: 1rem;
+  padding: 0.85rem 1.1rem;
+  font-weight: 500;
+  line-height: 1.65;
+}

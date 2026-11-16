@@ -18,7 +18,12 @@ npm run lint
 - `proxy.ts` sends `/` to `/en` or `/ta` based on the browser language.
 - `app/globals.css` design tokens (colors, fonts, glow tags, button sheen).
 - `app/orbit.css` orbiting-logo hero. Sized in container units, so it scales to phones.
-- `components/ui` Button, PlaceholderTag, Marquee. `components/layout` Navbar, Footer, LanguageToggle. `components/hero` OrbitHero.
+- `components/ui` Button, PlaceholderTag, Marquee, CtaBand, FaqList. `components/layout` Navbar, Footer, LanguageToggle, PageHeader. `components/hero` OrbitHero. `components/home` home sections. `components/realestate` ListingCard, ListingBrowser. `components/legal` LegalPage.
+- `lib/site.ts` phone, WhatsApp and email (dummy until supplied). `lib/products.ts` product slugs and insurers. `lib/listings.ts` sample listings (replaced by Supabase in Stage 5). `lib/meta.ts` page metadata helper.
+
+## Pages
+
+`/[lang]` home, `/about`, `/insurance`, `/insurance/{health,life,vehicle,corporate}`, `/real-estate`, `/real-estate/[id]`, `/faq`, `/contact`, `/privacy`, `/terms`.
 
 ## Placeholders
 
@@ -39,5 +44,5 @@ permission from each company (LIC, Star Health, IFFCO-Tokio, HDFC).
 
 ## Stages
 
-1. Design direction (done) 2. Setup and design system (this) 3. Home page 4. Inner pages
+1. Design direction (done) 2. Setup and design system (done) 3. Home page (done) 4. Inner pages (done)
 5. Admin page 6. Lead capture 7. Chatbot 8. Polish 9. Launch 10. Blog and reels (optional)

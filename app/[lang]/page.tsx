@@ -31,14 +31,16 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <Services lang={lang} dict={dict} />
         <HowItWorks dict={dict} />
         <WhyTrust dict={dict} />
-        <Listings dict={dict} />
+        <Listings lang={lang} dict={dict} />
         <Testimonials dict={dict} />
         <Faq
+          lang={lang}
+          viewAll={dict.faq.viewAll}
           title={dict.faq.title}
           answer={dict.faq.answer}
           items={dict.faq.items}
         />
-        <Contact lang={lang} dict={dict} />
+        <Contact dict={dict} />
       </main>
       <Footer lang={lang} nav={dict.nav} footer={dict.footer} />
     </>

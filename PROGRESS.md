@@ -19,8 +19,13 @@ Last updated: 2026-11-16
 - Checks: lint clean, production build passes, `/en` and `/ta` serve correctly, desktop English and mobile Tamil screenshots reviewed.
 - Pushed to GitHub: https://github.com/Indra9078/subramaniam_insurance
 
-## Stage 3: Home page
-See the latest entry below.
+## Stage 3: Home page (done, 2026-11-16)
+- Full home page at `/en` and `/ta`: hero with orbiting logos, insurer band, Insurance and Real estate cards plus call back, WhatsApp and chat tiles, how it works, "why people trust me" with animated chat preview, featured properties, testimonials, FAQ accordion, contact section, footer.
+- Sections live in `components/home/`. Every missing detail (phone, address, hours, stats, story, listings, testimonials, FAQ answers, IRDAI number) is a glowing placeholder tag.
+- The contact form is layout only. Sending is connected in Stage 6. The chat preview is an animation, the real chatbot is Stage 7.
+- The old design-system preview moved to `/en/design` and `/ta/design`.
+- Checks: lint clean, production build passes, both languages serve, desktop and mobile screenshots reviewed (English and Tamil).
+- Not yet built: `/privacy` and `/terms` pages linked in the footer (Stage 4).
 
 ## Open items and risks
 - Tamil text is my translation. A native speaker must review it before launch.

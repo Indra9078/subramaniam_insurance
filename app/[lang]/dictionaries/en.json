@@ -50,5 +50,134 @@
     "cardInsuranceText": "Health, life, vehicle and group cover explained in plain words.",
     "cardPropertyTitle": "Real estate",
     "cardPropertyText": "Plots, houses and apartments, added from the admin page."
+  },
+  "services": {
+    "tag": "What I help with",
+    "title": "Two things, done properly.",
+    "insTitle": "Insurance",
+    "insText": "Health, life, vehicle and group cover explained in plain words, with help at claim time.",
+    "insProducts": [
+      "Health",
+      "Life",
+      "Vehicle",
+      "Group"
+    ],
+    "confirm": "Product details to confirm",
+    "insBtn": "Get an insurance call back",
+    "propTitle": "Real estate",
+    "propText": "Find and enquire about plots, houses and apartments. Listings are added from the admin page.",
+    "propTypes": [
+      "Plots",
+      "Houses",
+      "Apartments",
+      "Commercial"
+    ],
+    "propConfirm": "Property types and areas to confirm",
+    "propBtn": "Get a property call back",
+    "bento": [
+      {
+        "t": "Call back",
+        "d": "Ask for a call and pick a time that suits you."
+      },
+      {
+        "t": "WhatsApp",
+        "d": "Send your question and documents on WhatsApp."
+      },
+      {
+        "t": "Chat assistant",
+        "d": "Get quick answers in English or Tamil, any time."
+      }
+    ]
+  },
+  "how": {
+    "title": "How it works",
+    "steps": [
+      {
+        "t": "Tell me what you need",
+        "d": "Call, WhatsApp or fill the short form."
+      },
+      {
+        "t": "I compare the options",
+        "d": "Plans from LIC, Star Health and IFFCO-Tokio explained in plain words."
+      },
+      {
+        "t": "I stay with you",
+        "d": "From paperwork to claims, I guide you through."
+      }
+    ]
+  },
+  "why": {
+    "tag": "Why people trust me",
+    "title": "Honest advice from someone who answers the phone.",
+    "text": "Senior Sales Manager at Star Health Insurance and a LIC agent, helping people across Tamil Nadu and India.",
+    "story": "Short personal story to add",
+    "stats": [
+      "Years of experience",
+      "Families served",
+      "Claims assisted"
+    ]
+  },
+  "chat": {
+    "title": "Ask me anything",
+    "msgs": [
+      "Hi! Looking for health cover, a vehicle policy or a plot? Ask here and I will point you to the right next step.",
+      "What cover do I need for my parents?",
+      "Happy to help. Want a call back, or shall we continue on WhatsApp?"
+    ],
+    "placeholder": "Type your question",
+    "send": "Send",
+    "note": "General guidance only, not a quote or policy advice."
+  },
+  "listings": {
+    "title": "Featured properties",
+    "note": "Added from the admin page",
+    "photo": "Listing photo",
+    "name": "Property title",
+    "meta": "Location, size, price"
+  },
+  "testimonials": {
+    "title": "What clients say",
+    "quote": "Real client quote, with written permission",
+    "who": "Client name, area"
+  },
+  "faq": {
+    "title": "Common questions",
+    "answer": "Answer from the client",
+    "items": [
+      "Which health plan is right for my family?",
+      "How do I make a claim on my policy?",
+      "How do I enquire about a plot?",
+      "Can you help renew my vehicle insurance?"
+    ]
+  },
+  "contact": {
+    "title": "Let's talk. Call, WhatsApp or ask for a call back.",
+    "sub": "Tell me what you need and I will reply at a time that suits you.",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "office": "Office",
+    "address": "[Address and map link]",
+    "hours": "Hours",
+    "hoursPh": "[Working days and hours]",
+    "form": {
+      "name": "Your name",
+      "phone": "Phone number",
+      "interest": "I am interested in",
+      "interestOptions": [
+        "Health insurance",
+        "Life insurance",
+        "Vehicle insurance",
+        "Property"
+      ],
+      "time": "Best time to call",
+      "timeOptions": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "consent": "I agree to be contacted about my enquiry.",
+      "submit": "Request a call back",
+      "pending": "Form sending is connected in Stage 6"
+    }
   }
 }

@@ -48,7 +48,7 @@ Fonts: Space Grotesk (headings), Inter (body), Noto Sans Tamil (Tamil).
 |---|---|---|---|
 | 1 | Discovery and design direction | Sitemap, content inventory, design direction, language plan, lead and chatbot flow | Done |
 | 2 | Project setup and design system | Next.js project, tokens, fonts, EN/TA toggle, mobile-first layout, shared components, orbiting-logo hero | Done |
-| 3 | Home page | Hero, insurer band, services, how it works, why trust me, chatbot preview, featured properties, testimonials, FAQ, contact section. English and Tamil | See PROGRESS.md |
+| 3 | Home page | Hero, insurer band, services, how it works, why trust me, chatbot preview, featured properties, testimonials, FAQ, contact section. English and Tamil | Done, awaiting your review |
 | 4 | Inner pages | About, Insurance services, Real estate and listings, FAQ, Contact | Not started |
 | 5 | Admin page | Protected login. Add and edit property listings and photos, view and export leads, edit testimonials and FAQs | Not started |
 | 6 | Lead capture | Enquiry and quote forms per product, call-back request, WhatsApp, call buttons, Supabase, email alerts | Not started |

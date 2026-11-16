@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { site } from "@/lib/site";
-import { waLink } from "@/lib/whatsapp";
+import { siteUrl, waLink } from "@/lib/whatsapp";
+import { AssistantLauncher } from "@/components/assistant/AssistantLauncher";
+import type { AssistantDict } from "@/components/assistant/AssistantPanel";
+import { productInsurers, productSlugs } from "@/lib/products";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -19,6 +22,20 @@ function WhatsAppIcon({ className }: { className?: string }) {
 export function Footer({ lang, dict, waText }: { lang: string; dict: Dictionary; waText?: string }) {
   const { nav, footer, actionBar } = dict;
   const wa = waLink(waText ?? dict.whatsappText.general);
+  const assistant: AssistantDict = {
+    a: dict.assistant,
+    products: Object.fromEntries(
+      productSlugs.map((p) => {
+        const it = dict.products.items[p];
+        return [p, { name: it.name, covers: it.covers, suits: it.suits, documents: it.documents }];
+      }),
+    ) as AssistantDict["products"],
+    insurers: productInsurers,
+    types: dict.realEstate.types,
+    hours: { label: dict.contact.hours, ph: dict.contact.hoursPh },
+    confirm: dict.products.labels.confirm,
+    form: { contact: dict.contact, productForm: dict.productForm, propertyForm: dict.propertyForm },
+  };
   return (
     <>
       <footer className="bg-ink pb-20 text-[#e7e5ec] md:pb-0">
@@ -64,6 +81,14 @@ export function Footer({ lang, dict, waText }: { lang: string; dict: Dictionary;
           {actionBar.enquire}
         </Link>
       </nav>
+
+      <AssistantLauncher
+        lang={lang === "ta" ? "ta" : "en"}
+        d={assistant}
+        phoneHref={site.phoneHref}
+        whatsappBase={site.whatsappHref}
+        siteUrl={siteUrl()}
+      />
 
       <a
         href={wa}

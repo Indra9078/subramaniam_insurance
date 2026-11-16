@@ -62,12 +62,106 @@ async function Dashboard() {
   );
 }
 
+const topicNames: Record<string, string> = {
+  health: "Health insurance", life: "Life insurance", vehicle: "Vehicle insurance", corporate: "Corporate and group",
+  property: "Property", claims: "Claims help", talk: "Talk to Mr. Subramaniam", faq: "An FAQ answer",
+  covers: "What does it cover?", suits: "Who is it for?", documents: "Documents needed", faqs: "Common questions",
+  callback: "Call-back form", sell: "Sell or rent", all: "All", plot: "Plots", house: "Houses",
+  apartment: "Apartments", commercial: "Commercial", general: "General", any: "Any area",
+};
+const readable = (topic: string) =>
+  topic.split(":").map((p) => topicNames[p] ?? p.replace(/-/g, " ")).join(" › ");
+
+type EventRow = { event: string; topic: string | null; query: string | null };
+
+const thirtyDaysAgo = () => new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString();
+
+function count(rows: EventRow[], key: (r: EventRow) => string | null) {
+  const m = new Map<string, number>();
+  for (const r of rows) {
+    const k = key(r);
+    if (k) m.set(k, (m.get(k) ?? 0) + 1);
+  }
+  return [...m.entries()].sort((a, b) => b[1] - a[1]);
+}
+
+function Box({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-2 rounded-[1.25rem] border border-line bg-white p-5">
+      <h3 className="font-semibold">{title}</h3>
+      {children}
+    </div>
+  );
+}
+
+function CountList({ rows, empty, label = (k: string) => k }: { rows: [string, number][]; empty: string; label?: (k: string) => string }) {
+  return rows.length ? (
+    <ol className="flex flex-col gap-1 text-sm">
+      {rows.map(([k, n]) => (
+        <li key={k} className="flex justify-between gap-3">
+          <span className="min-w-0 truncate">{label(k)}</span>
+          <span className="font-semibold">{n}</span>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <p className="text-sm text-muted">{empty}</p>
+  );
+}
+
+const contactLabel = (k: string) => (k === "call" ? "Call tapped" : k === "whatsapp" ? "WhatsApp tapped" : k);
+
+/** Anonymous usage counts from the guided assistant (last 30 days). */
+async function AssistantStats() {
+  const { supabase } = await requireAdmin();
+  const since = thirtyDaysAgo();
+  const { data, error } = await supabase
+    .from("assistant_events")
+    .select("event, topic, query")
+    .gte("created_at", since)
+    .limit(20000);
+  if (error) {
+    return (
+      <p className="text-sm text-muted">
+        Assistant usage is not available yet. Run <code>supabase/migrations/0003_assistant.sql</code> in Supabase.
+      </p>
+    );
+  }
+  const rows = data as EventRow[];
+  const opens = rows.filter((r) => r.event === "open").length;
+  const topics = count(rows.filter((r) => r.event === "topic" && r.topic !== "home"), (r) => r.topic).slice(0, 10);
+  const contacts = count(rows.filter((r) => r.event === "contact"), (r) => r.topic);
+  const searches = rows.filter((r) => r.event === "search");
+  const missed = count(searches.filter((r) => r.topic === "nomatch"), (r) => r.query?.toLowerCase() ?? null).slice(0, 10);
+
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <Box title="Overview">
+        <p className="text-sm">Opened <strong>{opens}</strong> times · <strong>{searches.length}</strong> searches</p>
+        <CountList rows={contacts} empty="No contact taps yet." label={contactLabel} />
+      </Box>
+      <Box title="Most opened topics">
+        <CountList rows={topics} empty="No topics opened yet." label={readable} />
+      </Box>
+      <Box title="Searches with no answer (add these as FAQs)">
+        <CountList rows={missed} empty="None yet." />
+      </Box>
+    </div>
+  );
+}
+
 export default function AdminHome() {
   return (
     <AdminShell>
       <Suspense fallback={<Loading />}>
         <Dashboard />
       </Suspense>
+      <section className="mt-10">
+        <h2 className="mb-4 font-display text-xl font-bold">Assistant, last 30 days</h2>
+        <Suspense fallback={<Loading />}>
+          <AssistantStats />
+        </Suspense>
+      </section>
     </AdminShell>
   );
 }

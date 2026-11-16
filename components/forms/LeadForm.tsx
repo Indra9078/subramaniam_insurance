@@ -45,14 +45,21 @@ function productExtras(product: ProductSlug, t: Dictionary["productForm"]): Extr
   }
 }
 
+/** The dictionary parts the form uses. */
+export type LeadFormDict = Pick<Dictionary, "contact" | "productForm" | "propertyForm">;
+
 type Props = {
   lang: string;
-  dict: Dictionary;
+  dict: LeadFormDict;
   /** WhatsApp link offered after sending. */
   waHref: string;
   variant?: "light" | "dark";
+  /** Prefix for field ids, so two forms on one page never share ids. */
+  idPrefix?: string;
+  /** Where the form was opened from, saved with the lead (e.g. "Assistant"). */
+  source?: string;
 } & (
-  | { kind: "callback" }
+  | { kind: "callback"; defaultInterest?: string }
   | { kind: "product"; product: ProductSlug }
   | { kind: "property"; listing: { slug: string; title: string } }
 );
@@ -70,7 +77,7 @@ export function LeadForm(props: Props) {
   // Record when the form was shown (bots post instantly). Reset for "send another".
   useEffect(() => setStartedAt(Date.now()), [key]);
 
-  const id = (n: string) => `${props.kind}-${n}`;
+  const id = (n: string) => `${props.idPrefix ?? props.kind}-${n.replace(/\s+/g, "-")}`;
   const label = (htmlFor: string, text: string, optional = false) => (
     <label htmlFor={htmlFor} className="text-sm font-semibold">
       {text}
@@ -138,6 +145,7 @@ export function LeadForm(props: Props) {
       <input type="hidden" name="language" value={lang} />
       <input type="hidden" name="source_page" value={pathname} />
       <input type="hidden" name="_t" value={startedAt || ""} />
+      {props.source && <input type="hidden" name="d:Source" value={props.source} />}
       {props.kind === "product" && (
         <>
           <input type="hidden" name="product" value={props.product} />
@@ -174,7 +182,7 @@ export function LeadForm(props: Props) {
       {props.kind === "callback" && (
         <div className="flex flex-col gap-1.5">
           {label(id("interest"), f.interest)}
-          <select id={id("interest")} name="interest" className={field} defaultValue="health">
+          <select id={id("interest")} name="interest" className={field} defaultValue={props.defaultInterest ?? "health"}>
             {Object.entries(f.interestOptions).map(([k, v]) => (
               <option key={k} value={k}>{v}</option>
             ))}

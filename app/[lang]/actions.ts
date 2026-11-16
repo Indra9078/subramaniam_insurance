@@ -81,3 +81,18 @@ export async function submitLead(_prev: LeadState, fd: FormData): Promise<LeadSt
   after(() => sendLeadEmail(lead));
   return { ok: true, time: lead.preferred_time ?? "any" };
 }
+
+/** Records an anonymous assistant usage event. Never throws; failures are ignored. */
+export async function logAssistantEvent(event: string, topic?: string, query?: string, language?: string) {
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+    await supabase.rpc("log_assistant_event", {
+      p_event: String(event).slice(0, 20),
+      p_topic: topic ? String(topic).slice(0, 60) : null,
+      p_query: query ? String(query).slice(0, 80) : null,
+      p_language: language === "ta" ? "ta" : "en",
+    });
+  } catch {}
+}

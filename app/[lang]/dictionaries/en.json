@@ -511,7 +511,7 @@
       "sections": [
         {
           "h": "Information we collect",
-          "p": "When you fill a form, call or message, we may collect your name, phone number, email and details of your enquiry."
+          "p": "When you fill a form, call or message, we may collect your name, phone number, email and details of your enquiry. The help assistant only keeps anonymous counts of which topics are opened, with no personal details."
         },
         {
           "h": "How we use it",
@@ -637,5 +637,98 @@
     "whatsapp": "WhatsApp",
     "enquire": "Enquire",
     "label": "Quick contact"
+  },
+  "assistant": {
+    "name": "Subramaniam's Helper",
+    "open": "Need help?",
+    "close": "Close",
+    "restart": "Start over",
+    "back": "Back",
+    "disclaimer": "Automated help with general information. Not a quote or policy advice.",
+    "greeting": "Hello! I can help you with insurance and property. What would you like to know?",
+    "menu": {
+      "health": "Health insurance",
+      "life": "Life insurance",
+      "vehicle": "Vehicle insurance",
+      "corporate": "Corporate and group",
+      "property": "Property",
+      "claims": "Claims help",
+      "talk": "Talk to Mr. Subramaniam"
+    },
+    "productIntro": "What would you like to know about {product}?",
+    "productMenu": {
+      "covers": "What does it cover?",
+      "suits": "Who is it for?",
+      "documents": "Documents needed",
+      "faqs": "Common questions",
+      "callback": "Get a call back about this",
+      "page": "Open the full page"
+    },
+    "insurerLine": "Offered through: {insurers}.",
+    "termsNote": "Cover depends on the insurer and policy. Mr. Subramaniam can check the details for you.",
+    "faqsIntro": "Here are common questions. Tap one to see the answer.",
+    "noFaqs": "Questions for this topic will be added soon. Mr. Subramaniam can answer you directly.",
+    "anythingElse": "Anything else?",
+    "property": {
+      "intro": "What are you looking for?",
+      "types": "Which type of property?",
+      "anyType": "Show all properties",
+      "areas": "Which area?",
+      "anyArea": "Any area",
+      "results": "Here is what is available:",
+      "none": "No properties match right now. Mr. Subramaniam can tell you about new ones.",
+      "view": "View details",
+      "enquire": "Enquire on WhatsApp",
+      "more": "See all properties",
+      "sell": "Sell or rent my property",
+      "sellText": "Happy to help. Share the location, size and expected price, and Mr. Subramaniam will call you back."
+    },
+    "claims": {
+      "intro": "Here are the general steps. Every insurer has its own process, so call Mr. Subramaniam when you need to make a claim.",
+      "cashless": {
+        "t": "Cashless claim (network hospital)",
+        "steps": [
+          "Show your health card and ID at the hospital's insurance desk.",
+          "The hospital sends a pre-authorisation request to the insurer.",
+          "Once approved, the insurer pays the hospital directly as per policy terms."
+        ]
+      },
+      "reimbursement": {
+        "t": "Reimbursement claim",
+        "steps": [
+          "Pay the hospital and keep every original bill and report.",
+          "Fill in the claim form and send it with the documents.",
+          "The insurer checks the claim and pays as per policy terms."
+        ]
+      },
+      "keep": {
+        "t": "Keep ready",
+        "items": [
+          "Policy number or health card",
+          "ID proof",
+          "Bills, prescriptions and reports",
+          "Discharge summary"
+        ]
+      },
+      "emergency": "In a medical emergency, go to the nearest hospital first and call the insurer's helpline."
+    },
+    "talk": "You can reach Mr. Subramaniam directly. Pick whatever is easiest:",
+    "contact": {
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "callback": "Request a call back"
+    },
+    "callbackIntro": "Leave your details and Mr. Subramaniam will call you back.",
+    "search": {
+      "placeholder": "Type a question, e.g. bike renewal",
+      "button": "Search",
+      "label": "Search the help topics",
+      "results": "Here is what I found:",
+      "none": "I couldn't find that. Mr. Subramaniam can answer you directly."
+    },
+    "you": "You",
+    "typing": "Typing",
+    "waTopic": "Hello Mr. Subramaniam, I have a question about {topic}.",
+    "tryIt": "Try the assistant"
   }
 }

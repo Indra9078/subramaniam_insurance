@@ -1,3 +1,4 @@
+import { AssistantTrigger } from "@/components/assistant/AssistantLauncher";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
@@ -41,8 +42,6 @@ export function WhyTrust({ dict }: { dict: Dictionary }) {
 
         <div
           className="flex w-full max-w-[520px] min-w-0 flex-1 flex-col gap-4 rounded-[2rem] border border-iris-200/35 bg-[rgba(14,10,32,.55)] p-5 shadow-[0_0_80px_rgba(142,124,255,.4)] md:p-6"
-          role="img"
-          aria-label={c.title}
         >
           <div className="flex items-center justify-between">
             <div className="font-display text-lg font-semibold">{c.title}</div>
@@ -51,13 +50,13 @@ export function WhyTrust({ dict }: { dict: Dictionary }) {
               EN / தமிழ்
             </div>
           </div>
-          <div className="chat-msg-1 max-w-[85%] self-start rounded-[18px_18px_18px_4px] bg-white/12 px-4 py-3.5 text-[15px] leading-relaxed">
+          <div aria-hidden="true" className="chat-msg-1 max-w-[85%] self-start rounded-[18px_18px_18px_4px] bg-white/12 px-4 py-3.5 text-[15px] leading-relaxed">
             {c.msgs[0]}
           </div>
-          <div className="chat-msg-2 max-w-[85%] self-end rounded-[18px_18px_4px_18px] bg-iris-300 px-4 py-3.5 text-[15px] font-medium leading-relaxed text-[#120c2b]">
+          <div aria-hidden="true" className="chat-msg-2 max-w-[85%] self-end rounded-[18px_18px_4px_18px] bg-iris-300 px-4 py-3.5 text-[15px] font-medium leading-relaxed text-[#120c2b]">
             {c.msgs[1]}
           </div>
-          <div className="chat-msg-3 max-w-[85%] self-start rounded-[18px_18px_18px_4px] bg-white/12 px-4 py-3.5 text-[15px] leading-relaxed">
+          <div aria-hidden="true" className="chat-msg-3 max-w-[85%] self-start rounded-[18px_18px_18px_4px] bg-white/12 px-4 py-3.5 text-[15px] leading-relaxed">
             {c.msgs[2]}
           </div>
           <div className="typing-dots self-start px-3.5 py-2" aria-hidden="true">
@@ -66,12 +65,10 @@ export function WhyTrust({ dict }: { dict: Dictionary }) {
             <span />
           </div>
           <div className="mt-1 flex gap-2.5">
-            <div className="flex min-h-12 min-w-0 flex-1 items-center rounded-full border border-iris-200/45 bg-white/7 px-4 text-[15px] text-iris-200/80">
-              {c.placeholder}
-            </div>
-            <div className="btn-sheen flex min-h-12 items-center rounded-full px-5 text-[15px] font-semibold text-white">
-              {c.send}
-            </div>
+            <AssistantTrigger
+              label={dict.assistant.tryIt}
+              className="btn-sheen flex min-h-12 w-full items-center justify-center rounded-full px-5 text-[15px] font-semibold text-white"
+            />
           </div>
           <p className="text-xs text-[#bdb6da]">{c.note}</p>
         </div>

@@ -90,6 +90,7 @@ ${base ? `<p><a href="${base}/admin/leads">Open all leads in the admin</a></p>` 
       body: JSON.stringify({ from, to, subject: `New enquiry: ${lead.name} (${what})`, html, text }),
     });
     if (!res.ok) console.error("Lead email failed:", res.status, await res.text());
+    else console.log("Lead email sent:", (await res.json()).id);
   } catch (e) {
     console.error("Lead email failed:", e instanceof Error ? e.message : e);
   }

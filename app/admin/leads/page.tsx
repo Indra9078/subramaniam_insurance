@@ -3,7 +3,8 @@ import { Suspense } from "react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { Badge, Loading, PageTitle } from "@/components/admin/fields";
 import { requireAdmin } from "@/lib/admin/auth";
-import { setLeadStatus } from "../actions";
+import { deleteLead, setLeadStatus } from "../actions";
+import { ConfirmButton } from "@/components/admin/ConfirmButton";
 
 const tone = { new: "orange", contacted: "purple", closed: "grey" } as const;
 const statuses = ["all", "new", "contacted", "closed"] as const;
@@ -77,6 +78,9 @@ async function LeadsList({ searchParams }: { searchParams: PageProps<"/admin/lea
                 <input name="notes" defaultValue={l.notes ?? ""} placeholder="Notes" aria-label="Notes" className="min-h-11 flex-1 rounded-[10px] border border-[#cfccd6] bg-white px-3" />
                 <button type="submit" className="min-h-11 rounded-full bg-ink px-5 text-sm font-semibold text-white">Update</button>
               </form>
+              <div className="flex justify-end">
+                <ConfirmButton action={deleteLead.bind(null, l.id)} label="Delete lead" message={`Delete the lead from ${l.name}? This cannot be undone.`} />
+              </div>
             </li>
           ))}
         </ul>

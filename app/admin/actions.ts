@@ -241,6 +241,12 @@ export async function setLeadStatus(id: string, fd: FormData) {
   redirect("/admin/leads");
 }
 
+export async function deleteLead(id: string) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("leads").delete().eq("id", id);
+  redirect("/admin/leads");
+}
+
 function friendly(message: string) {
   if (message.includes("listings_slug_key")) return "Another listing already uses this web address (slug). Change the slug.";
   if (message.includes("testimonial_permission")) return "A testimonial can only be published with written permission and a date.";

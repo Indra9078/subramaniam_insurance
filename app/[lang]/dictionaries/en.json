@@ -185,7 +185,7 @@
       "submit": "Request a call back",
       "sending": "Sending…",
       "successTitle": "Thank you! Your enquiry is received.",
-      "successText": "I will call you back soon. For a faster reply, message me on WhatsApp.",
+      "successText": "For a faster reply, message me on WhatsApp.",
       "successTime": {
         "morning": "I will call you back in the morning.",
         "afternoon": "I will call you back in the afternoon.",

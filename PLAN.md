@@ -50,8 +50,8 @@ Fonts: Space Grotesk (headings), Inter (body), Noto Sans Tamil (Tamil).
 | 2 | Project setup and design system | Next.js project, tokens, fonts, EN/TA toggle, mobile-first layout, shared components, orbiting-logo hero | Done |
 | 3 | Home page | Hero, insurer band, services, how it works, why trust me, chatbot preview, featured properties, testimonials, FAQ, contact section. English and Tamil | Done |
 | 4 | Inner pages | About, Insurance and 4 product pages, Real estate with listings and detail pages, FAQ, Contact, Privacy policy, Terms | Done |
-| 5 | Admin page | Protected login. Add and edit property listings and photos, view and export leads, edit testimonials and FAQs | Done, awaiting your review |
-| 6 | Lead capture | Enquiry and quote forms per product, call-back request, WhatsApp, call buttons, Supabase, email alerts | Not started |
+| 5 | Admin page | Protected login. Add and edit property listings and photos, view and export leads, edit testimonials and FAQs | Done |
+| 6 | Lead capture | Enquiry and quote forms per product, call-back request, WhatsApp, call buttons, Supabase, email alerts | Done, awaiting your review |
 | 7 | Chatbot | English and Tamil chatbot with guardrails, hands off to WhatsApp, call or form | Not started |
 | 8 | Polish | Animations, responsiveness, SEO, speed, accessibility, Tamil text review | Not started |
 | 9 | Launch | Vercel deployment, domain, analytics, privacy policy and terms, handover note | Not started |

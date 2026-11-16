@@ -53,6 +53,16 @@ Last updated: 2026-11-16
 - Write-blocking for anonymous visitors was not probed live (to avoid writing to the production database). It is enforced by the row level security in the migration.
 - Local note: in this cloud sandbox, build and start need `NODE_USE_ENV_PROXY=1` so Node can reach Supabase through the proxy. Not needed on Vercel or a normal machine.
 
+## Stage 6: Lead capture (done, 2026-11-16)
+- `supabase/migrations/0002_leads.sql`: the `submit_lead()` database function is the only way visitors can add a lead. It validates name, Indian mobile number, email and consent, and allows 5 enquiries per hour per device (hashed IP, raw IP never stored) and 3 per hour per phone number. New columns: product, listing, answers (`details`), consent version and time.
+- Forms (`components/forms/LeadForm.tsx`, English and Tamil): call back (home and contact page), insurance enquiry on each product page with the agreed fields (health, life, vehicle, corporate), property enquiry on each listing. Consent wording links to the privacy policy. A hidden trap field and a 3-second timing check stop bots (they see a thank-you, nothing is saved). Fields are kept when a submission is refused. The thank-you message names the chosen call time and offers WhatsApp.
+- Email alert to subramaniam9757@gmail.com through Resend, sent after the visitor gets the reply (`after()`), with tap-to-call and WhatsApp buttons and a link to the admin. The lead is always saved first; a failed email is only logged.
+- WhatsApp: a typed-in message for each page (general, product, listing with link). Phone action bar (Call, WhatsApp, Enquire) on every public page on phones, floating WhatsApp button on larger screens. Footer shows phone and email.
+- Admin leads: product, property, answers, WhatsApp button, delete button. CSV includes the new columns.
+- Privacy policy names Supabase and Resend and says leads are kept only as long as needed (the owner deletes them by hand).
+- Checks: lint clean, build passes. End-to-end browser test against the live database: invalid phone and missing consent refused with input kept, English call back, Tamil vehicle form, property form, honeypot and fast bots not saved, 4th enquiry from one phone blocked, WhatsApp texts per page, action bar on phones and floating button on desktop, leads and answers in the admin and CSV, delete works. One real alert email accepted by Resend. All test leads deleted. No horizontal scroll on the changed pages at 390px and 1440px in English and Tamil.
+- Vercel needs `RESEND_API_KEY` (set by the owner). Optional: `NEXT_PUBLIC_SITE_URL` (links in WhatsApp messages and emails; otherwise Vercel's production URL), `LEAD_ALERT_TO`, `LEAD_ALERT_FROM`, `LEAD_HASH_SALT`.
+
 ## Open items and risks
 
 - Tamil text is my translation. A native speaker must review it before launch.
@@ -65,6 +75,7 @@ Last updated: 2026-11-16
 - Which insurer the vehicle code is with, and whether corporate and group cover is sold, are still to confirm (shown as placeholders on those pages).
 - FAQ answers, privacy policy and terms are drafts. The client (or a lawyer for the legal text) must approve them.
 - The new Tamil text (about 450 lines) needs the native-speaker review.
+- Alerts come from onboarding@resend.dev until the client's domain is verified in Resend (Stage 9). Mark the first alert as 'Not spam'.
 - Sample listings and FAQs from `supabase/seed.sql` are live and glow as placeholders. Replace them with real content from the admin before launch.
 - Supabase free projects pause after about a week without activity. Upgrade or keep traffic flowing after launch.
 - Confirm in the Supabase dashboard that "Allow new users to sign up" is off.

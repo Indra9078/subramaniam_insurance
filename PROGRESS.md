@@ -37,7 +37,7 @@ Last updated: 2026-11-16
 - Checks: lint clean, production build passes, all pages tested in `/en` and `/ta` at 1440px and 390px (no horizontal scroll, no console errors), listing filters, mobile menu and language toggle tested in the browser.
 
 ## Open items and risks
-## Open items and risks
+
 - Tamil text is my translation. A native speaker must review it before launch.
 - Logo badges are plain text. Real logos need permission from LIC, Star Health, IFFCO-Tokio and HDFC.
 - HDFC was not in the client form. Confirm which HDFC product he sells, or remove it.

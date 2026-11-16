@@ -1,0 +1,137 @@
+/*
+  Orbiting logos in free space.
+  Everything is sized in container units (cqw), so the same markup scales
+  from a 320px phone to a 540px desktop hero without any media queries.
+  Rings spin with the individual `rotate` property; each badge counter-spins
+  by the same amount so text always stays upright.
+*/
+.orbit {
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  max-width: 540px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+
+.orbit__path {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(201, 191, 255, 0.45);
+}
+.orbit__path--outer-faint {
+  inset: 2.2%;
+  border: 1.5px solid rgba(201, 191, 255, 0.18);
+}
+.orbit__path--outer {
+  inset: 12.04%;
+}
+.orbit__path--inner {
+  inset: 26.85%;
+  border-color: rgba(255, 138, 91, 0.5);
+}
+
+.orbit__core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 27.8%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c9bfff, #6e5be0 60%, #3a2f7a);
+  box-shadow:
+    0 0 70px rgba(142, 124, 255, 0.85),
+    0 0 0 10px rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  animation: float 6s ease-in-out infinite;
+}
+.orbit__core-mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 8.1cqw, 44px);
+  line-height: 1;
+}
+.orbit__core-label {
+  margin-top: 4px;
+  font-size: clamp(8px, 2.2cqw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ede9ff;
+  text-align: center;
+  line-height: 1.2;
+  padding-inline: 8%;
+}
+
+.orbit__ring {
+  position: absolute;
+  inset: 0;
+  animation: orbit-spin var(--dur) linear infinite;
+}
+.orbit__ring--reverse {
+  animation-direction: reverse;
+}
+
+.orbit__item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--a)) translateX(var(--r));
+}
+.orbit__upright {
+  transform: rotate(calc(var(--a) * -1));
+}
+
+.orbit__badge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  translate: -50% -50%;
+  animation: orbit-spin var(--dur) linear infinite reverse;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.orbit__ring--reverse .orbit__badge {
+  animation-direction: normal;
+}
+
+.orbit__badge--icon {
+  width: clamp(36px, 11.1cqw, 60px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 24px rgba(142, 124, 255, 0.55);
+}
+.orbit__badge--icon svg {
+  width: 46%;
+  height: 46%;
+}
+
+.orbit__badge--pill {
+  height: clamp(28px, 8.1cqw, 44px);
+  padding-inline: clamp(10px, 2.8cqw, 18px);
+  border-radius: 999px;
+  background: #fff;
+  color: #2b2350;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(11px, 2.8cqw, 15px);
+  box-shadow: 0 10px 30px rgba(10, 6, 30, 0.4);
+}
+
+@keyframes orbit-spin {
+  to {
+    rotate: 360deg;
+  }
+}

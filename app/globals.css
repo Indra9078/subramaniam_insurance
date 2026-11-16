@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* Design tokens: light editorial base, soft purple dark sections, orange accent. */
+@theme {
+  --color-paper: #f4f2ee;
+  --color-ink: #1b1a1f;
+  --color-muted: #4a4750;
+  --color-line: #ddd9e3;
+
+  --color-ember: #c94312;
+  --color-ember-soft: #ff8a5b;
+
+  --color-iris-50: #f1eeff;
+  --color-iris-100: #e9e5ff;
+  --color-iris-200: #c9bfff;
+  --color-iris-300: #a898ff;
+  --color-iris-500: #6e5be0;
+  --color-iris-800: #352a66;
+  --color-iris-900: #2b2350;
+  --color-iris-950: #221c3d;
+
+  --font-display: "Space Grotesk", "Noto Sans Tamil", system-ui, sans-serif;
+  --font-sans: "Inter", "Noto Sans Tamil", system-ui, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-drift: drift 14s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(50px, -40px) scale(1.18);
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tamil script needs more line height than Latin. */
+:lang(ta) h1,
+:lang(ta) h2,
+:lang(ta) h3 {
+  line-height: 1.3;
+}
+:lang(ta) body {
+  line-height: 1.75;
+}
+
+/* Placeholder tags: a pulsing purple glow marks content still to be supplied by the client. */
+.tag-glow,
+.tag-glow-dark {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  animation: glow 2.8s ease-in-out infinite;
+}
+.tag-glow {
+  background: #e9e5ff;
+  color: #3f2fb0;
+  --glow: 142, 124, 255;
+}
+.tag-glow-dark {
+  background: rgba(142, 124, 255, 0.2);
+  color: #e8e3ff;
+  --glow: 170, 152, 255;
+}
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 10px rgba(var(--glow), 0.55),
+      0 0 2px rgba(var(--glow), 0.9);
+  }
+  50% {
+    box-shadow:
+      0 0 24px rgba(var(--glow), 1),
+      0 0 4px rgba(var(--glow), 1);
+  }
+}
+
+/* Primary button with a slow light sweep. */
+.btn-sheen {
+  background-color: var(--color-ember);
+  background-image: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 250% 100%;
+  animation: sheen 4s linear infinite;
+}
+.gradient-text {
+  background: linear-gradient(90deg, #ff8a5b, #c9bfff, #ff8a5b);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 6s linear infinite;
+}
+@keyframes sheen {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

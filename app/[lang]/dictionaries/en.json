@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "A. Subramaniam | Insurance and Property Advisor",
+    "description": "Health, life and vehicle insurance and property advice across Tamil Nadu and India. Call, WhatsApp or request a call back."
+  },
+  "nav": {
+    "insurance": "Insurance",
+    "realEstate": "Real estate",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "call": "Call now",
+    "menu": "Menu",
+    "language": "Language"
+  },
+  "hero": {
+    "eyebrow": "Insurance and property advisor across Tamil Nadu and India",
+    "titleA": "Protection and property,",
+    "titleB": "made simple.",
+    "sub": "Hello, I'm Subramaniam. I help families and businesses choose the right insurance and find the right property, with clear advice and a quick reply on call or WhatsApp.",
+    "btnInsurance": "Call about insurance",
+    "btnProperty": "Call about property",
+    "btnWhatsapp": "Chat on WhatsApp",
+    "phone": "Phone"
+  },
+  "orbit": {
+    "core": "Your advisor",
+    "label": "Insurers and services I work with"
+  },
+  "marquee": "Call · WhatsApp · Chat",
+  "footer": {
+    "irdai": "IRDAI registration",
+    "disclaimer": "Insurance is the subject matter of solicitation.",
+    "privacy": "Privacy policy",
+    "terms": "Terms"
+  },
+  "preview": {
+    "badge": "Stage 2 preview",
+    "title": "Design system",
+    "intro": "Building blocks for every page. This preview page is replaced by the real home page in Stage 3.",
+    "colors": "Colors",
+    "typography": "Typography",
+    "typographyEn": "English headline sample",
+    "typographyTa": "Tamil headline sample",
+    "buttons": "Buttons",
+    "placeholders": "Placeholder tags",
+    "placeholdersNote": "Missing client details glow like this so they are easy to find and replace.",
+    "cards": "Cards",
+    "cardInsuranceTitle": "Insurance",
+    "cardInsuranceText": "Health, life, vehicle and group cover explained in plain words.",
+    "cardPropertyTitle": "Real estate",
+    "cardPropertyText": "Plots, houses and apartments, added from the admin page."
+  }
+}

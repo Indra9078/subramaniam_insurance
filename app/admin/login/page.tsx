@@ -4,12 +4,22 @@ import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/admin/LoginForm";
 import { getAdmin } from "@/lib/admin/auth";
 import { signOut } from "../actions";
+import { supabaseConfigProblem } from "@/lib/supabase/env";
 
 export const metadata: Metadata = { title: "Log in" };
 
 /** Already logged in? Go to the dashboard. Logged in without admin access? Say so. */
 async function LoginState() {
-  const admin = await getAdmin();
+  const problem = supabaseConfigProblem();
+  if (problem) {
+    return (
+      <div className="rounded-[12px] border border-ember/40 bg-[#ffe9df] p-4 text-sm leading-6">
+        <strong>Login is not set up on this deployment.</strong> {problem} Fix it in Vercel (Project Settings,
+        Environment Variables), then redeploy.
+      </div>
+    );
+  }
+  const admin = await getAdmin().catch(() => null);
   if (admin?.isAdmin) redirect("/admin");
   if (admin) {
     return (

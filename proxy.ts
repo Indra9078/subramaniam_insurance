@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { supabaseConfigured, supabaseKey, supabaseUrl } from "@/lib/supabase/env";
 
 const locales = ["en", "ta"];
 const defaultLocale = "en";
@@ -19,9 +20,18 @@ function getLocale(request: NextRequest): string {
  */
 async function adminProxy(request: NextRequest) {
   let response = NextResponse.next({ request });
+  const isLogin = request.nextUrl.pathname === "/admin/login";
+  // Not configured: let the login page explain the problem instead of failing here.
+  if (!supabaseConfigured) {
+    if (isLogin) return response;
+    const url = request.nextUrl.clone();
+    url.pathname = "/admin/login";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "",
+    supabaseUrl,
+    supabaseKey,
     {
       cookies: {
         getAll() {
@@ -39,9 +49,8 @@ async function adminProxy(request: NextRequest) {
     },
   );
 
-  const { data } = await supabase.auth.getClaims();
+  const { data } = await supabase.auth.getClaims().catch(() => ({ data: null }));
   const loggedIn = Boolean(data?.claims);
-  const isLogin = request.nextUrl.pathname === "/admin/login";
 
   if (!loggedIn && !isLogin) {
     const url = request.nextUrl.clone();

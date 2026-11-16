@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { startTransition, useActionState } from "react";
 import { signIn } from "@/app/admin/actions";
 
 const input =
@@ -9,7 +9,15 @@ const input =
 export function LoginForm() {
   const [state, action, pending] = useActionState(signIn, {});
   return (
-    <form action={action} className="flex flex-col gap-4">
+    <form
+      className="flex flex-col gap-4"
+      // Manual submit so React does not clear the email after a failed attempt.
+      onSubmit={(e) => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        startTransition(() => action(fd));
+      }}
+    >
       <label className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">Email</span>
         <input name="email" type="email" autoComplete="username" required className={input} />

@@ -6,7 +6,7 @@ import { createSessionClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/admin/auth";
 import { bool, int, lines, slugify, text, type FormState } from "@/lib/admin/form";
 import { TAGS } from "@/lib/data";
-import { PHOTO_BUCKET } from "@/lib/supabase/env";
+import { PHOTO_BUCKET, supabaseConfigProblem } from "@/lib/supabase/env";
 import { faqCategories, listingTypes, type FaqCategory, type ListingType } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
@@ -17,9 +17,22 @@ export async function signIn(_prev: FormState, fd: FormData): Promise<FormState>
   const password = String(fd.get("password") ?? "");
   if (!email || !password) return { error: "Enter your email and password." };
 
+  const problem = supabaseConfigProblem();
+  if (problem) {
+    console.error("Admin login: configuration problem:", problem);
+    return { error: `Login is not set up correctly on this site: ${problem}` };
+  }
+
   const supabase = await createSessionClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) return { error: "Email or password is incorrect." };
+  if (error) {
+    console.error("Admin login failed:", error.code, error.status, error.message);
+    if (error.code === "invalid_credentials") return { error: "Email or password is incorrect." };
+    if (error.code === "email_not_confirmed")
+      return { error: "This email is not confirmed yet. Confirm the user in Supabase (Authentication, Users)." };
+    if (error.status === 429) return { error: "Too many attempts. Wait a few minutes and try again." };
+    return { error: `Could not reach the login service (${error.code ?? error.status ?? "error"}: ${error.message}).` };
+  }
 
   const { data: row } = await supabase.from("admins").select("email").maybeSingle();
   if (!row) {

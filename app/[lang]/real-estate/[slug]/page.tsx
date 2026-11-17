@@ -13,7 +13,7 @@ import { listingCovers } from "@/lib/types";
 import { site } from "@/lib/site";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { fill, siteUrl, waLink } from "@/lib/whatsapp";
-import { pageMetadata } from "@/lib/meta";
+import { jsonLd, pageMetadata } from "@/lib/meta";
 
 // Listings that exist at build time are prerendered. New ones added from the
 // admin page render on their first visit and are cached after that.
@@ -34,6 +34,7 @@ export async function generateMetadata({
     return { title: d.realEstate.detail.goneTitle, robots: { index: false } };
   }
   return pageMetadata(
+    lang,
     `/real-estate/${slug}`,
     listing.title[lang],
     [listing.location[lang], listing.size[lang]].filter(Boolean).join(" · "),
@@ -52,6 +53,7 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
   if (!listing) {
     return (
       <>
+        <main id="main" className="flex flex-1 flex-col">
         <PageHeader
           lang={lang}
           dict={dict}
@@ -66,9 +68,10 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
             </Button>
           </div>
         </PageHeader>
-        <main className="flex-1 pt-14 md:pt-20">
+        <div className="flex-1 pt-14 md:pt-20">
           <CtaBand lang={lang} dict={dict} />
-        </main>
+        </div>
+</main>
         <Footer lang={lang} dict={dict} />
       </>
     );
@@ -90,11 +93,26 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
   }).trim();
   const wa = waLink(waText);
 
+  // Structured data only for real listings, never for samples.
+  const listingLd =
+    !sample && siteUrl()
+      ? {
+          "@context": "https://schema.org",
+          "@type": "RealEstateListing",
+          name: title,
+          description: listing.description[lang],
+          url: `${siteUrl()}/${lang}/real-estate/${listing.slug}`,
+          ...(listing.photos.length ? { image: listing.photos } : {}),
+          contentLocation: { "@type": "Place", name: listing.location.en },
+        }
+      : null;
+
   const Value = ({ children }: { children: string }) =>
     sample ? <PlaceholderTag>{children}</PlaceholderTag> : <>{children}</>;
 
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <PageHeader
         lang={lang}
         dict={dict}
@@ -112,7 +130,7 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
         )}
       </PageHeader>
 
-      <main className="flex-1">
+      <div className="flex-1">
         <div className="mx-auto grid w-full max-w-[1240px] gap-10 px-5 py-12 md:px-8 md:py-20 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-12">
           <div className="flex min-w-0 flex-col gap-10">
             <div className="grid grid-cols-2 gap-3 md:gap-4">
@@ -207,7 +225,9 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
             <p className="text-sm leading-6 text-muted">{d.verify}</p>
           </aside>
         </div>
-      </main>
+      </div>
+</main>
+      {listingLd && <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(listingLd)} />}
       <Footer lang={lang} dict={dict} waText={waText} />
     </>
   );

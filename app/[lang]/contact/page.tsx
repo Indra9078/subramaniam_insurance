@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/contact">)
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const d = await getDictionary(lang);
-  return pageMetadata("/contact", d.contactPage.metaTitle, d.contactPage.metaDesc);
+  return pageMetadata(lang, "/contact", d.contactPage.metaTitle, d.contactPage.metaDesc);
 }
 
 export default async function ContactPage({ params }: PageProps<"/[lang]/contact">) {
@@ -32,6 +32,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
 
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <PageHeader
         lang={lang}
         dict={dict}
@@ -40,7 +41,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
         title={cp.title}
         sub={cp.sub}
       />
-      <main className="flex-1">
+      <div className="flex-1">
         <section className="mx-auto w-full max-w-[1240px] px-5 pt-14 md:px-8 md:pt-20">
           <h2 className="font-display text-[1.75rem] font-bold leading-tight tracking-tight md:text-4xl">
             {cp.channelsTitle}
@@ -80,7 +81,8 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
             <PlaceholderTag>{cp.mapPh}</PlaceholderTag>
           </div>
         </section>
-      </main>
+      </div>
+</main>
       <Footer lang={lang} dict={dict} />
     </>
   );

@@ -24,6 +24,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <Hero lang={lang} dict={dict} />
       <Marquee
         items={[
@@ -33,7 +34,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           dict.marquee,
         ]}
       />
-      <main className="flex-1">
+      <div className="flex-1">
         <Services lang={lang} dict={dict} />
         <HowItWorks dict={dict} />
         <WhyTrust dict={dict} />
@@ -47,7 +48,8 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           faqs={faqs}
         />
         <Contact lang={lang} dict={dict} />
-      </main>
+      </div>
+</main>
       <Footer lang={lang} dict={dict} />
     </>
   );

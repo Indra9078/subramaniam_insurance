@@ -76,7 +76,7 @@ export async function sendLeadEmail(lead: LeadInput) {
     .map(([k, v]) => `<tr><td style="color:#4a4750;vertical-align:top">${esc(k)}</td><td><strong>${esc(v)}</strong></td></tr>`)
     .join("")}</table>
 <p style="margin:18px 0">
-<a href="tel:+91${lead.phone}" style="background:#c94312;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none">Call ${esc(lead.name)}</a>
+<a href="tel:+91${lead.phone}" style="background:#BA3C0F;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none">Call ${esc(lead.name)}</a>
 &nbsp;<a href="https://wa.me/91${lead.phone}" style="background:#1f7a46;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none">WhatsApp</a>
 </p>
 ${base ? `<p><a href="${base}/admin/leads">Open all leads in the admin</a></p>` : ""}

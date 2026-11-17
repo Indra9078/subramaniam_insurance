@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/about">): 
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const d = await getDictionary(lang);
-  return pageMetadata("/about", d.about.metaTitle, d.about.metaDesc);
+  return pageMetadata(lang, "/about", d.about.metaTitle, d.about.metaDesc);
 }
 
 export default async function AboutPage({ params }: PageProps<"/[lang]/about">) {
@@ -26,6 +26,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <PageHeader
         lang={lang}
         dict={dict}
@@ -34,7 +35,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
         title={a.title}
         sub={a.sub}
       />
-      <main className="flex-1">
+      <div className="flex-1">
         <section className="mx-auto grid w-full max-w-[1240px] gap-10 px-5 py-14 md:px-8 md:py-24 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
           <div className="flex aspect-[4/5] w-full max-w-md items-center justify-center rounded-[2rem] bg-gradient-to-br from-iris-100 to-[#ffe9df]">
             <PlaceholderTag>{a.portrait}</PlaceholderTag>
@@ -126,7 +127,8 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
         </section>
 
         <CtaBand lang={lang} dict={dict} />
-      </main>
+      </div>
+</main>
       <Footer lang={lang} dict={dict} />
     </>
   );

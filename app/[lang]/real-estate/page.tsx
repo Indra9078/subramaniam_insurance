@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/real-estat
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const d = await getDictionary(lang);
-  return pageMetadata("/real-estate", d.realEstate.metaTitle, d.realEstate.metaDesc);
+  return pageMetadata(lang, "/real-estate", d.realEstate.metaTitle, d.realEstate.metaDesc);
 }
 
 export default async function RealEstatePage({ params }: PageProps<"/[lang]/real-estate">) {
@@ -27,6 +27,7 @@ export default async function RealEstatePage({ params }: PageProps<"/[lang]/real
 
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <PageHeader
         lang={lang}
         dict={dict}
@@ -39,7 +40,7 @@ export default async function RealEstatePage({ params }: PageProps<"/[lang]/real
           <PlaceholderTag tone="dark">{r.areasPh}</PlaceholderTag>
         </div>
       </PageHeader>
-      <main className="flex-1">
+      <div className="flex-1">
         <section className="mx-auto w-full max-w-[1240px] px-5 py-14 md:px-8 md:py-20">
           <h2 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight md:text-5xl">
             {r.servicesTitle}
@@ -71,7 +72,8 @@ export default async function RealEstatePage({ params }: PageProps<"/[lang]/real
         </section>
 
         <CtaBand lang={lang} dict={dict} />
-      </main>
+      </div>
+</main>
       <Footer lang={lang} dict={dict} />
     </>
   );

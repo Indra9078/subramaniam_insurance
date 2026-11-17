@@ -22,7 +22,7 @@ export function HowItWorks({ dict }: { dict: Dictionary }) {
             y1="2"
             x2="1000"
             y2="2"
-            stroke="#c94312"
+            stroke="#BA3C0F"
             strokeWidth="3"
             strokeDasharray="8 10"
             className="[animation:dashmove_3s_linear_infinite]"

@@ -15,7 +15,7 @@ export function Hero({ lang, dict }: { lang: string; dict: Dictionary }) {
 
       <Navbar lang={lang} nav={dict.nav} />
 
-      <div className="relative mx-auto flex max-w-[1240px] flex-col items-center gap-10 px-5 pb-16 pt-6 md:px-8 lg:flex-row lg:gap-12 lg:pb-28 lg:pt-10">
+      <div id="content" tabIndex={-1} className="relative mx-auto flex max-w-[1240px] flex-col items-center gap-10 outline-none px-5 pb-16 pt-6 md:px-8 lg:flex-row lg:gap-12 lg:pb-28 lg:pt-10">
         <div className="flex min-w-0 flex-1 flex-col gap-6 lg:gap-7">
           <div className="inline-flex items-center gap-2.5 self-start rounded-full border border-iris-200/35 bg-white/10 px-4 py-2 text-sm font-medium text-iris-100">
             <span className="size-2 shrink-0 rounded-full bg-ember-soft shadow-[0_0_10px_#ff8a5b]" />

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="A. Subramaniam">
+  <defs>
+    <linearGradient id="d-c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A5B"/><stop offset="1" stop-color="#C94312"/></linearGradient>
+  </defs>
+  <circle cx="48" cy="48" r="46" fill="#221C3D"/>
+  <circle cx="48" cy="48" r="41.5" fill="none" stroke="#C9BFFF" stroke-opacity=".35" stroke-width="1.5"/>
+  <!-- umbrella: protection -->
+  <rect x="46.6" y="12" width="2.8" height="6" rx="1.4" fill="#FF8A5B"/>
+  <path d="M17 44 Q48 6 79 44 Q71.25 38.5 63.5 44 Q55.75 38.5 48 44 Q40.25 38.5 32.5 44 Q24.75 38.5 17 44 Z" fill="url(#d-c)"/>
+  <path d="M48 17 Q40 26 32.5 44 M48 17 Q56 26 63.5 44" fill="none" stroke="#221C3D" stroke-opacity=".35" stroke-width="1.4"/>
+  <!-- home: property -->
+  <path d="M30 63 L48 49 L66 63" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M35 60 V77 H61 V60 L48 50 Z" fill="#FFFFFF"/>
+  <!-- heart window: health and life -->
+  <path d="M48 70.5 C42.8 66.6 41.6 64.4 41.6 62.6 A3.3 3.3 0 0 1 48 61.4 A3.3 3.3 0 0 1 54.4 62.6 C54.4 64.4 53.2 66.6 48 70.5 Z" fill="#C94312"/>
+  <path d="M24 79 H72" stroke="#C9BFFF" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

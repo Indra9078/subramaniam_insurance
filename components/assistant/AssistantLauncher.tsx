@@ -69,7 +69,7 @@ export function AssistantLauncher(props: {
   };
 
   return (
-    <>
+    <aside aria-label={props.d.a.name}>
       <button
         ref={buttonRef}
         type="button"
@@ -95,7 +95,7 @@ export function AssistantLauncher(props: {
           <AssistantPanel {...props} onClose={close} headingRef={headingRef} />
         </div>
       )}
-    </>
+    </aside>
   );
 }
 

@@ -36,23 +36,6 @@
     "privacy": "Privacy policy",
     "terms": "Terms"
   },
-  "preview": {
-    "badge": "Stage 2 preview",
-    "title": "Design system",
-    "intro": "Building blocks for every page. This preview page is replaced by the real home page in Stage 3.",
-    "colors": "Colors",
-    "typography": "Typography",
-    "typographyEn": "English headline sample",
-    "typographyTa": "Tamil headline sample",
-    "buttons": "Buttons",
-    "placeholders": "Placeholder tags",
-    "placeholdersNote": "Missing client details glow like this so they are easy to find and replace.",
-    "cards": "Cards",
-    "cardInsuranceTitle": "Insurance",
-    "cardInsuranceText": "Health, life, vehicle and group cover explained in plain words.",
-    "cardPropertyTitle": "Real estate",
-    "cardPropertyText": "Plots, houses and apartments, added from the admin page."
-  },
   "services": {
     "tag": "What I help with",
     "title": "Two things, done properly.",
@@ -126,16 +109,10 @@
       "What cover do I need for my parents?",
       "Happy to help. Want a call back, or shall we continue on WhatsApp?"
     ],
-    "placeholder": "Type your question",
-    "send": "Send",
     "note": "General guidance only, not a quote or policy advice."
   },
   "listings": {
     "title": "Featured properties",
-    "note": "Added from the admin page",
-    "photo": "Listing photo",
-    "name": "Property title",
-    "meta": "Location, size, price",
     "viewAll": "See all properties"
   },
   "testimonials": {
@@ -208,13 +185,13 @@
     "home": "Home",
     "learnMore": "Learn more",
     "viewAll": "View all",
-    "callNow": "Call now",
     "whatsapp": "WhatsApp",
     "enquire": "Send an enquiry",
     "subjectToTerms": "Cover, benefits and exclusions depend on the insurer and the policy you choose. Please read the policy wording before you buy.",
     "draftNote": "Sample content. To be replaced with the client's real details.",
     "breadcrumb": "Breadcrumb",
-    "sample": "Sample"
+    "sample": "Sample",
+    "skip": "Skip to content"
   },
   "cta": {
     "title": "Not sure where to start? Just ask.",
@@ -260,7 +237,6 @@
     "expiryPh": "[Expiry date]",
     "certificates": "Certificates and awards",
     "certificatesPh": "[Certificates to add]",
-    "statsTitle": "In numbers",
     "valuesTitle": "How I work",
     "values": [
       {
@@ -312,8 +288,6 @@
       "insurers": "Offered through",
       "documents": "Documents usually needed",
       "faq": "Questions about this cover",
-      "quote": "Get help with this cover",
-      "quoteText": "Tell me a little about your needs and I will call you back with options.",
       "others": "Other types of cover",
       "confirm": "To confirm with the client"
     },
@@ -668,7 +642,6 @@
     "termsNote": "Cover depends on the insurer and policy. Mr. Subramaniam can check the details for you.",
     "faqsIntro": "Here are common questions. Tap one to see the answer.",
     "noFaqs": "Questions for this topic will be added soon. Mr. Subramaniam can answer you directly.",
-    "anythingElse": "Anything else?",
     "property": {
       "intro": "What are you looking for?",
       "types": "Which type of property?",

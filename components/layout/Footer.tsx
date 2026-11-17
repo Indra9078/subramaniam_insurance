@@ -64,7 +64,6 @@ export function Footer({ lang, dict, waText }: { lang: string; dict: Dictionary;
             <Link href={`/${lang}/contact`} className="hover:text-white">{nav.contact}</Link>
           </nav>
         </div>
-      </footer>
 
       <nav
         aria-label={actionBar.label}
@@ -82,13 +81,6 @@ export function Footer({ lang, dict, waText }: { lang: string; dict: Dictionary;
         </Link>
       </nav>
 
-      <AssistantLauncher
-        lang={lang === "ta" ? "ta" : "en"}
-        d={assistant}
-        phoneHref={site.phoneHref}
-        whatsappBase={site.whatsappHref}
-        siteUrl={siteUrl()}
-      />
 
       <a
         href={wa}
@@ -99,6 +91,14 @@ export function Footer({ lang, dict, waText }: { lang: string; dict: Dictionary;
       >
         <WhatsAppIcon className="size-7" />
       </a>
+      </footer>
+      <AssistantLauncher
+        lang={lang === "ta" ? "ta" : "en"}
+        d={assistant}
+        phoneHref={site.phoneHref}
+        whatsappBase={site.whatsappHref}
+        siteUrl={siteUrl()}
+      />
     </>
   );
 }

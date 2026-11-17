@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A. Subramaniam">
+  <path d="M32 2 L58 11 V30 C58 46 47.5 56 32 62 C16.5 56 6 46 6 30 V11 Z" fill="#2B2350" stroke="#FF8A5B" stroke-width="3"/>
+  <path d="M15 32 L32 18 L49 32" fill="none" stroke="#FF8A5B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20 31 L32 21.5 L44 31 V48 H20 Z" fill="#FFFFFF"/>
+  <path d="M32 44 C26.6 40 25.4 37.7 25.4 35.9 A3.4 3.4 0 0 1 32 34.6 A3.4 3.4 0 0 1 38.6 35.9 C38.6 37.7 37.4 40 32 44 Z" fill="#C94312"/>
+</svg>

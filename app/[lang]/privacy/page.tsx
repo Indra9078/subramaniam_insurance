@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/privacy">)
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const d = await getDictionary(lang);
-  return pageMetadata("/privacy", d.legal.privacy.metaTitle, d.legal.privacy.metaDesc);
+  return pageMetadata(lang, "/privacy", d.legal.privacy.metaTitle, d.legal.privacy.metaDesc);
 }
 
 export default async function PrivacyPage({ params }: PageProps<"/[lang]/privacy">) {

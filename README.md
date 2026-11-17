@@ -42,10 +42,17 @@ Set `RESEND_API_KEY` in Vercel (server only, no `NEXT_PUBLIC_` prefix). Optional
 `components/assistant/`: launcher (in the footer), panel (menus, search, call-back form) and keyword search.
 Data comes from `/api/assistant?lang=en|ta`. Usage counts go through the `log_assistant_event` database function and show on the admin dashboard.
 
+## SEO and launch switches (Stage 8)
+
+- `NEXT_PUBLIC_SITE_URL`: the public address (no trailing slash). Without it the Vercel production URL is used.
+- `SITE_INDEXING=on`: lets search engines index the site. Leave it unset until launch; until then every page is noindex and robots.txt blocks crawling.
+- Sitemap at `/sitemap.xml`, robots at `/robots.txt`, link preview images from `opengraph-image.tsx` files (`lib/og.tsx`).
+- Fonts load through `next/font` (`lib/fonts.ts`). Accessibility checks: axe and Lighthouse (see PROGRESS.md).
+
 ## Placeholders
 
 Anything the client still has to supply is wrapped in `<PlaceholderTag>`, which glows purple.
-Before launch, search the code for `PlaceholderTag` (or `data-placeholder` in the page) and make sure none are left.
+Before launch, search the code for `PlaceholderTag` (or `data-placeholder` in the page) and make sure none are left. The full list is in `docs/PLACEHOLDERS.md`; the Tamil review list is `docs/tamil-review.csv`.
 
 ## Logos
 
@@ -62,4 +69,4 @@ permission from each company (LIC, Star Health, IFFCO-Tokio, HDFC).
 ## Stages
 
 1. Design direction (done) 2. Setup and design system (done) 3. Home page (done) 4. Inner pages (done) 5. Admin page (done)
-6. Lead capture (done) 7. Guided assistant (done) 8. Polish 9. Launch 10. Blog and reels (optional)
+6. Lead capture (done) 7. Guided assistant (done) 8. Polish and SEO (done) 9. Launch 10. Blog and reels (optional)

@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { FaqList } from "@/components/ui/FaqList";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
-import { pageMetadata } from "@/lib/meta";
+import { jsonLd, pageMetadata } from "@/lib/meta";
 import { getFaqs } from "@/lib/data";
 import { faqCategories } from "@/lib/types";
 
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/faq">): Pr
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const d = await getDictionary(lang);
-  return pageMetadata("/faq", d.faqPage.metaTitle, d.faqPage.metaDesc);
+  return pageMetadata(lang, "/faq", d.faqPage.metaTitle, d.faqPage.metaDesc);
 }
 
 export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
@@ -26,9 +26,22 @@ export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
     .map((c) => ({ c, items: faqs.filter((q) => q.category === c) }))
     .filter((g) => g.items.length > 0);
   const hasSamples = faqs.some((q) => q.isSample);
+  const approved = faqs.filter((q) => !q.isSample);
+  const faqLd = approved.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: approved.map((q) => ({
+          "@type": "Question",
+          name: q.question[lang],
+          acceptedAnswer: { "@type": "Answer", text: q.answer[lang] },
+        })),
+      }
+    : null;
 
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <PageHeader
         lang={lang}
         dict={dict}
@@ -37,7 +50,7 @@ export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
         title={f.title}
         sub={f.sub}
       />
-      <main className="flex-1">
+      <div className="flex-1">
         <div className="mx-auto flex w-full max-w-[960px] flex-col gap-12 px-5 py-14 md:px-8 md:py-20">
           {hasSamples && (
             <div>
@@ -60,7 +73,9 @@ export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
           ))}
         </div>
         <CtaBand lang={lang} dict={dict} />
-      </main>
+      </div>
+</main>
+      {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqLd)} />}
       <Footer lang={lang} dict={dict} />
     </>
   );

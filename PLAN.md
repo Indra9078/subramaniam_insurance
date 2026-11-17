@@ -26,7 +26,7 @@ Hybrid of the two reference styles:
 - **Mobile first:** every page must work on a phone.
 - **Placeholders:** any detail the client has not supplied is shown with a glowing purple tag so it is easy to find and replace. Nothing placeholder goes live.
 
-Palette: paper `#F4F2EE`, ink `#1B1A1F`, ember (orange) `#C94312`, soft ember `#FF8A5B`, iris purples `#C9BFFF` to `#221C3D`.
+Palette: paper `#F4F2EE`, ink `#1B1A1F`, ember (orange) `#BA3C0F` (darkened from #C94312 in Stage 8 for text contrast), soft ember `#FF8A5B`, iris purples `#C9BFFF` to `#221C3D`.
 Fonts: Space Grotesk (headings), Inter (body), Noto Sans Tamil (Tamil).
 
 ## Stack
@@ -52,8 +52,8 @@ Fonts: Space Grotesk (headings), Inter (body), Noto Sans Tamil (Tamil).
 | 4 | Inner pages | About, Insurance and 4 product pages, Real estate with listings and detail pages, FAQ, Contact, Privacy policy, Terms | Done |
 | 5 | Admin page | Protected login. Add and edit property listings and photos, view and export leads, edit testimonials and FAQs | Done |
 | 6 | Lead capture | Enquiry and quote forms per product, call-back request, WhatsApp, call buttons, Supabase, email alerts | Done |
-| 7 | Chatbot | Guided assistant (no AI, free): English and Tamil menus, search, hands off to WhatsApp, call or form; anonymous usage counts | Done, awaiting your review |
-| 8 | Polish | Animations, responsiveness, SEO, speed, accessibility, Tamil text review | Not started |
+| 7 | Chatbot | Guided assistant (no AI, free): English and Tamil menus, search, hands off to WhatsApp, call or form; anonymous usage counts | Done |
+| 8 | Polish | Animations, responsiveness, SEO, speed, accessibility, Tamil review sheet, placeholder list | Done, awaiting your review |
 | 9 | Launch | Vercel deployment, domain, analytics, privacy policy and terms, handover note | Not started |
 | 10 | Optional | Blog or resources, brand reel templates | Not started |
 

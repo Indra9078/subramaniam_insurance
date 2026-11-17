@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
+import { jsonLd } from "@/lib/meta";
+import { siteUrl } from "@/lib/whatsapp";
 
 type Crumb = { href?: string; label: string };
 
@@ -24,15 +26,29 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   const trail: Crumb[] = [{ href: `/${lang}`, label: dict.common.home }, ...crumbs];
+  const base = siteUrl();
+  const breadcrumbs = base
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: trail.map((c, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: c.label,
+          ...(c.href ? { item: `${base}${c.href}` } : {}),
+        })),
+      }
+    : null;
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-iris-900 via-iris-800 to-iris-950 text-iris-50">
       <div className="pointer-events-none absolute -left-32 -top-24 size-[460px] animate-drift rounded-full bg-[radial-gradient(circle,rgba(142,124,255,.5),transparent_65%)]" />
       <div className="pointer-events-none absolute -right-28 top-10 size-[420px] animate-drift rounded-full bg-[radial-gradient(circle,rgba(242,96,43,.28),transparent_65%)] [animation-direction:reverse] [animation-duration:18s]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
 
+      {breadcrumbs && <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbs)} />}
       <Navbar lang={lang} nav={dict.nav} />
 
-      <div className="relative mx-auto flex max-w-[1240px] flex-col gap-5 px-5 pb-14 pt-4 md:px-8 md:pb-20 md:pt-8">
+      <div id="content" tabIndex={-1} className="relative mx-auto flex max-w-[1240px] scroll-mt-4 flex-col gap-5 px-5 pb-14 pt-4 outline-none md:px-8 md:pb-20 md:pt-8">
         <nav aria-label={dict.common.breadcrumb}>
           <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-iris-200">
             {trail.map((c, i) => {

@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/insurance"
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const d = await getDictionary(lang);
-  return pageMetadata("/insurance", d.insurance.metaTitle, d.insurance.metaDesc);
+  return pageMetadata(lang, "/insurance", d.insurance.metaTitle, d.insurance.metaDesc);
 }
 
 export default async function InsurancePage({ params }: PageProps<"/[lang]/insurance">) {
@@ -25,6 +25,7 @@ export default async function InsurancePage({ params }: PageProps<"/[lang]/insur
 
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <PageHeader
         lang={lang}
         dict={dict}
@@ -34,7 +35,7 @@ export default async function InsurancePage({ params }: PageProps<"/[lang]/insur
         sub={ins.sub}
       />
       <Marquee items={[...insurers, dict.marquee]} />
-      <main className="flex-1">
+      <div className="flex-1">
         <section className="mx-auto w-full max-w-[1240px] px-5 py-14 md:px-8 md:py-24">
           <h2 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight md:text-5xl">
             {ins.productsTitle}
@@ -84,7 +85,8 @@ export default async function InsurancePage({ params }: PageProps<"/[lang]/insur
         </section>
 
         <CtaBand lang={lang} dict={dict} />
-      </main>
+      </div>
+</main>
       <Footer lang={lang} dict={dict} />
     </>
   );

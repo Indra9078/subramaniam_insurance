@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import "@fontsource/space-grotesk/600.css";
-import "@fontsource/space-grotesk/700.css";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/noto-sans-tamil/400.css";
-import "@fontsource/noto-sans-tamil/600.css";
 import "../globals.css";
+import { fontVariables } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: { default: "Admin", template: "%s | Admin" },
@@ -16,7 +10,7 @@ export const metadata: Metadata = {
 /** Separate root layout for the admin area (English only, not indexed). */
 export default function AdminRootLayout({ children }: LayoutProps<"/admin">) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={`h-full ${fontVariables}`}>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

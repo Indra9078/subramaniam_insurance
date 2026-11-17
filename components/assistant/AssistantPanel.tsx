@@ -456,7 +456,7 @@ export function AssistantPanel({
 
   return (
     <div className="flex h-full flex-col">
-      <header className="flex items-start justify-between gap-3 bg-gradient-to-br from-iris-900 to-iris-800 px-4 py-3.5 text-white">
+      <div className="flex items-start justify-between gap-3 bg-gradient-to-br from-iris-900 to-iris-800 px-4 py-3.5 text-white">
         <div className="min-w-0">
           <h2 ref={headingRef} tabIndex={-1} id="assistant-title" className="font-display text-lg font-bold outline-none">
             {a.name}
@@ -471,7 +471,7 @@ export function AssistantPanel({
             <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
           </button>
         </div>
-      </header>
+      </div>
 
       <div ref={logRef} role="log" aria-labelledby="assistant-title" className="relative flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto bg-paper px-3.5 py-4">
         {steps.map((s) => {

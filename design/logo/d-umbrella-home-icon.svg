@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A. Subramaniam">
+  <rect width="64" height="64" rx="14" fill="#221C3D"/>
+  <path d="M8 30 Q32 1 56 30 Q50 25.5 44 30 Q38 25.5 32 30 Q26 25.5 20 30 Q14 25.5 8 30 Z" fill="#FF8A5B"/>
+  <path d="M19 46 L32 36 L45 46 V57 H19 Z" fill="#FFFFFF"/>
+  <path d="M32 54 C28.6 51.4 27.8 49.9 27.8 48.7 A2.2 2.2 0 0 1 32 47.9 A2.2 2.2 0 0 1 36.2 48.7 C36.2 49.9 35.4 51.4 32 54 Z" fill="#C94312"/>
+</svg>

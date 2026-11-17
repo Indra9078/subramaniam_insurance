@@ -73,6 +73,19 @@ Last updated: 2026-11-16
 - Usage counts (`supabase/migrations/0003_assistant.sql`): anonymous opens, topics, contact taps and searches; search text kept only when nothing matched, without digits. Admin dashboard shows "Assistant, last 30 days": opens, contact taps, top topics, searches with no answer. Privacy policy mentions the anonymous counts.
 - Checks: lint clean, build passes, browser test of every path in English and Tamil on phone and desktop (search, back, start over, call back inside the chat, property cards, navigation, persistence, Escape focus, reduced motion, no horizontal scroll, no page errors), usage counts appear on the dashboard. Fixed during testing: Back flicker, Escape focus, a false search match, panel header scrolling away on phones. Test leads and test usage events deleted.
 
+## Stage 8: Polish, speed, accessibility and SEO (done, 2026-11-17)
+- SEO: every page has a canonical URL and English/Tamil/x-default alternates (`lib/meta.ts`), `sitemap.xml` (all pages in both languages plus real published listings), `robots.txt`, structured data (insurance agency and real-estate agent on every page; breadcrumbs; real listings; approved FAQs only, never samples). Uses `NEXT_PUBLIC_SITE_URL`, or the Vercel production URL until the domain exists.
+- Hidden from search engines until launch: every page is noindex and robots.txt blocks crawling unless `SITE_INDEXING=on` (to be set in Stage 9). Lighthouse SEO shows 66 because of this; it returns to normal when switched on.
+- Link previews: a branded 1200x630 image for every page type (`lib/og.tsx` + `opengraph-image.tsx` files). The image renderer cannot shape Tamil script, so preview images use the English title on both languages; the Tamil page's own title and description still show in Tamil in WhatsApp.
+- Branded bilingual 404 page (`app/global-not-found.tsx` for unknown URLs, `app/[lang]/not-found.tsx`) and a friendly error page (`app/[lang]/error.tsx`). The old `/design` preview page and unused text keys are removed (en and ta both have 355 keys).
+- Temporary "AS" monogram icons (favicon, app icon, phone home-screen icon, web manifest) until the logo is designed. Logo concepts kept in `design/logo/` for later.
+- Security headers on every response: nosniff, referrer policy, no framing (X-Frame-Options and CSP frame-ancestors), permissions policy, HSTS.
+- Accessibility: skip-to-content link (both languages), visible focus ring, all page content inside landmarks (main wraps headers and content; assistant in its own region), single h1 per page. Orange accent darkened from #C94312 to #BA3C0F so text passes 4.5:1 on every background. axe (WCAG 2.1 AA + best practice): 0 violations on 43 page views (20 pages x phone and desktop, assistant open, admin login).
+- Speed: fonts moved to next/font (preloaded, size-matched fallback, only the weights used; Tamil font limited to Tamil characters and `display: optional`); orbit hero CSS only on the home page; glowing placeholder tags animate opacity on a separate layer instead of repainting shadows. Layout shift is now 0 on every page tested (was 0.13 on /ta).
+- Lighthouse (phone, simulated slow 4G), before → after, performance / accessibility / best practices: /en 90/96/100 → 89–91/100/100, /ta 85/96/100 → 83–89/100/100, /en/insurance/health 93/100/100 → 88–94/100/100, /en/real-estate 94 → 93, /ta/contact 90 → 88–91. Scores vary a few points between runs. In the observed browser run the main heading paints with the first paint (about 0.25 s locally); the simulated 3.3 s LCP comes from Lighthouse assuming the heading waits for all JavaScript on a slow connection.
+- Scroll animations: sections and cards fade up as they enter the screen (`components/ui/Reveal.tsx`). Content already on screen is never hidden, nothing shifts, reduced motion shows everything, and without JavaScript everything is visible. Checked: no section left hidden after scrolling.
+- Reports: `docs/tamil-review.csv` (467 strings with English source and columns for the reviewer) and `docs/PLACEHOLDERS.md` (25 items still to supply or approve, with where each appears and how to replace it). The Google Sheet version needs an empty sheet shared by the owner (no Google Drive connector in this session to create one).
+
 ## Open items and risks
 
 - Tamil text is my translation. A native speaker must review it before launch.
@@ -90,7 +103,9 @@ Last updated: 2026-11-16
 - Sample listings and FAQs from `supabase/seed.sql` are live and glow as placeholders. Replace them with real content from the admin before launch.
 - Supabase free projects pause after about a week without activity. Upgrade or keep traffic flowing after launch.
 - Confirm in the Supabase dashboard that "Allow new users to sign up" is off.
-- An unknown listing or product URL shows the default "not found" page (marked noindex). A branded 404 page is planned for Stage 8.
+- An unknown product URL shows the branded 404 with status 200 (Next streams it); it is marked noindex.
+- Logo still to be designed (after development). Temporary monogram icons are in place.
+- Link preview images are English-only (Tamil shaping limitation of the image renderer).
 
 ## Links
 - Plan sheet: https://claude.ai/artifact/9mJ7HSBqCNtZyZCcJFsRDJ

@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/terms">): 
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const d = await getDictionary(lang);
-  return pageMetadata("/terms", d.legal.terms.metaTitle, d.legal.terms.metaDesc);
+  return pageMetadata(lang, "/terms", d.legal.terms.metaTitle, d.legal.terms.metaDesc);
 }
 
 export default async function TermsPage({ params }: PageProps<"/[lang]/terms">) {

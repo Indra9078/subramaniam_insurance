@@ -25,7 +25,7 @@ export async function generateMetadata({
   if (!hasLocale(lang) || !isProductSlug(product)) return {};
   const d = await getDictionary(lang);
   const p = d.products.items[product];
-  return pageMetadata(`/insurance/${product}`, p.name, p.intro);
+  return pageMetadata(lang, `/insurance/${product}`, p.name, p.intro);
 }
 
 function ListCard({ title, items, className }: { title: string; items: string[]; className: string }) {
@@ -60,6 +60,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/insuran
 
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <PageHeader
         lang={lang}
         dict={dict}
@@ -79,7 +80,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/insuran
         </div>
       </PageHeader>
 
-      <main className="flex-1">
+      <div className="flex-1">
         <section className="mx-auto grid w-full max-w-[1240px] gap-5 px-5 py-14 md:px-8 md:py-20 lg:grid-cols-3">
           <ListCard title={l.covers} items={p.covers} className={productAccent[product]} />
           <ListCard title={l.suits} items={p.suits} className="border border-line bg-white" />
@@ -138,7 +139,8 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/insuran
               ))}
           </ul>
         </section>
-      </main>
+      </div>
+</main>
       <Footer lang={lang} dict={dict} waText={waText} />
     </>
   );

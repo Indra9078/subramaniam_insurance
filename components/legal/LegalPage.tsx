@@ -16,6 +16,7 @@ export function LegalPage({
   const l = dict.legal;
   return (
     <>
+      <main id="main" className="flex flex-1 flex-col">
       <PageHeader
         lang={lang}
         dict={dict}
@@ -23,7 +24,7 @@ export function LegalPage({
         eyebrow={`${l.updated}: ${l.updatedPh}`}
         title={doc.title}
       />
-      <main className="flex-1">
+      <div className="flex-1">
         <article className="mx-auto flex w-full max-w-[820px] flex-col gap-9 px-5 py-14 md:px-8 md:py-20">
           <PlaceholderTag block>{l.draftNote}</PlaceholderTag>
           {doc.sections.map((s, i) => (
@@ -35,7 +36,8 @@ export function LegalPage({
             </section>
           ))}
         </article>
-      </main>
+      </div>
+</main>
       <Footer lang={lang} dict={dict} />
     </>
   );

@@ -20,6 +20,11 @@ export function supabaseConfigProblem(): string | null {
 }
 
 export const PHOTO_BUCKET = "listing-photos";
+export const PRODUCT_BUCKET = "product-images";
+
+/** Public URL of a plan image in the product-images bucket. */
+export const productImageUrl = (path: string) =>
+  `${supabaseUrl}/storage/v1/object/public/${PRODUCT_BUCKET}/${path}`;
 
 /** Public URL of a photo in the listing-photos bucket. */
 export const photoUrl = (path: string) =>

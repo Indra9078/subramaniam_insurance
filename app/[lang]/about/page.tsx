@@ -4,7 +4,9 @@ import { getDictionary, hasLocale } from "../dictionaries";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Footer } from "@/components/layout/Footer";
 import { CtaBand } from "@/components/ui/CtaBand";
+import { PageFaq } from "@/components/ui/PageFaq";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
+import { getTestimonials } from "@/lib/data";
 import { insurers } from "@/lib/site";
 import { pageMetadata } from "@/lib/meta";
 
@@ -21,7 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/about">): 
 export default async function AboutPage({ params }: PageProps<"/[lang]/about">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, testimonials] = await Promise.all([getDictionary(lang), getTestimonials()]);
   const a = dict.about;
 
   return (
@@ -126,6 +128,33 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
           </ol>
         </section>
 
+        <section className="mx-auto w-full max-w-[1240px] px-5 pb-14 md:px-8 md:pb-24">
+          <div className="flex max-w-3xl flex-col gap-3">
+            <h2 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight md:text-5xl">{a.praiseTitle}</h2>
+            <p className="text-base leading-7 text-muted md:text-lg">{a.praiseSub}</p>
+          </div>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {testimonials.length > 0
+              ? testimonials.map((t) => (
+                  <figure key={t.id} className="flex flex-col gap-4 rounded-[1.75rem] border border-line bg-white p-7 transition-transform duration-300 hover:-translate-y-2">
+                    <span aria-hidden="true" className="font-display text-5xl leading-none text-ember">“</span>
+                    <blockquote className="text-base leading-7 md:text-lg">{t.quote[lang]}</blockquote>
+                    <figcaption className="mt-auto text-sm font-semibold text-muted">{[t.name, t.area].filter(Boolean).join(", ")}</figcaption>
+                  </figure>
+                ))
+              : [0, 1, 2, 3, 4, 5].map((i) => (
+                  <figure key={i} className="flex flex-col gap-4 rounded-[1.75rem] border border-line bg-white p-7">
+                    <span aria-hidden="true" className="font-display text-5xl leading-none text-iris-200">“</span>
+                    <blockquote>
+                      <PlaceholderTag block>{a.praisePh}</PlaceholderTag>
+                    </blockquote>
+                    <figcaption className="text-sm text-muted">{a.praiseWho}</figcaption>
+                  </figure>
+                ))}
+          </div>
+        </section>
+
+        <PageFaq lang={lang} title={dict.pageFaq.about} categories={["general"]} />
         <CtaBand lang={lang} dict={dict} />
       </div>
 </main>

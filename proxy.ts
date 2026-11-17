@@ -66,10 +66,40 @@ async function adminProxy(request: NextRequest) {
   return response;
 }
 
+/**
+ * Account pages: keep the visitor's Supabase session fresh (refresh the cookie when the
+ * token is about to expire). Each page still checks the session itself.
+ */
+async function accountProxy(request: NextRequest) {
+  if (!supabaseConfigured) return;
+  let response = NextResponse.next({ request });
+  const supabase = createServerClient(supabaseUrl, supabaseKey, {
+    cookies: {
+      getAll() {
+        return request.cookies.getAll();
+      },
+      setAll(cookiesToSet, headers) {
+        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+        response = NextResponse.next({ request });
+        cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
+        Object.entries(headers ?? {}).forEach(([k, v]) => response.headers.set(k, v));
+      },
+    },
+  });
+  await supabase.auth.getClaims().catch(() => null);
+  response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return response;
+}
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   if (pathname === "/admin" || pathname.startsWith("/admin/")) {
     return adminProxy(request);
+  }
+  // Email confirmation link handler: no language prefix.
+  if (pathname.startsWith("/auth/")) return;
+  if (/^\/(en|ta)\/account(\/|$)/.test(pathname)) {
+    return accountProxy(request);
   }
 
   const hasLocale = locales.some(

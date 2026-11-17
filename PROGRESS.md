@@ -86,6 +86,24 @@ Last updated: 2026-11-16
 - Scroll animations: sections and cards fade up as they enter the screen (`components/ui/Reveal.tsx`). Content already on screen is never hidden, nothing shifts, reduced motion shows everything, and without JavaScript everything is visible. Checked: no section left hidden after scrolling.
 - Reports: `docs/tamil-review.csv` (467 strings with English source and columns for the reviewer) and `docs/PLACEHOLDERS.md` (25 items still to supply or approve, with where each appears and how to replace it). The Google Sheet version needs an empty sheet shared by the owner (no Google Drive connector in this session to create one).
 
+## Stage 9: Update and iterate (batch 1, 2026-11-17)
+Twelve client changes built and deployed together. Everything works before the new database file is run (plans fall back to built-in samples, account pages show a friendly notice), but visitor accounts, property submissions, plan requests and the new admin pages need `supabase/migrations/0004_products_accounts.sql` (and optionally `supabase/seed_products.sql`) to be run in the Supabase SQL editor, plus two Supabase Authentication settings (see README).
+1. Hero backdrop: a blurred insurance and real-estate scene (skyline, houses, shield, umbrella) baked into `public/images/hero-bg.jpg` (and a small version behind inner-page headers). It is an illustration; drop a real photo at the same path to replace it.
+2. Orbit globe: outer ring LIC, Tata AIA Life Insurance, Star Health Insurance, IFFCO-Tokio Vehicle Insurance, United India Vehicle Insurance, HDFC Life Insurance; inner ring Property Selling, Property Buying, Consulting. Both rings turn together (spacing never changes; checked every angle at 7 widths). On very small phones the service names show under the globe. "United Vehicle Insurance" was read as United India Insurance (the public-sector insurer): confirm. Insurer lists on the marquee, About and plan pages use the official names. Logos still need each company's permission.
+3. Assistant renamed Vinu (English name on both languages, greeting introduces Vinu).
+4. How it works: the dangling dashed line is gone; dashes now only connect step to step.
+5. Years of experience, families served and claims assisted moved into the hero (still placeholders until real numbers arrive; they stay on About too).
+6. Insurance plans: plan cards (category filter) on /insurance with 8 sample plans, a plan page (`/insurance/plans/[slug]`), and Admin > Plans (add, edit, publish, order, feature, delete, upload an image). Plans without an image get a drawn cover per category. Plans live in the database (`insurance_products`, bucket `product-images`).
+7. Property listing by visitors: "List my property" on Real estate. Visitors submit through their account; the listing is hidden (pending) until the admin approves it in Admin > Listings (filter "Pending approval", Approve or Reject with a note). Visitor input is forced to pending, not featured, owned by them, by a database trigger, whatever they send.
+8. Visitor accounts (`/en/account`, `/ta/account`): sign up and log in (email and password), edit details, see and edit their pending or rejected listings with photos, request a plan and follow its status and the advisor's note. Admin > Requests lists requests with the visitor's contact, status and note. The client gets an email for each new plan request and property submission.
+9. About: praise section (real testimonials from the admin; six glowing placeholders until real ones exist, nothing invented).
+10. The separate FAQ page is removed (old links redirect to the home page). FAQs now sit at the bottom of each page for its topic (home, About, Contact, Insurance, each category and plan page, Real estate, each listing), managed under Admin > FAQs by category.
+11. Admin dashboard: KPI tiles with change and sparklines, "needs attention", recent activity, daily enquiries chart (hover, keyboard and table view), ranked bars, lead follow-up and language splits, plan and property stats, Vinu stats, 7/30/90-day range. Charts follow the data-viz method; the orange/violet/aqua order passed the colour validator (aqua needs the labels and table view it has).
+12. Admin theme: sunset orange (gradient header with a sun, warm cream background, same layout and components).
+- Checks: lint clean, build passes, 61 database access-rule checks pass (local Postgres test of migrations 0001-0004: visitors cannot approve, feature or edit others' listings, cannot touch status, cannot read other people's data or leads), axe 0 violations on public pages (both languages, phone and desktop) and all admin pages, no horizontal scroll, account validation and login flow tested against the live project, dashboard tested with temporary leads (deleted).
+- Bugs found and fixed while building: scroll-reveal left streamed-in content invisible (now observes new content), orbit captions colliding with insurer badges, white text contrast on chart segments, long error messages overflowing on phones.
+- Not yet tested end to end (needs the SQL run): real sign-up, listing submission with photo upload, plan request, admin approve/reject, product image upload.
+
 ## Open items and risks
 
 - Tamil text is my translation. A native speaker must review it before launch.
@@ -100,6 +118,8 @@ Last updated: 2026-11-16
 - FAQ answers, privacy policy and terms are drafts. The client (or a lawyer for the legal text) must approve them.
 - The new Tamil text (about 450 lines) needs the native-speaker review.
 - Alerts come from onboarding@resend.dev until the client's domain is verified in Resend (Stage 9). Mark the first alert as 'Not spam'.
+- Supabase dashboard: Authentication > Sign In / Providers > turn ON "Allow new users to sign up" (reverses the earlier advice, needed for visitor accounts). Set URL Configuration: Site URL = the website address, and add `<website address>/auth/callback` to Redirect URLs. Decide whether to keep "Confirm email" on (recommended) and note Supabase's built-in email sender is limited to a few emails an hour; a custom SMTP (for example Resend) is better before launch.
+- Visitor accounts expose new public write paths (accounts, listings, photos). Rate limits and database rules are in place; the planned security stage (10) reviews them in depth.
 - Sample listings and FAQs from `supabase/seed.sql` are live and glow as placeholders. Replace them with real content from the admin before launch.
 - Supabase free projects pause after about a week without activity. Upgrade or keep traffic flowing after launch.
 - Confirm in the Supabase dashboard that "Allow new users to sign up" is off.

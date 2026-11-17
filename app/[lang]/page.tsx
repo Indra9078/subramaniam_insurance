@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getDictionary, hasLocale } from "./dictionaries";
 import { Footer } from "@/components/layout/Footer";
+import { insurers } from "@/lib/site";
 import { Marquee } from "@/components/ui/Marquee";
 import { Hero } from "@/components/home/Hero";
 import { Services } from "@/components/home/Services";
@@ -26,14 +27,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
     <>
       <main id="main" className="flex flex-1 flex-col">
       <Hero lang={lang} dict={dict} />
-      <Marquee
-        items={[
-          "LIC",
-          "Star Health Insurance",
-          "IFFCO-Tokio General Insurance",
-          dict.marquee,
-        ]}
-      />
+      <Marquee items={[...insurers, dict.marquee]} />
       <div className="flex-1">
         <Services lang={lang} dict={dict} />
         <HowItWorks dict={dict} />
@@ -42,7 +36,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <Testimonials lang={lang} dict={dict} testimonials={testimonials} />
         <Faq
           lang={lang}
-          viewAll={dict.faq.viewAll}
           title={dict.faq.title}
           empty={dict.faq.empty}
           faqs={faqs}

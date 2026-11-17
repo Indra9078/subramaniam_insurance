@@ -15,8 +15,8 @@ export const productInsurers: Record<
   { names: string[]; confirmed: boolean }
 > = {
   health: { names: ["Star Health Insurance"], confirmed: true },
-  life: { names: ["LIC"], confirmed: true },
-  vehicle: { names: ["IFFCO-Tokio General Insurance"], confirmed: false },
+  life: { names: ["LIC", "Tata AIA Life Insurance", "HDFC Life Insurance"], confirmed: true },
+  vehicle: { names: ["IFFCO-Tokio General Insurance", "United India Insurance"], confirmed: true },
   corporate: {
     names: ["Star Health Insurance", "IFFCO-Tokio General Insurance"],
     confirmed: false,

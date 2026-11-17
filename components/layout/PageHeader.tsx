@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Navbar } from "@/components/layout/Navbar";
@@ -41,6 +42,8 @@ export function PageHeader({
     : null;
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-iris-900 via-iris-800 to-iris-950 text-iris-50">
+      <Image src="/images/hero-bg-small.jpg" alt="" fill sizes="100vw" className="pointer-events-none select-none object-cover opacity-30" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-iris-950/90 via-iris-900/60 to-iris-900/20" />
       <div className="pointer-events-none absolute -left-32 -top-24 size-[460px] animate-drift rounded-full bg-[radial-gradient(circle,rgba(142,124,255,.5),transparent_65%)]" />
       <div className="pointer-events-none absolute -right-28 top-10 size-[420px] animate-drift rounded-full bg-[radial-gradient(circle,rgba(242,96,43,.28),transparent_65%)] [animation-direction:reverse] [animation-duration:18s]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />

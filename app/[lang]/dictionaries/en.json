@@ -8,12 +8,12 @@
     "insurance": "Insurance",
     "realEstate": "Real estate",
     "about": "About",
-    "faq": "FAQ",
     "contact": "Contact",
     "call": "Call now",
     "menu": "Menu",
     "language": "Language",
-    "home": "Home"
+    "home": "Home",
+    "account": "Account"
   },
   "hero": {
     "eyebrow": "Insurance and property advisor across Tamil Nadu and India",
@@ -122,7 +122,6 @@
   },
   "faq": {
     "title": "Common questions",
-    "viewAll": "See all questions",
     "empty": "Questions and answers will be added soon. Meanwhile, call or WhatsApp me."
   },
   "contact": {
@@ -191,7 +190,8 @@
     "draftNote": "Sample content. To be replaced with the client's real details.",
     "breadcrumb": "Breadcrumb",
     "sample": "Sample",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "sampleNote": "Sample content. The real details are added from the admin page."
   },
   "cta": {
     "title": "Not sure where to start? Just ask.",
@@ -251,7 +251,11 @@
         "t": "There at claim time",
         "d": "I help with paperwork and follow up until your claim is settled."
       }
-    ]
+    ],
+    "praiseTitle": "Kind words from clients",
+    "praiseSub": "Real words from real clients, shared with their written permission.",
+    "praisePh": "Real client praise, with written permission",
+    "praiseWho": "Client name, area"
   },
   "insurance": {
     "metaTitle": "Insurance",
@@ -440,23 +444,13 @@
       "goneText": "It may have been sold or taken down. Have a look at the other properties, or call me and I will tell you what is available."
     },
     "sold": "Sold",
-    "noListings": "New properties will be listed here soon. Call or WhatsApp me to ask what is available."
-  },
-  "faqPage": {
-    "metaTitle": "FAQ",
-    "metaDesc": "Answers to common questions about health, life and vehicle insurance, claims and property enquiries.",
-    "eyebrow": "FAQ",
-    "title": "Questions people often ask.",
-    "sub": "Can't find your question? Call or WhatsApp me and I will answer it.",
-    "categories": {
-      "general": "General",
-      "health": "Health insurance",
-      "life": "Life insurance",
-      "vehicle": "Vehicle insurance",
-      "corporate": "Corporate and group insurance",
-      "real_estate": "Real estate"
-    },
-    "empty": "Questions and answers will be added soon. Meanwhile, call or WhatsApp me."
+    "noListings": "New properties will be listed here soon. Call or WhatsApp me to ask what is available.",
+    "listCta": {
+      "title": "Have a property to sell or rent?",
+      "text": "List it here for free. Mr. Subramaniam reviews every listing, and it goes live on the site once he approves it.",
+      "btn": "List my property",
+      "note": "You will be asked to log in or create a free account."
+    }
   },
   "contactPage": {
     "metaTitle": "Contact",
@@ -613,13 +607,13 @@
     "label": "Quick contact"
   },
   "assistant": {
-    "name": "Subramaniam's Helper",
+    "name": "Vinu",
     "open": "Need help?",
     "close": "Close",
     "restart": "Start over",
     "back": "Back",
-    "disclaimer": "Automated help with general information. Not a quote or policy advice.",
-    "greeting": "Hello! I can help you with insurance and property. What would you like to know?",
+    "disclaimer": "Vinu gives general information only. Not a quote or policy advice.",
+    "greeting": "Hello, I'm Vinu, Mr. Subramaniam's helper. I can help you with insurance and property. What would you like to know?",
     "menu": {
       "health": "Health insurance",
       "life": "Life insurance",
@@ -654,7 +648,8 @@
       "enquire": "Enquire on WhatsApp",
       "more": "See all properties",
       "sell": "Sell or rent my property",
-      "sellText": "Happy to help. Share the location, size and expected price, and Mr. Subramaniam will call you back."
+      "sellText": "Happy to help. Share the location, size and expected price, and Mr. Subramaniam will call you back.",
+      "listIt": "List it on the site"
     },
     "claims": {
       "intro": "Here are the general steps. Every insurer has its own process, so call Mr. Subramaniam when you need to make a claim.",
@@ -703,5 +698,164 @@
     "typing": "Typing",
     "waTopic": "Hello Mr. Subramaniam, I have a question about {topic}.",
     "tryIt": "Try the assistant"
+  },
+  "plans": {
+    "title": "Insurance plans",
+    "sub": "Browse plans from the insurers I work with. Open a plan to see the details and request it.",
+    "all": "All plans",
+    "count": "plans",
+    "categories": {
+      "health": "Health",
+      "life": "Life",
+      "vehicle": "Vehicle",
+      "corporate": "Corporate and group"
+    },
+    "insurer": "Insurer",
+    "sampleNote": "Sample plans. The real plans are added from the admin page.",
+    "view": "View details",
+    "request": "Request this plan",
+    "back": "Back to all plans",
+    "features": "Key benefits",
+    "about": "About this plan",
+    "none": "Plans will be added here soon. Meanwhile, call or WhatsApp me and I will help you choose.",
+    "requestTitle": "Request this plan",
+    "requestSub": "Mr. Subramaniam will call you to explain the details. You can follow the status of your request in your account.",
+    "phone": "Mobile number",
+    "time": "Best time to call",
+    "message": "Anything else I should know?",
+    "optional": "optional",
+    "consent": "I agree to be contacted by A. Subramaniam by phone, WhatsApp or email about this request.",
+    "privacy": "Privacy policy",
+    "send": "Send my request",
+    "sending": "Sending…",
+    "sent": "Request sent. Mr. Subramaniam will call you soon.",
+    "track": "Track it in your account",
+    "loginPrompt": "Log in or create a free account to request this plan and follow its status.",
+    "loginBtn": "Log in or sign up",
+    "orCall": "Prefer not to sign up? Leave your number and I will call you back:",
+    "errors": {
+      "phone": "Please enter a valid 10-digit mobile number.",
+      "consent": "Please tick the box so I can contact you.",
+      "duplicate": "You already have an open request for this plan. Check your account for its status.",
+      "rate": "You have sent several requests today. Please call or WhatsApp me instead.",
+      "login": "Please log in again.",
+      "generic": "Sorry, something went wrong. Please call or WhatsApp me instead."
+    },
+    "notReady": "Requests need the account feature, which is not switched on for sample plans. Please call or leave your number below.",
+    "goneTitle": "This plan is no longer listed",
+    "goneText": "It may have been updated or removed. Have a look at the other plans, or call me and I will help you choose."
+  },
+  "account": {
+    "loginTitle": "My account",
+    "loginSub": "Log in to list a property and to follow your insurance requests.",
+    "tabLogin": "Log in",
+    "tabSignup": "Create account",
+    "name": "Your name",
+    "phone": "Mobile number",
+    "email": "Email",
+    "password": "Password",
+    "passwordHint": "At least 8 characters",
+    "consent": "I agree to the Terms and the Privacy policy.",
+    "terms": "Terms",
+    "privacy": "Privacy policy",
+    "login": "Log in",
+    "signup": "Create account",
+    "working": "Please wait…",
+    "checkEmail": "Almost done! We sent a confirmation link to your email. Open it to finish creating your account, then log in.",
+    "errors": {
+      "invalid": "Email or password is incorrect.",
+      "unconfirmed": "Please confirm your email first. Check your inbox.",
+      "exists": "An account with this email already exists. Try logging in.",
+      "weak": "The password must be at least 8 characters.",
+      "name": "Please enter your name.",
+      "phone": "Please enter a valid 10-digit mobile number.",
+      "email": "Please enter a valid email address.",
+      "consent": "Please tick the box to continue.",
+      "rate": "Too many attempts. Please wait a few minutes and try again.",
+      "closed": "New accounts are not open yet. Please call or WhatsApp me.",
+      "link": "That link did not work. Please log in, or sign up again.",
+      "generic": "Sorry, something went wrong. Please try again."
+    },
+    "hello": "Hello, {name}",
+    "logout": "Log out",
+    "detailsTitle": "My details",
+    "save": "Save",
+    "saved": "Saved.",
+    "requestsTitle": "My insurance requests",
+    "noRequests": "You have not requested a plan yet.",
+    "browse": "Browse plans",
+    "requested": "Requested",
+    "advisorNote": "Note from Mr. Subramaniam",
+    "requestStatus": {
+      "new": "Received",
+      "contacted": "Contacted",
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "closed": "Closed"
+    },
+    "listingsTitle": "My property listings",
+    "noListings": "You have not listed a property yet.",
+    "list": "List a property",
+    "listingStatus": {
+      "pending": "Waiting for approval",
+      "published": "Live on the site",
+      "rejected": "Needs changes",
+      "sold": "Marked as sold",
+      "draft": "Draft"
+    },
+    "reviewNote": "Note from Mr. Subramaniam",
+    "edit": "Edit",
+    "remove": "Delete",
+    "view": "View on site",
+    "confirmRemove": "Delete this listing and its photos?",
+    "photos": "photos",
+    "lockedNote": "Live listings can only be changed by Mr. Subramaniam. Call or WhatsApp him to update or remove it."
+  },
+  "listingForm": {
+    "newTitle": "List a property",
+    "editTitle": "Edit your listing",
+    "intro": "Share the details of your property. Mr. Subramaniam will review it, and it goes live on the site once he approves it.",
+    "writeIn": "You can write in English or Tamil. Visitors will see it on both versions of the site.",
+    "type": "Property type",
+    "title": "Title",
+    "titleHint": "e.g. 2 BHK house near the main road",
+    "location": "Location",
+    "locationHint": "Area and city",
+    "price": "Price",
+    "priceHint": "e.g. ₹ 45,00,000, or Price on request",
+    "size": "Size",
+    "sizeHint": "e.g. 1,200 sq ft",
+    "description": "Description",
+    "features": "Features",
+    "featuresHint": "One feature per line",
+    "submit": "Submit for approval",
+    "saveChanges": "Save changes",
+    "saveNote": "After you save, the listing waits for approval again.",
+    "created": "Listing submitted for approval. Add photos below to help it get approved faster.",
+    "photosTitle": "Photos",
+    "add": "+ Add photos",
+    "adding": "Uploading…",
+    "photoHint": "JPEG, PNG or WebP. Up to 10 photos. The first one is the cover.",
+    "cover": "Cover",
+    "moveEarlier": "Move earlier",
+    "moveLater": "Move later",
+    "deletePhoto": "Delete photo",
+    "noPhotos": "No photos yet.",
+    "back": "Back to my account",
+    "required": "required",
+    "errors": {
+      "title": "Please enter a title.",
+      "location": "Please enter the location.",
+      "type": "Please choose a property type.",
+      "limit": "You have reached the limit for new listings today or too many are waiting. Please try later.",
+      "locked": "This listing can no longer be edited.",
+      "generic": "Sorry, something went wrong. Please try again."
+    }
+  },
+  "pageFaq": {
+    "title": "Common questions",
+    "insurance": "Insurance questions",
+    "property": "Property questions",
+    "about": "Questions about working with me"
   }
 }

@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/ui/CtaBand";
+import { PageFaq } from "@/components/ui/PageFaq";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { getListing, getListings } from "@/lib/data";
 import { listingCovers } from "@/lib/types";
@@ -226,7 +227,8 @@ export default async function ListingPage({ params }: PageProps<"/[lang]/real-es
           </aside>
         </div>
       </div>
-</main>
+      <PageFaq lang={lang} title={dict.pageFaq.property} categories={["real_estate"]} />
+      </main>
       {listingLd && <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(listingLd)} />}
       <Footer lang={lang} dict={dict} waText={waText} />
     </>

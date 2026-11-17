@@ -24,7 +24,7 @@
   border: 1.5px solid rgba(201, 191, 255, 0.18);
 }
 .orbit__path--outer {
-  inset: 12.04%;
+  inset: 10.5%;
 }
 .orbit__path--inner {
   inset: 26.85%;
@@ -35,7 +35,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 27.8%;
+  width: 22%;
   aspect-ratio: 1;
   translate: -50% -50%;
   border-radius: 50%;
@@ -73,9 +73,6 @@
   inset: 0;
   animation: orbit-spin var(--dur) linear infinite;
 }
-.orbit__ring--reverse {
-  animation-direction: reverse;
-}
 
 .orbit__item {
   position: absolute;
@@ -100,12 +97,31 @@
   justify-content: center;
   white-space: nowrap;
 }
-.orbit__ring--reverse .orbit__badge {
-  animation-direction: normal;
-}
 
+/* Inner ring: round icon with a short caption beneath. */
+.orbit__badge--stack {
+  flex-direction: column;
+  gap: 3px;
+}
+/* Very small phones: icon-only service badges (names are listed under the globe instead). */
+@container (max-width: 344px) {
+  .orbit__caption {
+    display: none;
+  }
+}
+.orbit__caption {
+  font-size: clamp(9px, 2.3cqw, 12px);
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(10, 6, 30, 0.8);
+}
 .orbit__badge--icon {
-  width: clamp(36px, 11.1cqw, 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(32px, 9cqw, 54px);
   aspect-ratio: 1;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.16);
@@ -119,14 +135,19 @@
 }
 
 .orbit__badge--pill {
-  height: clamp(28px, 8.1cqw, 44px);
-  padding-inline: clamp(10px, 2.8cqw, 18px);
-  border-radius: 999px;
+  /* Long official names wrap onto two or three centred lines. */
+  white-space: normal;
+  text-align: center;
+  line-height: 1.15;
+  width: clamp(70px, 22cqw, 124px);
+  min-height: clamp(30px, 8cqw, 44px);
+  padding: 5px clamp(7px, 1.8cqw, 12px);
+  border-radius: 16px;
   background: #fff;
   color: #2b2350;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(11px, 2.8cqw, 15px);
+  font-size: clamp(9px, 2.35cqw, 12.5px);
   box-shadow: 0 10px 30px rgba(10, 6, 30, 0.4);
 }
 

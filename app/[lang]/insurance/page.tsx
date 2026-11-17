@@ -6,6 +6,10 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Footer } from "@/components/layout/Footer";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Marquee } from "@/components/ui/Marquee";
+import { PageFaq } from "@/components/ui/PageFaq";
+import { PlanBrowser } from "@/components/insurance/PlanBrowser";
+import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
+import { getPlans } from "@/lib/data";
 import { productAccent, productSlugs } from "@/lib/products";
 import { insurers } from "@/lib/site";
 import { pageMetadata } from "@/lib/meta";
@@ -20,8 +24,9 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/insurance"
 export default async function InsurancePage({ params }: PageProps<"/[lang]/insurance">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, plans] = await Promise.all([getDictionary(lang), getPlans()]);
   const ins = dict.insurance;
+  const hasSamples = plans.some((x) => x.isSample);
 
   return (
     <>
@@ -66,6 +71,19 @@ export default async function InsurancePage({ params }: PageProps<"/[lang]/insur
           </div>
         </section>
 
+        <section id="plans" className="mx-auto w-full max-w-[1240px] scroll-mt-4 px-5 pb-14 md:px-8 md:pb-24">
+          <div className="mb-3 flex flex-wrap items-end justify-between gap-4">
+            <h2 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight md:text-5xl">{dict.plans.title}</h2>
+            {hasSamples && <PlaceholderTag>{dict.plans.sampleNote}</PlaceholderTag>}
+          </div>
+          <p className="mb-8 max-w-2xl text-base leading-7 text-muted">{dict.plans.sub}</p>
+          {plans.length > 0 ? (
+            <PlanBrowser lang={lang} plans={plans} dict={dict} />
+          ) : (
+            <p className="rounded-[1.5rem] border border-dashed border-line bg-white p-8 text-muted">{dict.plans.none}</p>
+          )}
+        </section>
+
         <section className="mx-auto w-full max-w-[1240px] px-5 pb-14 md:px-8 md:pb-24">
           <h2 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight md:text-5xl">
             {ins.chooseTitle}
@@ -84,6 +102,7 @@ export default async function InsurancePage({ params }: PageProps<"/[lang]/insur
           <p className="mt-8 max-w-3xl text-sm leading-6 text-muted">{dict.common.subjectToTerms}</p>
         </section>
 
+        <PageFaq lang={lang} title={dict.pageFaq.insurance} categories={["health", "life", "vehicle", "corporate"]} />
         <CtaBand lang={lang} dict={dict} />
       </div>
 </main>

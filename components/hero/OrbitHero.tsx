@@ -17,41 +17,47 @@ const stroke = {
 };
 
 const icons: Record<string, ReactNode> = {
-  health: (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...stroke}>
-      <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" />
-      <path d="M9 12l2 2 4-4" />
-    </svg>
-  ),
-  property: (
+  sell: (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...stroke}>
       <path d="M3 11l9-7 9 7" />
       <path d="M5 10v10h14V10" />
-      <path d="M10 20v-6h4v6" />
+      <path d="M9.5 15.5l1.7 1.7 3.3-3.4" />
     </svg>
   ),
-  vehicle: (
+  buy: (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...stroke}>
-      <path d="M5 16v-4l2-5h10l2 5v4" />
-      <path d="M3 16h18" />
-      <circle cx="7.5" cy="17.5" r="1.5" />
-      <circle cx="16.5" cy="17.5" r="1.5" />
+      <path d="M3 11l9-7 9 7" />
+      <path d="M5 10v10h14V10" />
+      <circle cx="10" cy="14.5" r="1.8" />
+      <path d="M11.8 14.5H16M14.5 14.5v2" />
+    </svg>
+  ),
+  consult: (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...stroke}>
+      <path d="M4 5h16v11H9l-5 4z" />
+      <path d="M8.5 9.5h7M8.5 12.5h4" />
     </svg>
   ),
 };
 
+/** Services on the inner ring. `lines` are the two short lines shown under each badge. */
 const inner = [
-  { angle: 0, icon: "health" },
-  { angle: 120, icon: "property" },
-  { angle: 240, icon: "vehicle" },
+  { angle: 0, icon: "sell", lines: ["Property", "Selling"] },
+  { angle: 120, icon: "buy", lines: ["Property", "Buying"] },
+  { angle: 240, icon: "consult", lines: ["Consulting", ""] },
 ];
 
-const outer = [
-  { angle: 20, name: "LIC" },
-  { angle: 110, name: "Star Health" },
-  { angle: 200, name: "IFFCO-Tokio" },
-  { angle: 290, name: "HDFC" },
+/** Insurers the client works with, shown as name badges on the outer ring (text only: logos need permission). */
+export const orbitInsurers = [
+  "LIC",
+  "Tata AIA Life Insurance",
+  "Star Health Insurance",
+  "IFFCO-Tokio Vehicle Insurance",
+  "United India Vehicle Insurance",
+  "HDFC Life Insurance",
 ];
+// Offset 30° from the inner badges. Both rings turn together, so spacing never changes.
+const outer = orbitInsurers.map((name, i) => ({ angle: 30 + i * 60, name }));
 
 type CSSVars = React.CSSProperties & Record<`--${string}`, string>;
 
@@ -59,6 +65,8 @@ const itemStyle = (angle: number, radius: string): CSSVars => ({
   "--a": `${angle}deg`,
   "--r": radius,
 });
+
+export const orbitServices = inner.map((i) => i.lines.join(" ").trim());
 
 export function OrbitHero({
   coreLabel,
@@ -68,7 +76,8 @@ export function OrbitHero({
   label: string;
 }) {
   return (
-    <div className="orbit" role="img" aria-label={label}>
+    <>
+    <div className="orbit" role="img" aria-label={`${label}: ${orbitInsurers.join(", ")}, ${inner.map((i) => i.lines.join(" ").trim()).join(", ")}`}>
       <div className="orbit__path orbit__path--outer-faint" />
       <div className="orbit__path orbit__path--outer" />
       <div className="orbit__path orbit__path--inner" />
@@ -78,31 +87,33 @@ export function OrbitHero({
         <div className="orbit__core-label">{coreLabel}</div>
       </div>
 
-      <div className="orbit__ring" style={{ "--dur": "30s" } as CSSVars}>
-        {inner.map(({ angle, icon }) => (
+      <div className="orbit__ring" style={{ "--dur": "40s" } as CSSVars}>
+        {inner.map(({ angle, icon, lines }) => (
           <div
             key={icon}
             className="orbit__item"
             style={itemStyle(angle, "23.1cqw")}
           >
             <div className="orbit__upright" style={itemStyle(angle, "0")}>
-              <div className="orbit__badge orbit__badge--icon">
-                {icons[icon]}
+              <div className="orbit__badge orbit__badge--stack">
+                <span className="orbit__badge--icon">{icons[icon]}</span>
+                <span className="orbit__caption">
+                  {lines[0]}
+                  {lines[1] && <br />}
+                  {lines[1]}
+                </span>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div
-        className="orbit__ring orbit__ring--reverse"
-        style={{ "--dur": "46s" } as CSSVars}
-      >
+      <div className="orbit__ring" style={{ "--dur": "40s" } as CSSVars}>
         {outer.map(({ angle, name }) => (
           <div
             key={name}
             className="orbit__item"
-            style={itemStyle(angle, "37.96cqw")}
+            style={itemStyle(angle, "39.5cqw")}
           >
             <div className="orbit__upright" style={itemStyle(angle, "0")}>
               <div className="orbit__badge orbit__badge--pill">{name}</div>
@@ -111,5 +122,14 @@ export function OrbitHero({
         ))}
       </div>
     </div>
+    <ul className="mt-3 hidden flex-wrap justify-center gap-x-4 gap-y-1 text-sm font-semibold text-iris-100 max-[384px]:flex">
+      {orbitServices.map((name) => (
+        <li key={name} className="flex items-center gap-1.5">
+          <span aria-hidden="true" className="size-1.5 rounded-full bg-ember-soft" />
+          {name}
+        </li>
+      ))}
+    </ul>
+    </>
   );
 }

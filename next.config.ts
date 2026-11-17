@@ -11,10 +11,17 @@ const nextConfig: NextConfig = {
   },
   partialPrefetching: true,
   images: {
-    // Listing photos from the Supabase storage bucket only.
+    // Listing photos and plan images from the Supabase storage buckets only.
     remotePatterns: supabaseUrl
-      ? [new URL(`${supabaseUrl}/storage/v1/object/public/listing-photos/**`)]
+      ? [
+          new URL(`${supabaseUrl}/storage/v1/object/public/listing-photos/**`),
+          new URL(`${supabaseUrl}/storage/v1/object/public/product-images/**`),
+        ]
       : [],
+  },
+  // The separate FAQ page is gone (FAQs sit at the bottom of each page); keep old links working.
+  async redirects() {
+    return [{ source: "/:lang(en|ta)/faq", destination: "/:lang", permanent: true }];
   },
   // Basic browser security headers for every response.
   async headers() {

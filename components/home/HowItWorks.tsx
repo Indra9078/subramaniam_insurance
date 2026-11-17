@@ -10,24 +10,6 @@ export function HowItWorks({ dict }: { dict: Dictionary }) {
         {h.title}
       </h2>
       <ol className="relative mt-10 grid gap-10 md:mt-14 md:grid-cols-3 md:gap-7">
-        {/* dashed connector, desktop only */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1000 4"
-          preserveAspectRatio="none"
-          className="absolute left-[8%] top-[34px] hidden h-1 w-[84%] md:block"
-        >
-          <line
-            x1="0"
-            y1="2"
-            x2="1000"
-            y2="2"
-            stroke="#BA3C0F"
-            strokeWidth="3"
-            strokeDasharray="8 10"
-            className="[animation:dashmove_3s_linear_infinite]"
-          />
-        </svg>
         {h.steps.map((step, i) => (
           <li key={step.t} className="relative flex flex-col gap-3.5">
             <span
@@ -35,6 +17,10 @@ export function HowItWorks({ dict }: { dict: Dictionary }) {
             >
               {i + 1}
             </span>
+            {/* Dashed connector from this step's circle to the next one (desktop only, never after the last). */}
+            {i < h.steps.length - 1 && (
+              <span aria-hidden="true" className="step-line absolute left-[84px] top-[32px] hidden h-[3px] w-[calc(100%-100px+1.75rem)] md:block" />
+            )}
             <h3 className="font-display text-2xl font-bold">{step.t}</h3>
             <p className="leading-relaxed text-muted">{step.d}</p>
           </li>

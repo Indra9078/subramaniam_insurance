@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { getDictionary, hasLocale } from "../dictionaries";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Footer } from "@/components/layout/Footer";
+import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/ui/CtaBand";
+import { PageFaq } from "@/components/ui/PageFaq";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { ListingBrowser } from "@/components/realestate/ListingBrowser";
 import { getListings } from "@/lib/data";
@@ -55,6 +57,20 @@ export default async function RealEstatePage({ params }: PageProps<"/[lang]/real
           </div>
         </section>
 
+        <section className="mx-auto w-full max-w-[1240px] px-5 pb-14 md:px-8 md:pb-20">
+          <div className="relative flex flex-col gap-5 overflow-hidden rounded-[2rem] bg-gradient-to-br from-iris-800 to-iris-950 p-7 text-iris-50 md:flex-row md:items-center md:justify-between md:p-10">
+            <div className="pointer-events-none absolute -bottom-24 -right-16 size-80 animate-drift rounded-full bg-[radial-gradient(circle,rgba(242,96,43,.35),transparent_70%)]" />
+            <div className="relative flex max-w-2xl flex-col gap-3">
+              <h2 className="font-display text-[1.75rem] font-bold leading-tight md:text-4xl">{r.listCta.title}</h2>
+              <p className="text-base leading-7 text-iris-100">{r.listCta.text}</p>
+              <p className="text-sm text-iris-200">{r.listCta.note}</p>
+            </div>
+            <div className="relative">
+              <Button href={`/${lang}/account/listings/new`}>{r.listCta.btn}</Button>
+            </div>
+          </div>
+        </section>
+
         <section id="listings" className="mx-auto w-full max-w-[1240px] scroll-mt-4 px-5 pb-14 md:px-8 md:pb-24">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <h2 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight md:text-5xl">
@@ -71,6 +87,7 @@ export default async function RealEstatePage({ params }: PageProps<"/[lang]/real
           )}
         </section>
 
+        <PageFaq lang={lang} title={dict.pageFaq.property} categories={["real_estate"]} />
         <CtaBand lang={lang} dict={dict} />
       </div>
 </main>

@@ -50,8 +50,10 @@ export function ListingForm({ listing }: { listing?: ListingRecord }) {
           defaultValue={l?.status ?? "draft"}
           options={[
             { value: "draft", label: "Draft (hidden from the website)" },
+            { value: "pending", label: "Pending approval (hidden)" },
             { value: "published", label: "Published" },
             { value: "sold", label: "Sold (still shown, marked sold)" },
+            { value: "rejected", label: "Rejected (hidden, owner sees the note)" },
           ]}
         />
         <Field

@@ -53,9 +53,11 @@ Fonts: Space Grotesk (headings), Inter (body), Noto Sans Tamil (Tamil).
 | 5 | Admin page | Protected login. Add and edit property listings and photos, view and export leads, edit testimonials and FAQs | Done |
 | 6 | Lead capture | Enquiry and quote forms per product, call-back request, WhatsApp, call buttons, Supabase, email alerts | Done |
 | 7 | Chatbot | Guided assistant (no AI, free): English and Tamil menus, search, hands off to WhatsApp, call or form; anonymous usage counts | Done |
-| 8 | Polish | Animations, responsiveness, SEO, speed, accessibility, Tamil review sheet, placeholder list | Done, awaiting your review |
-| 9 | Launch | Vercel deployment, domain, analytics, privacy policy and terms, handover note | Not started |
-| 10 | Optional | Blog or resources, brand reel templates | Not started |
+| 8 | Polish | Animations, responsiveness, SEO, speed, accessibility, Tamil review sheet, placeholder list | Done |
+| 9 | Update and iterate | Changes and additions requested by the client, then an optimisation pass (speed, clean-up) | In progress (batch 1 built, awaiting review) |
+| 10 | Security build-up and testing | Input validation everywhere, access-rule tests, admin 2-step login, rate limits, strict browser policy, dependency and secret scans, OWASP checks, report | Not started |
+| 11 | Launch | Vercel deployment, domain, analytics, Resend domain, privacy policy and terms, indexing on, handover note | Not started |
+| 12 | Optional | Blog or resources, brand reel templates | Not started |
 
 ## Sitemap
 Home, About, Insurance (Health, Life, Vehicle, Corporate and group), Real estate and listings, FAQ, Contact, Privacy policy, Terms, Admin (protected).

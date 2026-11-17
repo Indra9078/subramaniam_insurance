@@ -6,8 +6,8 @@ import { createSessionClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/admin/auth";
 import { bool, int, lines, slugify, text, type FormState } from "@/lib/admin/form";
 import { TAGS } from "@/lib/data";
-import { PHOTO_BUCKET, supabaseConfigProblem } from "@/lib/supabase/env";
-import { faqCategories, listingTypes, type FaqCategory, type ListingType } from "@/lib/types";
+import { PHOTO_BUCKET, PRODUCT_BUCKET, supabaseConfigProblem } from "@/lib/supabase/env";
+import { faqCategories, listingTypes, planCategories, type FaqCategory, type ListingType, type PlanCategory } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
 // Login and logout
@@ -70,7 +70,7 @@ function listingFields(fd: FormData) {
   const status = text(fd, "status");
   return {
     type: listingTypes.includes(type) ? type : "plot",
-    status: ["draft", "published", "sold"].includes(status) ? status : "draft",
+    status: ["draft", "pending", "published", "sold", "rejected"].includes(status) ? status : "draft",
     featured: bool(fd, "featured"),
     sort: int(fd, "sort"),
     title_en: text(fd, "title_en"),
@@ -111,6 +111,33 @@ export async function saveListing(id: string | null, _prev: FormState, fd: FormD
   if (error) return { error: friendly(error.message) };
   refreshListings(slug);
   redirect(`/admin/listings/${data.id}?created=1`);
+}
+
+/** Approve a visitor's property: it goes live on the site. */
+export async function approveListing(id: string) {
+  const { supabase } = await requireAdmin();
+  const { data } = await supabase.from("listings").select("slug").eq("id", id).single();
+  const { error } = await supabase
+    .from("listings")
+    .update({ status: "published", reviewed_at: new Date().toISOString(), review_note: null })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  refreshListings(data?.slug);
+  redirect(`/admin/listings/${id}?approved=1`);
+}
+
+/** Reject a visitor's property with a note they can read in their account. */
+export async function rejectListing(id: string, fd: FormData) {
+  const { supabase } = await requireAdmin();
+  const note = text(fd, "note").slice(0, 500);
+  const { data } = await supabase.from("listings").select("slug").eq("id", id).single();
+  const { error } = await supabase
+    .from("listings")
+    .update({ status: "rejected", reviewed_at: new Date().toISOString(), review_note: note || null })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  refreshListings(data?.slug);
+  redirect(`/admin/listings/${id}?rejected=1`);
 }
 
 export async function deleteListing(id: string) {
@@ -156,6 +183,79 @@ export async function reorderPhotos(listingId: string, ids: string[]) {
     ),
   );
   refreshListings(await slugOf(supabase, listingId));
+}
+
+// ---------------------------------------------------------------------------
+// Insurance plans (Products)
+// ---------------------------------------------------------------------------
+function refreshProducts(...slugs: (string | null | undefined)[]) {
+  updateTag(TAGS.products);
+  for (const lang of ["en", "ta"]) {
+    revalidatePath(`/${lang}/insurance`);
+    for (const slug of slugs) if (slug) revalidatePath(`/${lang}/insurance/plans/${slug}`);
+  }
+}
+
+export async function saveProduct(id: string | null, _prev: FormState, fd: FormData): Promise<FormState> {
+  const { supabase } = await requireAdmin();
+  const category = text(fd, "category") as PlanCategory;
+  const status = text(fd, "status");
+  const fields = {
+    category: planCategories.includes(category) ? category : "health",
+    status: ["draft", "published"].includes(status) ? status : "draft",
+    featured: bool(fd, "featured"),
+    sort: int(fd, "sort"),
+    insurer: text(fd, "insurer").slice(0, 80),
+    name_en: text(fd, "name_en"),
+    name_ta: text(fd, "name_ta"),
+    summary_en: text(fd, "summary_en"),
+    summary_ta: text(fd, "summary_ta"),
+    description_en: text(fd, "description_en"),
+    description_ta: text(fd, "description_ta"),
+    features_en: lines(fd, "features_en"),
+    features_ta: lines(fd, "features_ta"),
+    // Saving from the admin means the plan is real, not seed sample data.
+    is_sample: false,
+  };
+  if (!fields.name_en) return { error: "English name is required." };
+  const slug = slugify(text(fd, "slug") || fields.name_en);
+
+  if (id) {
+    const { data: old } = await supabase.from("insurance_products").select("slug").eq("id", id).single();
+    const { error } = await supabase.from("insurance_products").update({ ...fields, slug }).eq("id", id);
+    if (error) return { error: friendlyProduct(error.message) };
+    refreshProducts(slug, old?.slug);
+    return { ok: "Saved." };
+  }
+  const { data, error } = await supabase.from("insurance_products").insert({ ...fields, slug }).select("id").single();
+  if (error) return { error: friendlyProduct(error.message) };
+  refreshProducts(slug);
+  redirect(`/admin/products/${data.id}?created=1`);
+}
+
+export async function deleteProduct(id: string) {
+  const { supabase } = await requireAdmin();
+  const { data } = await supabase.from("insurance_products").select("slug, image_path").eq("id", id).single();
+  if (data?.image_path) await supabase.storage.from(PRODUCT_BUCKET).remove([data.image_path]);
+  await supabase.from("insurance_products").delete().eq("id", id);
+  refreshProducts(data?.slug);
+  redirect("/admin/products");
+}
+
+/** Sets (or clears) the plan image after the browser uploaded the file. Removes the previous file. */
+export async function setProductImage(id: string, path: string | null) {
+  const { supabase } = await requireAdmin();
+  if (path !== null && !path.startsWith(`${id}/`)) throw new Error("Invalid image path");
+  const { data: old } = await supabase.from("insurance_products").select("slug, image_path").eq("id", id).single();
+  const { error } = await supabase.from("insurance_products").update({ image_path: path }).eq("id", id);
+  if (error) throw new Error(error.message);
+  if (old?.image_path && old.image_path !== path) await supabase.storage.from(PRODUCT_BUCKET).remove([old.image_path]);
+  refreshProducts(old?.slug);
+}
+
+function friendlyProduct(message: string) {
+  if (message.includes("insurance_products_slug_key")) return "Another plan already uses this web address (slug). Change the slug.";
+  return `Could not save: ${message}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -228,6 +328,23 @@ export async function deleteFaq(id: string) {
   await supabase.from("faqs").delete().eq("id", id);
   updateTag(TAGS.faqs);
   redirect("/admin/faqs");
+}
+
+// ---------------------------------------------------------------------------
+// Insurance requests from signed-in visitors
+// ---------------------------------------------------------------------------
+export async function updateRequest(id: string, fd: FormData) {
+  const { supabase } = await requireAdmin();
+  const status = text(fd, "status");
+  if (!["new", "contacted", "in_progress", "completed", "closed"].includes(status)) return;
+  await supabase.from("insurance_requests").update({ status, advisor_note: text(fd, "note").slice(0, 500) || null }).eq("id", id);
+  redirect("/admin/requests");
+}
+
+export async function deleteRequest(id: string) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("insurance_requests").delete().eq("id", id);
+  redirect("/admin/requests");
 }
 
 // ---------------------------------------------------------------------------

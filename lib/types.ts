@@ -46,3 +46,21 @@ export const listingCovers = [
   "from-iris-100 to-[#ffe0d2]",
   "from-iris-100 to-[#fff3cf]",
 ];
+
+export type PlanCategory = "health" | "life" | "vehicle" | "corporate";
+export const planCategories: PlanCategory[] = ["health", "life", "vehicle", "corporate"];
+
+/** An insurance plan card (from the database, or the built-in samples). */
+export type Plan = {
+  id: string;
+  slug: string;
+  category: PlanCategory;
+  insurer: string;
+  featured: boolean;
+  name: Text;
+  summary: Text;
+  description: Text;
+  features: { en: string[]; ta: string[] };
+  image: string | null;
+  isSample: boolean;
+};

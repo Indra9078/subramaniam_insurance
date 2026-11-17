@@ -4,6 +4,7 @@ import { getDictionary, hasLocale } from "../dictionaries";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Footer } from "@/components/layout/Footer";
 import { Contact } from "@/components/home/Contact";
+import { PageFaq } from "@/components/ui/PageFaq";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { site } from "@/lib/site";
 import { waLink } from "@/lib/whatsapp";
@@ -82,7 +83,8 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
           </div>
         </section>
       </div>
-</main>
+      <PageFaq lang={lang} title={dict.pageFaq.title} categories={["general"]} />
+      </main>
       <Footer lang={lang} dict={dict} />
     </>
   );

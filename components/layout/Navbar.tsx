@@ -21,8 +21,8 @@ export function Navbar({ lang, nav }: NavbarProps) {
     { href: `/${lang}/insurance`, label: nav.insurance },
     { href: `/${lang}/real-estate`, label: nav.realEstate },
     { href: `/${lang}/about`, label: nav.about },
-    { href: `/${lang}/faq`, label: nav.faq },
     { href: `/${lang}/contact`, label: nav.contact },
+    { href: `/${lang}/account`, label: nav.account },
   ];
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);

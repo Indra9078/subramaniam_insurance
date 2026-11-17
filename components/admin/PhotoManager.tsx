@@ -5,24 +5,9 @@ import { useRouter } from "next/navigation";
 import { addPhoto, deletePhoto, reorderPhotos } from "@/app/admin/actions";
 import { createBrowserSupabase } from "@/lib/supabase/browser";
 import { PHOTO_BUCKET } from "@/lib/supabase/env";
+import { resizeImage } from "@/lib/image";
 
 export type AdminPhoto = { id: string; url: string };
-
-const MAX_SIDE = 1920;
-
-/** Shrinks a phone photo to at most 1920px on the long side, as JPEG. */
-async function resize(file: File): Promise<Blob> {
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
-  const canvas = document.createElement("canvas");
-  canvas.width = Math.round(bitmap.width * scale);
-  canvas.height = Math.round(bitmap.height * scale);
-  canvas.getContext("2d")?.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  bitmap.close();
-  return new Promise((resolve, reject) =>
-    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("Could not process photo"))), "image/jpeg", 0.82),
-  );
-}
 
 /** Upload, delete and reorder listing photos. The first photo is the cover. */
 export function PhotoManager({ listingId, photos }: { listingId: string; photos: AdminPhoto[] }) {
@@ -40,7 +25,7 @@ export function PhotoManager({ listingId, photos }: { listingId: string; photos:
     try {
       for (const file of Array.from(files)) {
         setStatus(`Uploading ${done + 1} of ${files.length}…`);
-        const blob = await resize(file);
+        const blob = await resizeImage(file);
         const path = `${listingId}/${crypto.randomUUID()}.jpg`;
         const { error } = await supabase.storage
           .from(PHOTO_BUCKET)

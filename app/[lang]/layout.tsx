@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { fontVariables } from "@/lib/fonts";
@@ -76,7 +77,9 @@ export default async function RootLayout({
           {dict.common.skip}
         </a>
         {children}
-        <Reveal />
+        <Suspense fallback={null}>
+          <Reveal />
+        </Suspense>
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(business)} />
       </body>
     </html>

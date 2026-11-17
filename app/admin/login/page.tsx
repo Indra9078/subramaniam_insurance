@@ -40,8 +40,8 @@ async function LoginState() {
 
 export default function LoginPage() {
   return (
-    <main className="flex flex-1 items-center justify-center bg-gradient-to-br from-iris-900 via-iris-800 to-iris-950 px-4 py-16">
-      <div className="w-full max-w-sm rounded-[1.75rem] bg-paper p-7 shadow-[0_30px_80px_rgba(14,10,32,.45)] md:p-9">
+    <main className="flex flex-1 items-center justify-center bg-[linear-gradient(150deg,#3d0f04_0%,#8a2a0a_42%,#d9480f_78%,#ff9f45_100%)] px-4 py-16">
+      <div className="w-full max-w-sm rounded-[1.75rem] bg-paper p-7 shadow-[0_30px_80px_rgba(61,15,4,.5)] md:p-9">
         <p className="text-sm font-semibold uppercase tracking-wider text-ember">Admin</p>
         <h1 className="mt-1 font-display text-2xl font-bold">A. Subramaniam</h1>
         <p className="mb-6 mt-2 text-sm text-muted">Log in to manage listings, testimonials, FAQs and leads.</p>

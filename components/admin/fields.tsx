@@ -150,7 +150,7 @@ export function Badge({ children, tone = "grey" }: { children: ReactNode; tone?:
     grey: "bg-[#ecebef] text-muted",
     green: "bg-[#e1f4e8] text-[#1f7a46]",
     orange: "bg-[#ffe9df] text-ember",
-    purple: "bg-iris-100 text-[#3f2fb0]",
+    purple: "bg-[#fff0c2] text-[#7a5200]",
   };
   return (
     <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${tones[tone]}`}>

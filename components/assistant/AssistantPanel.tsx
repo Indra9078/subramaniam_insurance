@@ -321,6 +321,7 @@ export function AssistantPanel({
           options: [
             ...(ls.length ? [{ label: a.property.anyType, go: { k: "ptype", t: "all" } as Node }] : []),
             ...types.map((t) => ({ label: `${d.types[t]} (${ls.filter((l) => l.type === t).length})`, go: { k: "ptype", t } as Node })),
+            { label: a.property.listIt, href: `/${lang}/account/listings/new` },
             { label: a.property.sell, go: { k: "callback", ctx: "property", sell: true } },
             ...(ls.length ? [] : contactRow(a.menu.property, "property")),
           ],

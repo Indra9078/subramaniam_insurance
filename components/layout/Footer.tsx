@@ -60,7 +60,7 @@ export function Footer({ lang, dict, waText }: { lang: string; dict: Dictionary;
             <Link href={`/${lang}/about`} className="hover:text-white">{nav.about}</Link>
             <Link href={`/${lang}/privacy`} className="hover:text-white">{footer.privacy}</Link>
             <Link href={`/${lang}/terms`} className="hover:text-white">{footer.terms}</Link>
-            <Link href={`/${lang}/faq`} className="hover:text-white">{nav.faq}</Link>
+            <Link href={`/${lang}/account`} className="hover:text-white">{nav.account}</Link>
             <Link href={`/${lang}/contact`} className="hover:text-white">{nav.contact}</Link>
           </nav>
         </div>

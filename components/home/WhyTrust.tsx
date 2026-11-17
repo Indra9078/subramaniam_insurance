@@ -2,8 +2,6 @@ import { AssistantTrigger } from "@/components/assistant/AssistantLauncher";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
-const statPlaceholders = ["[00]+", "[000]+", "[00]+"];
-
 /** Soft purple section: why people trust him, plus an animated chat preview. */
 export function WhyTrust({ dict }: { dict: Dictionary }) {
   const w = dict.why;
@@ -25,19 +23,6 @@ export function WhyTrust({ dict }: { dict: Dictionary }) {
           <p className="max-w-xl text-base leading-7 text-[#d6d0f0] md:text-lg">
             {w.text} <PlaceholderTag tone="dark">{w.story}</PlaceholderTag>
           </p>
-          <ul className="flex flex-wrap gap-4">
-            {w.stats.map((label, i) => (
-              <li
-                key={label}
-                className="min-w-[140px] flex-1 rounded-[22px] border border-iris-200/30 bg-white/8 p-5 transition-transform duration-300 hover:-translate-y-2 md:p-6"
-              >
-                <div className="font-display text-4xl font-bold md:text-[40px]">
-                  <PlaceholderTag tone="dark">{statPlaceholders[i]}</PlaceholderTag>
-                </div>
-                <div className="mt-2 text-sm text-[#d6d0f0]">{label}</div>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div

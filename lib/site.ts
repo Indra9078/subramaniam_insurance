@@ -10,6 +10,9 @@ export const site = {
 /** Official insurer names. Logos only with written permission. */
 export const insurers = [
   "LIC",
+  "Tata AIA Life Insurance",
   "Star Health Insurance",
+  "HDFC Life Insurance",
   "IFFCO-Tokio General Insurance",
+  "United India Insurance",
 ] as const;
